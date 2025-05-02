@@ -1,0 +1,162 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\main.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File001]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\uart.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File002]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\delays.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File003]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\misc.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File004]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\glcd_320x240.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File005]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\ads7843.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File006]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\ext_int.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File007]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\oscillator.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File008]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\mcu_config.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File009]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\i2c.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-g -Wall
+TraceCmdString=
+DebugOptions=-D__DEBUG
+[File010]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\eval_board_qfp64.cof
+Folder=Output
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-ld.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)" -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem
+TraceCmdString=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
+[File011]
+Location=D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output\eval_board_qfp64.hex
+Folder=Output
+DeviceName=dsPIC33FJ256GP506A
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-ld.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\PIC\PIC33\eval_board_qfp64;D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\Libraries;C:\Program Files (x86)\Microchip\mplabc30\v3.31\include||$(LIBDIR)|C:\Program Files (x86)\Microchip\mplabc30\v3.31\lib||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\glcd_320x240.c|D:\Electronique\MCU\Libraries\ads7843.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\mcu_config.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c||<obj>||<lib>||<lkr>|D:\Electronique\MCU\PIC\headers\p33FJ256GP506A.gld||
+SuiteArgsString=
+ToolArgsString=-o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)" -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem
+TraceCmdString=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
+[TOOL_LOC_STAMPS]
+tool_loc{069BD372-6CA0-40D4-BF2F-5DC806D05083}=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+tool_loc{433C3D55-811D-409D-A6BF-159CF9355B42}=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-ld.exe

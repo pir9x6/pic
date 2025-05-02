@@ -1,0 +1,2 @@
+@"C:\Program Files (x86)\Microchip\libraries_101019\Microchip Solutions v2010-10-19\Microchip\TCPIP Stack\Utilities\MPFS2.exe" /mpfs2 /ASM30 ".\WebPages" "." "MPFSImg2.s"
+@echo WebPages execute avec succes

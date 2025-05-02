@@ -1,0 +1,227 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\main.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File001]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\delays.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File002]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\oscillator.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File003]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\uart.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File004]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\pwm.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File005]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\timer.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File006]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\i2c.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File007]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\ext_int.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File008]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\misc.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File009]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\i2c_tools.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File010]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\interrupts_management.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File011]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\pic_config.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File012]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\ds1621.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File013]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\ds1337.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File014]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\pcf8574.o
+Folder=Intermediary
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={069BD372-6CA0-40D4-BF2F-5DC806D05083}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=-g -Wall -O2
+TraceCmdString=
+DebugOptions=
+[File015]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\horloge_orange_3mm.cof
+Folder=Output
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-ld.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=10 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[File016]
+Location=D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output\horloge_orange_3mm.hex
+Folder=Output
+DeviceName=dsPIC33FJ12GP201
+LanguageToolSuiteID={479DDE59-4D56-455E-855E-FFF59A3DB57E}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-ld.exe
+PPAD=$(BINDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(TMPDIR)|D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm\output||$(AINDIR)||$(INCDIR)|D:\Electronique\MCU\Libraries\lib_pic;D:\Electronique\MCU\PIC\PIC33\horloge_orange_3mm;D:\Electronique\MCU\Libraries||$(LIBDIR)|C:\Program Files\Microchip\MPLAB C30\lib\dsPIC33F||$(LKRDIR)||
+SOLK=<src>|main.c|D:\Electronique\MCU\Libraries\delays.c|D:\Electronique\MCU\Libraries\lib_pic\oscillator.c|D:\Electronique\MCU\Libraries\lib_pic\uart.c|D:\Electronique\MCU\Libraries\lib_pic\pwm.c|D:\Electronique\MCU\Libraries\lib_pic\timer.c|D:\Electronique\MCU\Libraries\lib_pic\i2c.c|D:\Electronique\MCU\Libraries\lib_pic\ext_int.c|D:\Electronique\MCU\Libraries\misc.c|D:\Electronique\MCU\Libraries\i2c_tools.c|interrupts_management.c|D:\Electronique\MCU\Libraries\lib_pic\pic_config.c|D:\Electronique\MCU\Libraries\ds1621.c|D:\Electronique\MCU\Libraries\ds1337.c|D:\Electronique\MCU\Libraries\pcf8574.c||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=--heap=10 -Map="$(BINDIR_)$(TARGETBASE).map" --report-mem -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=
+[TOOL_LOC_STAMPS]
+tool_loc{069BD372-6CA0-40D4-BF2F-5DC806D05083}=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-gcc.exe
+tool_loc{433C3D55-811D-409D-A6BF-159CF9355B42}=C:\Program Files (x86)\Microchip\mplabc30\v3.31\bin\pic30-ld.exe
