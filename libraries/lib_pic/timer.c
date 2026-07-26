@@ -28,10 +28,10 @@ result_t timer_init(
         PIE1bits.TMR2IE = 1;
 
         /* Set Prescaler */
-        T2CONbits.T2CKPS = prescaler;
+        T2CONbits.T2CKPS = (u8)prescaler;
 
         /* set postscaler */
-        T2CONbits.TOUTPS = postscaler;  
+        T2CONbits.TOUTPS = (u8)postscaler;  
 
         /* Set timer period */
         PR2 = period - 1;                    
@@ -138,7 +138,7 @@ result_t timer_init(
 //     T0CONbits.T08BIT = 0;           // configure as a 16-bits timer
 //     T0CONbits.T0PS = scaler;        // set prescaler
 //     T0CONbits.TMR0ON = 1;           // Enable Timer
-//     RCONbits.IPEN = 1;              // Interruption prioritaires activées
+//     RCONbits.IPEN = 1;              // Interruption prioritaires activï¿½es
 // }
 // #endif
 

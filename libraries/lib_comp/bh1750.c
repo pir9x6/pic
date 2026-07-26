@@ -11,11 +11,13 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t bh1750_init (I2C_BUS i2c_bus_id, u8 dev_addr)
 {
+    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
+
     // config the chip for a high resolution continuous measure
     if (i2c_start (i2c_bus_id) != SUCCESS)
         return ERROR;
 
-    if (i2c_write (i2c_bus_id, (dev_addr << 1) & 0xFE) != SUCCESS)
+    if (i2c_write (i2c_bus_id, adr_wr) != SUCCESS)
         return ERROR;
 
     if (i2c_write (i2c_bus_id, BH1750_REG_CONT_H_RES) != SUCCESS)
@@ -34,12 +36,13 @@ result_t bh1750_init (I2C_BUS i2c_bus_id, u8 dev_addr)
 result_t bh1750_get_light (I2C_BUS i2c_bus_id, u8 dev_addr, float *light)
 {
     u8 data[2];
+    u8 adr_rd = (u8)((dev_addr << 1) | 0x01);
     float light_raw;
 
     if (i2c_start(i2c_bus_id) != SUCCESS)
         return ERROR;
 
-    if (i2c_write(i2c_bus_id, (dev_addr << 1) | 0x01) != SUCCESS)
+    if (i2c_write(i2c_bus_id, adr_rd) != SUCCESS)
         return ERROR;
 
     /* MSB */

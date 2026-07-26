@@ -2,7 +2,7 @@
 #include "log.h"
 #include "stdlib.h"
 #include "hardware_profile.h"
-     
+
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------ Command Line interpreter ---------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -77,7 +77,7 @@ result_t command_line_interpreter (UART_ID uart_id, I2C_BUS i2c_id, u8 uart_rx_d
 
         uart_write_string (uart_id, INVITE_CMD);
         index_buf = 0;
-        init_array(uart_buff, 0);
+        init_array(uart_buff, str_len(uart_buff), 0);
 
     }else{
 

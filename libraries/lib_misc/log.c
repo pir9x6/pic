@@ -2,7 +2,7 @@
 
 #include "log.h"
 
-extern UART_ID UART_ID_LOG;
+//extern UART_ID UART_ID_LOG;
 
 void PRINT_ERROR(char *log)
 {

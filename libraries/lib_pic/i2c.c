@@ -27,7 +27,7 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
             SSPCON1bits.SSPEN = 1;
 
             // set i2c frequency
-            SSPADD = I2C_BRG;
+            SSPADD = (u8)I2C_BRG;
 
             // Standard Speed mode (100 kHz)
             SSPSTATbits.SMP = 1;
@@ -54,10 +54,10 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
             I2C1CON2bits.BFRET = 1; /* bus free time of 16 clock cycles */
 
             // Clear all interrupt flags
-            I2C1PIR = 0; 
+            I2C1PIR = 0;
 
             // Clear all error flags
-            I2C1ERR = 0; 
+            I2C1ERR = 0;
 
             // Enable I2C module
             I2C1CON0bits.EN = 1;
@@ -201,7 +201,7 @@ result_t i2c_start(I2C_BUS bus_id)
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
 
         if (bus_id == I2C_BUS_1){
-            
+
             I2C1CONbits.SEN = 1;        // Send the start condition
         }
 
@@ -445,7 +445,7 @@ result_t i2c_read(I2C_BUS bus_id, u8 ack, u8 *data)
         #error -- processor ID not specified in generic header file
 
     #endif
-    
+
     return SUCCESS;
 }
 
@@ -461,7 +461,7 @@ result_t i2c_write(I2C_BUS bus_id, u8 data)
 
     #if defined (_18F252)
 
-        /* send data */     
+        /* send data */
         SSPBUF = data;
         PIR1bits.SSPIF = 0;
 
@@ -469,17 +469,17 @@ result_t i2c_write(I2C_BUS bus_id, u8 data)
 
         I2C1CNT = 1;
         I2C1TXB = data;
-    
+
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
 
         if (bus_id == I2C_BUS_1){
-            /* send data */                          
+            /* send data */
             I2C1TRN = data;
         }
 
         #ifdef _MI2C2IF
         else if (bus_id == I2C_BUS_2){
-            /* send data */                       
+            /* send data */
             I2C2TRN = data;
 
         }
@@ -488,13 +488,13 @@ result_t i2c_write(I2C_BUS bus_id, u8 data)
     #elif defined(__PIC32MX__)
 
         return ERROR;
-        
+
     #else
 
         #error -- processor ID not specified in generic header file
 
     #endif
-    
+
     /* wait for the reception of Ack */
     if (i2c_wait_ack(bus_id) != SUCCESS){
         return ERROR;
@@ -554,9 +554,9 @@ static result_t i2c_wait_for_idle(I2C_BUS bus_id)
 
         u16 timeout = 0;
 
-        while (SSPCON2bits.RSEN || 
-               SSPCON2bits.SEN || 
-               SSPCON2bits.PEN || 
+        while (SSPCON2bits.RSEN ||
+               SSPCON2bits.SEN ||
+               SSPCON2bits.PEN ||
                SSPCON2bits.RCEN ||
                SSPSTATbits.R_W){
             timeout++;
@@ -574,11 +574,11 @@ static result_t i2c_wait_for_idle(I2C_BUS bus_id)
         u16 timeout = 0;
 
         if (bus_id == I2C_BUS_1){
-            while (I2C1CONbits.SEN || 
-                   I2C1CONbits.PEN || 
-                   I2C1CONbits.RCEN || 
-                   I2C1CONbits.RSEN || 
-                   I2C1CONbits.ACKEN || 
+            while (I2C1CONbits.SEN ||
+                   I2C1CONbits.PEN ||
+                   I2C1CONbits.RCEN ||
+                   I2C1CONbits.RSEN ||
+                   I2C1CONbits.ACKEN ||
                    I2C1STATbits.TRSTAT){
                 timeout++;
                 delay_us(1);
@@ -589,10 +589,10 @@ static result_t i2c_wait_for_idle(I2C_BUS bus_id)
 
         #ifdef _MI2C2IF
         else if (bus_id == I2C_BUS_2){
-            while (I2C2CONbits.SEN || 
-                   I2C2CONbits.PEN || 
-                   I2C2CONbits.RCEN || 
-                   I2C2CONbits.RSEN || 
+            while (I2C2CONbits.SEN ||
+                   I2C2CONbits.PEN ||
+                   I2C2CONbits.RCEN ||
+                   I2C2CONbits.RSEN ||
                    I2C2CONbits.ACKEN ||
                    I2C2STATbits.TRSTAT){
                 timeout++;
@@ -621,12 +621,15 @@ static result_t i2c_wait_for_idle(I2C_BUS bus_id)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t i2c_read_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 *data)
 {
+    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
+    u8 adr_rd = (u8)((dev_addr << 1) | 0x01);
+
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the chip + W */
-    if (i2c_write(bus_id, (dev_addr << 1) & 0xFE) != SUCCESS)
+    if (i2c_write(bus_id, adr_wr) != SUCCESS)
         return ERROR;
 
     /* address of the register */
@@ -638,7 +641,7 @@ result_t i2c_read_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 *data)
         return ERROR;
 
     /* next operation is a reading */
-    if (i2c_write(bus_id, (dev_addr << 1) | 0x01) != SUCCESS)
+    if (i2c_write(bus_id, adr_rd) != SUCCESS)
         return ERROR;
 
     /* get data */
@@ -658,13 +661,15 @@ result_t i2c_read_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 *data)
 result_t i2c_read_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *data)
 {
     u8 i;
+    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
+    u8 adr_rd = (u8)((dev_addr << 1) | 0x01);
 
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the chip + W */
-    if (i2c_write(bus_id, (dev_addr << 1) & 0xFE) != SUCCESS)
+    if (i2c_write(bus_id, adr_wr) != SUCCESS)
         return ERROR;
 
     /* address of the register */
@@ -676,7 +681,7 @@ result_t i2c_read_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *d
         return ERROR;
 
     /* next operation is a reading */
-    if (i2c_write(bus_id, (dev_addr << 1) | 0x01) != SUCCESS)
+    if (i2c_write(bus_id, adr_rd) != SUCCESS)
         return ERROR;
 
     /* get data */
@@ -706,12 +711,14 @@ result_t i2c_read_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *d
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t i2c_write_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 data)
 {
+    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
+
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the device + Write */
-    if (i2c_write(bus_id, (dev_addr << 1) & 0xFE) != SUCCESS)
+    if (i2c_write(bus_id, adr_wr) != SUCCESS)
         return ERROR;
 
     /* address of the register */
@@ -735,13 +742,14 @@ result_t i2c_write_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 data)
 result_t i2c_write_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *data)
 {
     u8 i;
+    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
 
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the device + Write */
-    if (i2c_write(bus_id, (dev_addr << 1) & 0xFE) != SUCCESS)
+    if (i2c_write(bus_id, adr_wr) != SUCCESS)
         return ERROR;
 
     /* address of the register */

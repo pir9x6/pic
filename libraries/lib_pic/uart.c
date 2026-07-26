@@ -14,7 +14,7 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
 {
     #if defined (_18F252)
 
-        SPBRG = GetSystemClock() / (16.0 * baudrate) - 1;
+        SPBRG = (u8)(GetSystemClock() / (16 * baudrate) - 1);
 
         if (uart_id == UART_ID_1){
             // high speed mode
@@ -36,13 +36,13 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
         else{
             return ERROR;
         }
-        
+
     #elif defined (_18F26K42) || defined (_18F57K42) || defined (_18F57Q43)
 
         if (uart_id == UART_ID_1){
             /* set baudrate */
             U1BRGH = 0;
-            U1BRGL = GetSystemClock() / (4.0 * baudrate) - 1;
+            U1BRGL = (u8)(GetSystemClock() / (4.0 * baudrate) - 1);
 
             /* 8 bits, async mode, high speed mode */
             U1CON0 = 0;
@@ -58,8 +58,8 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
             U1FIFO = 0;
 
             /* Auto-baud not enabled */
-            U1UIR = 0x00; 
-            
+            U1UIR = 0x00;
+
             U1ERRIR = 0x00;
             U1ERRIE = 0x00;
 
@@ -107,7 +107,7 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
                 U1STAbits.UTXISEL1 = 0;
                 U1STAbits.URXISEL  = 0;             // Interrupt after one RX character is received
             }
-            
+
         //===============================================================
         #ifdef _U2TXIF
         }else if (uart_id == UART_ID_2){
@@ -139,11 +139,11 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
                 U2STAbits.URXISEL  = 0;             // Interrupt after one RX character is received
             }
         #endif
-            
+
         //===============================================================
         #ifdef _U3TXIF
         }else if (uart_id == UART_ID_3){
-            
+
             // Enable UART
             U3MODEbits.UARTEN = 1;
 
@@ -201,10 +201,10 @@ result_t uart_write (UART_ID uart_id, u8 data)
 
         if (uart_id == UART_ID_1){
             /* wait for the buffer to be empty */
-            while(!TXSTAbits.TRMT);         
+            while(!TXSTAbits.TRMT);
 
             /* send data */
-            TXREG = data;                   
+            TXREG = data;
         }
         else{
             return ERROR;
@@ -214,10 +214,10 @@ result_t uart_write (UART_ID uart_id, u8 data)
 
         if (uart_id == UART_ID_1){
             /* wait for the buffer to be empty */
-            while(0 == PIR3bits.U1TXIF);         
+            while(0 == PIR3bits.U1TXIF);
 
             /* send data */
-            U1TXB = data;    
+            U1TXB = data;
         }
         else{
             return ERROR;
@@ -227,10 +227,10 @@ result_t uart_write (UART_ID uart_id, u8 data)
 
         if (uart_id == UART_ID_1){
             /* wait for the buffer to be empty */
-            while(0 == PIR4bits.U1TXIF);         
+            while(0 == PIR4bits.U1TXIF);
 
             /* send data */
-            U1TXB = data;    
+            U1TXB = data;
         }
         else{
             return ERROR;
@@ -245,9 +245,9 @@ result_t uart_write (UART_ID uart_id, u8 data)
             while (!U1STAbits.TRMT);
 
             /* send data */
-            U1TXREG = data;       
+            U1TXREG = data;
         #endif
-        
+
         //===============================================================
         #ifdef _U2TXIF
         }else if (uart_id == UART_ID_2){
@@ -255,9 +255,9 @@ result_t uart_write (UART_ID uart_id, u8 data)
             while (!U2STAbits.TRMT);
 
             /* send data */
-            U2TXREG = data;        
+            U2TXREG = data;
         #endif
-    
+
         //===============================================================
         #ifdef _U3TXIF
         }else if (uart_id == UART_ID_3){
@@ -265,14 +265,14 @@ result_t uart_write (UART_ID uart_id, u8 data)
             while (!U3STAbits.TRMT);
 
             /* send data */
-            U3TXREG = data;   
+            U3TXREG = data;
         #endif
 
         //===============================================================
         }else{
             return ERROR;
         }
-        
+
     #else
 
         #error -- processor ID not specified in generic header file
@@ -288,24 +288,24 @@ result_t uart_write (UART_ID uart_id, u8 data)
 result_t uart_write_string (UART_ID uart_id, const char *data)
 {
     #if defined (_18F252)
-        while (*data != '\0')   
+        while (*data != '\0')
         {
             /* wait for the buffer to be empty */
-            while (!TXSTAbits.TRMT); 
+            while (!TXSTAbits.TRMT);
 
             /* send data */
-            TXREG = *data++;     
+            TXREG = *data++;
         }
 
     #elif defined (_18F26K42) || defined (_18F57K42) || defined (_18F57Q43)
 
-        while (*data != '\0')          
+        while (*data != '\0')
         {
             /* wait for the buffer to be empty */
-            while (U1FIFObits.TXBF); 
+            while (U1FIFObits.TXBF);
 
             /* send data */
-            U1TXB = *data++;              
+            U1TXB = *data++;
         }
 
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
@@ -319,10 +319,10 @@ result_t uart_write_string (UART_ID uart_id, const char *data)
                 while (!U1STAbits.TRMT);
 
                 /* send data */
-                U1TXREG = *data++;  
+                U1TXREG = *data++;
             }
         #endif
-        
+
         //===============================================================
         #ifdef _U2TXIF
         }else if (uart_id == UART_ID_2){
@@ -332,10 +332,10 @@ result_t uart_write_string (UART_ID uart_id, const char *data)
                 while (!U1STAbits.TRMT);
 
                 /* send data */
-                U1TXREG = *data++;    
+                U1TXREG = *data++;
             }
         #endif
-    
+
         //===============================================================
         #ifdef _U3TXIF
         }else if (uart_id == UART_ID_3){
@@ -345,7 +345,7 @@ result_t uart_write_string (UART_ID uart_id, const char *data)
                 while (!U1STAbits.TRMT);
 
                 /* send data */
-                U1TXREG = *data++; 
+                U1TXREG = *data++;
             }
         #endif
 
@@ -353,11 +353,11 @@ result_t uart_write_string (UART_ID uart_id, const char *data)
         }else{
             return ERROR;
         }
-        
+
     #else
 
         #error -- processor ID not specified in generic header file
-        
+
     #endif
 
     return SUCCESS;

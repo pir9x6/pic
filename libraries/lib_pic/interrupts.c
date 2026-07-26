@@ -28,17 +28,17 @@ void disable_global_interrupts(void)
     /* disnable interrupts (global, peripheral, high priority) */
 #if defined (_18F252)
 
-    INTCONbits.GIE = 0;       
+    INTCONbits.GIE = 0;
     INTCONbits.PEIE = 0;
-    RCONbits.IPEN = 0; 
+    RCONbits.IPEN = 0;
 
 #elif defined (_18F26K42) || \
       defined (_18F57K42) || \
       defined (_18F57Q43)
 
-    INTCON0bits.GIEH = 0;   
-    INTCON0bits.GIEL = 0;   
-    INTCON0bits.IPEN = 0;   
+    INTCON0bits.GIEH = 0;
+    INTCON0bits.GIEL = 0;
+    INTCON0bits.IPEN = 0;
 
 #else
 

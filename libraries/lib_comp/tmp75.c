@@ -30,15 +30,20 @@ result_t tmp75_configure(I2C_BUS bus_id, u8 dev_addr)
 result_t tmp75_read_temp(I2C_BUS bus_id, u8 dev_addr, float *temp)
 {
     u16 tmp = 0;
+    s16 raw;
     u8 data[2];
-    
+
     if (i2c_read_n_reg(bus_id, dev_addr, TMP75_REG_TEMPERATURE, sizeof(data), data) != SUCCESS){
         return ERROR;
     }
 
-    tmp = ((data[0] << 8) | data[1]) >> 4;
+    raw = (s16)((data[0] << 8) | data[1]);
+    raw >>= 4;
 
-    *temp = (float)tmp * 0.0625f;
+    if (temp == NULL)
+        return ERROR;
+    else
+        *temp = raw * 0.0625f;
 
     return SUCCESS;
 }

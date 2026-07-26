@@ -2,29 +2,50 @@
 #include "types.h"
 
 const char *day_of_week_long[] = {
-    "Monday", 
-    "Tuesday", 
-    "Wednesday", 
-    "Thursday", 
-    "Friday", 
-    "Saturday", 
-    "Sunday" 
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
 };
 
 const char *day_of_week_short[] = {
-    "Mon", 
-    "Tue", 
-    "Wed", 
-    "Thu", 
-    "Fri", 
-    "Sat", 
-    "Sun" 
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sun"
 };
 
 const char *month_short[] = {
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 };
+
+static u8 _days_in_month(u8 month, u8 year)
+{
+    switch(month)
+    {
+        case 2:
+            if ((year % 4) == 0)
+                return 29;
+            else
+                return 28;
+
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            return 30;
+
+        default:
+            return 31;
+    }
+}
 
 void datetime_decrease_seconds(date_time_t *t)
 {
@@ -97,7 +118,7 @@ void datetime_decrease_days(date_time_t *t)
     if (t->day == 1)
     {
         t->day = 31;
-        datetime_decrease_mounths(t);
+        datetime_decrease_months(t);
     }
     else
     {
@@ -114,23 +135,23 @@ void datetime_decrease_days(date_time_t *t)
 
 void datetime_increase_days(date_time_t *t)
 {
-    if (t->day >= 31){
-        t->day = 1;
-        datetime_increase_mounths(t);
-    }
-    else{
-        t->day++;
-    }
+    t->dow++;
 
-    if (t->dow >= 7){
+    if (t->dow > 7)
         t->dow = 1;
+
+    if (t->day >= _days_in_month(t->mth,t->yrs))
+    {
+        t->day = 1;
+        datetime_increase_months(t);
     }
-    else{
-        t->dow++;
+    else
+    {
+        t->day++;
     }
 }
 
-void datetime_decrease_mounths(date_time_t *t)
+void datetime_decrease_months(date_time_t *t)
 {
     if (t->mth == 1){
         t->mth = 12;
@@ -141,7 +162,7 @@ void datetime_decrease_mounths(date_time_t *t)
     }
 }
 
-void datetime_increase_mounths(date_time_t *t)
+void datetime_increase_months(date_time_t *t)
 {
     if (t->mth >= 12){
         t->mth = 1;

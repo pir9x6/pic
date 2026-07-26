@@ -81,12 +81,12 @@ result_t pwm_set_duty (PWM_ID pwm_id, u16 duty)
     #if defined (_18F252)
 
         if (pwm_id == PWM_ID_1){
-            CCPR1L = (duty >> 2);                       // bits 9 to 2
+            CCPR1L = (u8)(duty >> 2);                       // bits 9 to 2
             CCP1CONbits.DC1B1 = (duty >> 1) & 0x01;     // bit 1
             CCP1CONbits.DC1B0 = duty & 0x01;            // bit 0
         }
         else if (pwm_id == PWM_ID_2){
-            CCPR2L = (duty >> 2);                       // bits 9 to 2
+            CCPR2L = (u8)(duty >> 2);                       // bits 9 to 2
             CCP2CONbits.DC2B1 = (duty >> 1) & 0x01;     // bit 1
             CCP2CONbits.DC2B0 = duty & 0x01;            // bit 0
         }
