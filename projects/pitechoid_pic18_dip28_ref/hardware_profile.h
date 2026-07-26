@@ -29,22 +29,18 @@
 #define LCD_D6_DIR              TRISBbits.TRISB2
 #define LCD_D7_DIR              TRISBbits.TRISB3
 
-#define LCD_RS_PIN              LATBbits.LATB5
-#define LCD_E_PIN               LATBbits.LATB4
-#define LCD_D4_PIN              LATBbits.LATB0
-#define LCD_D5_PIN              LATBbits.LATB1
-#define LCD_D6_PIN              LATBbits.LATB2
-#define LCD_D7_PIN              LATBbits.LATB3
+#define PIN_LCD_HD44780_RS      LATBbits.LATB5
+#define PIN_LCD_HD44780_E       LATBbits.LATB4
+#define PIN_LCD_HD44780_D4      LATBbits.LATB0
+#define PIN_LCD_HD44780_D5      LATBbits.LATB1
+#define PIN_LCD_HD44780_D6      LATBbits.LATB2
+#define PIN_LCD_HD44780_D7      LATBbits.LATB3
 
-#define LED_ERROR               LATAbits.LATA0
-#define LED_SEC                 LATAbits.LATA1
+#define PIN_LED_ERROR           LATAbits.LATA0
+#define PIN_LED_SEC             LATAbits.LATA1
 
-#define SWITCH_1                PORTAbits.RA2
-#define SWITCH_2                PORTAbits.RA3
-
-#define LED_R                   LATBbits.LATB0
-#define LED_G                   LATBbits.LATB1
-#define LED_B                   LATBbits.LATB2
+#define PIN_SWITCH_1            PORTAbits.RA2
+#define PIN_SWITCH_2            PORTAbits.RA3
 
 #define LCD_5110_SCE            LATBbits.LATB0
 #define LCD_5110_RST            LATBbits.LATB1
