@@ -7,13 +7,13 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 void dec_2_bcd(u16 dec, u8 bcd[])
 {
-    bcd[0]=0, bcd[1]=0, bcd[2]=0, bcd[3]=0, bcd[4]=0;
+    bcd[4] = 0, bcd[3] = 0, bcd[2] = 0, bcd[1] = 0;
 
-    while (dec>=10000) {bcd[4]++; dec -= 10000;}
-    while (dec>=1000)  {bcd[3]++; dec -= 1000;}
-    while (dec>=100)   {bcd[2]++; dec -= 100;}
-    while (dec>=10)    {bcd[1]++; dec -= 10;}
-    bcd[0] = dec;
+    while (dec >= 10000U)   {dec -= 10000U; bcd[4]++;}
+    while (dec >= 1000U)    {dec -= 1000U;  bcd[3]++;}
+    while (dec >= 100U)     {dec -= 100U;   bcd[2]++;}
+    while (dec >= 10U)      {dec -= 10U;    bcd[1]++;}
+    bcd[0] = (u8)dec;
 }
 
 
@@ -31,7 +31,7 @@ void dec_2_bcd32(u32 dec, u8 bcd[])
     while (dec>=1000)       {bcd[3]++; dec -= 1000;}
     while (dec>=100)        {bcd[2]++; dec -= 100;}
     while (dec>=10)         {bcd[1]++; dec -= 10;}
-    bcd[0] = dec;
+    bcd[0] = (u8)dec;
 }
 
 
@@ -99,7 +99,7 @@ void hex16_2_bcd(u16 hex, u8 bcd[])
     while (hex>=4096)  {bcd[3]++; hex -= 4096;}
     while (hex>=256)   {bcd[2]++; hex -= 256;}
     while (hex>=16)    {bcd[1]++; hex -= 16;}
-    bcd[0] = hex;
+    bcd[0] = (u8)hex;
 }
 
 void hex32_2_bcd(u32 hex, u8 bcd[])
@@ -114,7 +114,7 @@ void hex32_2_bcd(u32 hex, u8 bcd[])
     while (hex>=16*16*16)                   {bcd[3]++; hex -= 16*16*16;}
     while (hex>=16*16)                      {bcd[2]++; hex -= 16*16;}
     while (hex>=16)                         {bcd[1]++; hex -= 16;}
-    bcd[0] = hex;
+    bcd[0] = (u8)hex;
 }
 
 
@@ -123,7 +123,9 @@ void hex32_2_bcd(u32 hex, u8 bcd[])
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 u8 bin_2_bcd(u8 bin)
 {
-    return ((bin / 10) << 4) + (bin % 10);
+    u8 tens = bin / 10;
+
+    return (u8)((tens << 4) | (bin - tens * 10));
 }
 
 
