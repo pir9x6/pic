@@ -24,6 +24,9 @@ typedef enum{
 #define I2C_ACK                 0
 #define I2C_NACK                1
 
+#define I2C_ADDR_WR(addr)    ((u8)((addr) << 1))
+#define I2C_ADDR_RD(addr)    ((u8)(((addr) << 1) | 0x01))
+
 result_t i2c_init       (I2C_BUS bus_id, u32 freq, u16 opt);
 result_t i2c_start      (I2C_BUS bus_id);
 result_t i2c_rstart     (I2C_BUS bus_id);
@@ -40,17 +43,17 @@ result_t i2c_write_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *
 #if defined (__dsPIC33F__)
 
     void __attribute__((interrupt, no_auto_psv))_SI2C1Interrupt();
-    
+
     #ifdef _MI2C2IF
     void __attribute__((interrupt, no_auto_psv))_SI2C2Interrupt();
     #endif
-    
+
     void __attribute__((interrupt, no_auto_psv))_MI2C1Interrupt();
-    
+
     #ifdef _MI2C2IF
     void __attribute__((interrupt, no_auto_psv))_MI2C2Interrupt();
     #endif
-    
+
 #endif
 
 #endif
