@@ -380,6 +380,9 @@ void lcd_hd44780_write_temperature (float temp, u8 line, u8 pos)
 
     /* Celsius */
     _write ('C', LCD_HD44780_DATA);
+
+    /* Blank caractere to erase potential previous content */
+    _write (' ', LCD_HD44780_DATA);
 }
 
 
