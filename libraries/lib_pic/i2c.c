@@ -8,7 +8,7 @@ u8 addr_flag = 0;  // Initlize AddFlag
 u8 data_flag = 0;  // Initlize DataFlag
 u8 addr_ptr = 0;
 
-static result_t i2c_wait_for_idle(I2C_BUS bus_id);
+static result_t _wait_for_idle(I2C_BUS bus_id);
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------- Configuration du bus I2C --------------------------
@@ -170,7 +170,7 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
 result_t i2c_start(I2C_BUS bus_id)
 {
     /* wait for the bus to be free */
-    // if (i2c_wait_for_idle(bus_id) != SUCCESS){
+    // if (_wait_for_idle(bus_id) != SUCCESS){
     //     return ERROR;
     // }
 
@@ -234,7 +234,7 @@ result_t i2c_start(I2C_BUS bus_id)
 result_t i2c_rstart(I2C_BUS bus_id)
 {
     /* wait for the bus to be free */
-    if (i2c_wait_for_idle(bus_id) != SUCCESS){
+    if (_wait_for_idle(bus_id) != SUCCESS){
         return ERROR;
     }
 
@@ -294,7 +294,7 @@ result_t i2c_rstart(I2C_BUS bus_id)
 result_t i2c_send_ack(I2C_BUS bus_id, u8 Ack)
 {
     /* wait for the bus to be free */
-    if (i2c_wait_for_idle(bus_id) != SUCCESS){
+    if (_wait_for_idle(bus_id) != SUCCESS){
         return ERROR;
     }
 
@@ -406,7 +406,7 @@ result_t i2c_wait_ack(I2C_BUS bus_id)
 result_t i2c_read(I2C_BUS bus_id, u8 ack, u8 *data)
 {
     /* wait for the bus to be free */
-    if (i2c_wait_for_idle(bus_id) != SUCCESS){
+    if (_wait_for_idle(bus_id) != SUCCESS){
         return ERROR;
     }
 
@@ -455,7 +455,7 @@ result_t i2c_read(I2C_BUS bus_id, u8 ack, u8 *data)
 result_t i2c_write(I2C_BUS bus_id, u8 data)
 {
     /* wait for the bus to be free */
-    // if (i2c_wait_for_idle(bus_id) != SUCCESS){
+    // if (_wait_for_idle(bus_id) != SUCCESS){
     //     return ERROR;
     // }
 
@@ -520,13 +520,13 @@ result_t i2c_stop(I2C_BUS bus_id)
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
 
         if (bus_id == I2C_BUS_1){
-            i2c_wait_for_idle (bus_id);
+            _wait_for_idle (bus_id);
             I2C1CONbits.PEN = 1;
         }
 
         #ifdef _MI2C2IF
         else if (bus_id == I2C_BUS_2){
-            i2c_wait_for_idle (bus_id);
+            _wait_for_idle (bus_id);
             I2C2CONbits.PEN = 1;
         }
         #endif
@@ -548,7 +548,7 @@ result_t i2c_stop(I2C_BUS bus_id)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //--------------------------------- Idle --------------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-static result_t i2c_wait_for_idle(I2C_BUS bus_id)
+static result_t _wait_for_idle(I2C_BUS bus_id)
 {
     #if defined (_18F252)
 
