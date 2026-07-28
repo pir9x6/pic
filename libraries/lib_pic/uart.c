@@ -1,3 +1,6 @@
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "bcd.h"
 #include "date_time.h"
 #include "delays.h"
@@ -266,87 +269,6 @@ result_t uart_write (UART_ID uart_id, u8 data)
 
             /* send data */
             U3TXREG = data;
-        #endif
-
-        //===============================================================
-        }else{
-            return ERROR;
-        }
-
-    #else
-
-        #error -- processor ID not specified in generic header file
-
-    #endif
-
-    return SUCCESS;
-}
-
-/*******************************************************************************
- * Transmit a string
- * ****************************************************************************/
-result_t uart_write_string (UART_ID uart_id, const char *data)
-{
-    #if defined (_18F252)
-        while (*data != '\0')
-        {
-            /* wait for the buffer to be empty */
-            while (!TXSTAbits.TRMT);
-
-            /* send data */
-            TXREG = *data++;
-        }
-
-    #elif defined (_18F26K42) || defined (_18F57K42) || defined (_18F57Q43)
-
-        while (*data != '\0')
-        {
-            /* wait for the buffer to be empty */
-            while (U1FIFObits.TXBF);
-
-            /* send data */
-            U1TXB = *data++;
-        }
-
-    #elif defined(__PIC24F__) || defined(__dsPIC33F__)
-
-        //===============================================================
-        #ifdef _U1TXIF
-        if (uart_id == UART_ID_1){
-            while (*data != '\0')
-            {
-                /* wait for the buffer to be empty */
-                while (!U1STAbits.TRMT);
-
-                /* send data */
-                U1TXREG = *data++;
-            }
-        #endif
-
-        //===============================================================
-        #ifdef _U2TXIF
-        }else if (uart_id == UART_ID_2){
-            while (*data != '\0')
-            {
-                /* wait for the buffer to be empty */
-                while (!U1STAbits.TRMT);
-
-                /* send data */
-                U1TXREG = *data++;
-            }
-        #endif
-
-        //===============================================================
-        #ifdef _U3TXIF
-        }else if (uart_id == UART_ID_3){
-            while (*data != '\0')
-            {
-                /* wait for the buffer to be empty */
-                while (!U1STAbits.TRMT);
-
-                /* send data */
-                U1TXREG = *data++;
-            }
         #endif
 
         //===============================================================
