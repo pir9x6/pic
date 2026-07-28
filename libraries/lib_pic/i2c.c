@@ -101,7 +101,7 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
             _SI2C1IF = 0;
 
             #if defined UART_VERBOSE
-                uart_write_string("i2c bus 1 is initialized \n");
+                printf("i2c bus 1 is initialized \n");
             #endif
         }
 
@@ -137,7 +137,7 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
             _SI2C2IF = 0;
 
             #if defined UART_VERBOSE
-                uart_write_string("i2c bus 2 is initialized \n");
+                printf("i2c bus 2 is initialized \n");
             #endif
         }
         #endif
