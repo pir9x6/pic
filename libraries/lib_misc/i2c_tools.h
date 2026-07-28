@@ -1,10 +1,16 @@
 #ifndef LIB_MISC_I2C_TOOLS_H
 #define LIB_MISC_I2C_TOOLS_H
 
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "i2c.h"
 #include "types.h"
 
+/*****************************************************************************
+* Prototypes
+******************************************************************************/
 result_t i2c_detect(I2C_BUS i2c_id);
-result_t i2c_dump  (I2C_BUS i2c_id, u8 dev_addr);
+result_t i2c_dump  (I2C_BUS i2c_id, u8 dev_addr, u16 start, u16 length);
 
 #endif
