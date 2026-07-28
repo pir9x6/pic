@@ -22,13 +22,13 @@ void __interrupt(high_priority) interrupt()
 
         CntTmrIncSec++;
 
-        if (CntTmrIncSec == 499){
-            LED_SEC = !LED_SEC;
+        if (CntTmrIncSec == 199){
+            PIN_LED_SEC = !PIN_LED_SEC;
         }
-        else if (CntTmrIncSec == 999)
+        else if (CntTmrIncSec == 399)
         {
             time_has_changed_timer = TRUE;
-            LED_SEC = !LED_SEC;
+            PIN_LED_SEC = !PIN_LED_SEC;
             CntTmrIncSec = 0;
         }
     }
@@ -41,7 +41,7 @@ void __interrupt(high_priority) interrupt()
         u8 uart_rx_data = RCREG;
         // command_line_interpreter(UART_ID_1, uart_rx_data);
     }
-    
+
 }
 #endif
 
@@ -52,7 +52,7 @@ void __interrupt(irq(TMR2),high_priority) timer2_irq(void)
     static u16 CntTmrIncSec = 0;
 
     /* Disable Timer 2 */
-    T2CONbits.TMR2ON = 0;               
+    T2CONbits.TMR2ON = 0;
 
     /* clear timer interrupt */
     #if defined (_18F252)
@@ -73,12 +73,12 @@ void __interrupt(irq(TMR2),high_priority) timer2_irq(void)
     CntTmrIncSec++;
 
     if (CntTmrIncSec == 499){
-        LED_SEC = !LED_SEC;
+        PIN_LED_SEC = !PIN_LED_SEC;
     }
     else if (CntTmrIncSec == 999)
     {
         time_has_changed_timer = TRUE;
-        LED_SEC = !LED_SEC;
+        PIN_LED_SEC = !PIN_LED_SEC;
         CntTmrIncSec = 0;
     }
 }
