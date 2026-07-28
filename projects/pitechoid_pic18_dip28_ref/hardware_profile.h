@@ -49,7 +49,7 @@
 #define LCD_5110_CLK            LATBbits.LATB5
 
 //--------------------------- Peripherals speed -------------------------------
-#define UART_FREQ               115200  /* actual bitrate is 125k for 18F252, 119k for 18F26K42*/
+#define UART_FREQ               125000  /* cannot have 115200 at 10 MHz. PuttY should be set to 125000 !!*/
 #define I2C_FREQ                100000
 #define GetSystemClock()        10000000L
 #define GetPeripheralClock()    GetSystemClock()
