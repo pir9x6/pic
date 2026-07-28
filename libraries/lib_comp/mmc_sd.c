@@ -1,5 +1,5 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Author      :   Pierre BLACHÉ                                       &&&
+//&&&   Author      :   Pierre BLACHï¿½                                       &&&
 //&&&   Version     :   v1.0                                                &&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&   Description :   - MMC/SD Card libraries                             &&&
@@ -25,10 +25,10 @@ RESULT sd_initialize()
 {
     u8 i, j;
 
-    // set the clock rate à 400 kHz
+    // set the clock rate ï¿½ 400 kHz
     SPI1CON1bits.PPRE = 0;          // prescaler primaire, clock = Fcyc/64 (625kHz)
     SPI1CON1bits.SPRE = 0;          // prescaler secondaire, clock = 625k/8 (78.125kHz)
-    
+
     /* SPI SD initialization sequence:
     * CMD0
     * CMD55
@@ -57,7 +57,7 @@ RESULT sd_initialize()
 
     // Put the card in the idle state
     if (sd_send_command(CMD0, CMD0_R, response, argument) == ERROR){
-        uart_write_string(UART_ID_1, "[sd_initialize] Error - Idle state!\n");
+        printf(UART_ID_1, "[sd_initialize] Error - Idle state!\n");
         return ERROR;
     }
 
@@ -77,26 +77,26 @@ RESULT sd_initialize()
         }
     }while ((response[0] & MSK_IDLE) == MSK_IDLE && j < SD_IDLE_WAIT_MAX);
 
-    // As long as we didn’t hit the timeout, assume we’re OK.
+    // As long as we didnï¿½t hit the timeout, assume weï¿½re OK.
     if (j >= SD_IDLE_WAIT_MAX){
-        uart_write_string(UART_ID_1, "[sd_initialize] Error - Timeout!\n");
+        printf(UART_ID_1, "[sd_initialize] Error - Timeout!\n");
         return ERROR;
     }
 
     if (sd_send_command(CMD58, CMD58_R, response, argument) == ERROR){
-        uart_write_string(UART_ID_1, "[sd_initialize] Error - Read OCR!\n");
+        printf(UART_ID_1, "[sd_initialize] Error - Read OCR!\n");
         return ERROR;
     }
 
     // At a very minimum, we must allow 3.3V.
     if ((response[2] & MSK_OCR_33) != MSK_OCR_33){
-        uart_write_string(UART_ID_1, "[sd_initialize] Error - Voltage!\n");
+        printf(UART_ID_1, "[sd_initialize] Error - Voltage!\n");
         return ERROR;
     }
 
     // Set the block length
     if (sd_set_blocklen (SD_BLOCKSIZE) != SUCCESS){
-        uart_write_string(UART_ID_1, "[sd_initialize] Error - set block length!\n");
+        printf(UART_ID_1, "[sd_initialize] Error - set block length!\n");
         return ERROR;
     }
 
@@ -164,7 +164,7 @@ RESULT sd_send_command(u8 cmd, u8 response_type, u8 *response, u8 *argument)
     if (i >= SD_CMD_TIMEOUT)
     {
         spi_cs_high();
-        uart_write_string(UART_ID_1, "[sd_send_command] Timeout!!!\n");
+        printf(UART_ID_1, "[sd_send_command] Timeout!!!\n");
         return ERROR;
     }
 
@@ -175,7 +175,7 @@ RESULT sd_send_command(u8 cmd, u8 response_type, u8 *response, u8 *argument)
         spi_read(SPI_ID_1, &tmp);
     }
 
-    /* If the response is a "busy" type (R1B), then there’s some
+    /* If the response is a "busy" type (R1B), then thereï¿½s some
     * special handling that needs to be done. The card will
     * output a continuous stream of zeros, so the end of the BUSY
     * state is signaled by any nonzero response. The bus idles high.
@@ -216,7 +216,7 @@ void sd_packarg(u8 *argument, u32 value)
     argument[1] = (u8)(value >> 8);
     argument[0] = (u8)(value);
 
-    uart_write_string(UART_ID_1, "sd arguments: ");
+    printf(UART_ID_1, "sd arguments: ");
     uart_write_hexa_u8(UART_ID_1, argument[0], UART_0x | UART_LF);
     uart_write_hexa_u8(UART_ID_1, argument[1], UART_0x | UART_LF);
     uart_write_hexa_u8(UART_ID_1, argument[2], UART_0x | UART_LF);

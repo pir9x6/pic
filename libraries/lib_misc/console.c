@@ -1,6 +1,7 @@
 #include "console.h"
 #include "log.h"
 #include "stdlib.h"
+#include "i2c_tools.h"
 #include "hardware_profile.h"
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -23,12 +24,12 @@ result_t command_line_interpreter (UART_ID uart_id, I2C_BUS i2c_id, u8 uart_rx_d
         uart_write(uart_id, '\n');
 
         if (index_buf == 0){
-            uart_write_string (uart_id, INVITE_CMD);
+            printf (uart_id, INVITE_CMD);
             return SUCCESS;
         }
         else if (string_compare(uart_buff, "i2cdump",   7) == SUCCESS){
             arg[0] = (uart_buff[10]-0x30) * 16 + (uart_buff[11]-0x30);      // address of the chip
-            i2c_dump(uart_id, i2c_id, arg[0]);
+            i2c_dump(uart_id, i2c_id, arg[0], 0/*start*/, 256/*length*/);
         }
         else if (string_compare(uart_buff, "i2cdetect", 9) == SUCCESS){
             i2c_detect(uart_id, i2c_id);
@@ -55,7 +56,7 @@ result_t command_line_interpreter (UART_ID uart_id, I2C_BUS i2c_id, u8 uart_rx_d
             ds1337_get_time(i2c_id, &t);
             uart_write_date(uart_id, t);
             #else
-            uart_write_string(uart_id, " : device currently not supported\n");
+            printf(uart_id, " : device currently not supported\n");
             #endif
         }
         else if (string_compare(uart_buff, "temperature", 11) == SUCCESS){
@@ -63,7 +64,7 @@ result_t command_line_interpreter (UART_ID uart_id, I2C_BUS i2c_id, u8 uart_rx_d
             ds1621_read_temp(i2c_id, temperature);
             uart_write_temperature(uart_id, temperature);
             #else
-            uart_write_string(uart_id, " : device currently not supported\n");
+            printf(uart_id, " : device currently not supported\n");
             #endif
         }
         else if (string_compare(uart_buff, "reboot", 6) == SUCCESS){
@@ -71,11 +72,11 @@ result_t command_line_interpreter (UART_ID uart_id, I2C_BUS i2c_id, u8 uart_rx_d
         }
         else{
             uart_buff[index_buf++] = '\0';
-            uart_write_string(uart_id, uart_buff);
-            uart_write_string(uart_id, " : unknown command\n");
+            printf(uart_id, uart_buff);
+            printf(uart_id, " : unknown command\n");
         }
 
-        uart_write_string (uart_id, INVITE_CMD);
+        printf(uart_id, INVITE_CMD);
         index_buf = 0;
         init_array(uart_buff, str_len(uart_buff), 0);
 
