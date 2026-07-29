@@ -1,26 +1,33 @@
+/*****************************************************************************
+*   v1.0    2026-07-28  Original version (read validated)
+******************************************************************************/
+
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "bh1750.h"
 #include "i2c.h"
 #include "types.h"
 
+/*****************************************************************************
+* Docs
+******************************************************************************/
 // https://www.mouser.com/datasheet/2/348/bh1750fvi-e-186247.pdf
 
-/* Todo: set and get MTREG */
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//-------------------------------- init sensor --------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+/*****************************************************************************
+* Init sensor
+******************************************************************************/
 result_t bh1750_init (I2C_BUS i2c_bus_id, u8 dev_addr)
 {
-    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
-
     // config the chip for a high resolution continuous measure
     if (i2c_start (i2c_bus_id) != SUCCESS)
         return ERROR;
 
-    if (i2c_write (i2c_bus_id, adr_wr) != SUCCESS)
+    if (i2c_write (i2c_bus_id, I2C_ADDR_WR(dev_addr)) != SUCCESS)
         return ERROR;
 
-    if (i2c_write (i2c_bus_id, BH1750_REG_CONT_H_RES) != SUCCESS)
+    if (i2c_write (i2c_bus_id, BH1750_REG_CONT_L_RES) != SUCCESS)
         return ERROR;
 
     if (i2c_stop (i2c_bus_id) != SUCCESS)
@@ -30,39 +37,35 @@ result_t bh1750_init (I2C_BUS i2c_bus_id, u8 dev_addr)
 }
 
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//------------------------- Get Light from sensor -----------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+/*****************************************************************************
+* Get Light from sensor
+******************************************************************************/
 result_t bh1750_get_light (I2C_BUS i2c_bus_id, u8 dev_addr, float *light)
 {
-    u8 data[2];
-    u8 adr_rd = (u8)((dev_addr << 1) | 0x01);
-    float light_raw;
+    u8 msb, lsb;
 
     if (i2c_start(i2c_bus_id) != SUCCESS)
         return ERROR;
 
-    if (i2c_write(i2c_bus_id, adr_rd) != SUCCESS)
+    if (i2c_write(i2c_bus_id, I2C_ADDR_RD(dev_addr)) != SUCCESS)
         return ERROR;
 
-    /* MSB */
-    if (i2c_read (i2c_bus_id, I2C_ACK,  &data[0]) != SUCCESS)
+    /* Get MSB */
+    if (i2c_read (i2c_bus_id, I2C_ACK,  &msb) != SUCCESS)
         return ERROR;
 
-    /* LSB */
-    if (i2c_read (i2c_bus_id, I2C_NACK, &data[1]) != SUCCESS)
+    /* Get LSB */
+    if (i2c_read (i2c_bus_id, I2C_NACK, &lsb) != SUCCESS)
         return ERROR;
 
     if (i2c_stop (i2c_bus_id) != SUCCESS)
         return ERROR;
 
-    light_raw = (data[0] << 8) + data[1];
+    *light = ((msb << 8) | lsb) / 1.2;
 
-    /* if high res mode 2 is used */
-    *light = light_raw / 2.0;
-
-    /* Convert raw value to lux */
-    *light /= BH1750_CONV_FACTOR;
+    /* workaround: the light goes negative when higher than 32768 */
+    if (*light < 0)
+        *light = 32768;
 
     return SUCCESS;
 }

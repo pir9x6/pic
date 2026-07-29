@@ -1,22 +1,36 @@
 #ifndef LIB_COMP_BH1750_H
 #define LIB_COMP_BH1750_H
 
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "i2c.h"
 #include "types.h"
 
+/*****************************************************************************
+* Defines
+******************************************************************************/
 #define BH1750_DEFAULT_MTREG    (float)69
 #define BH1750_CONV_FACTOR      (float)1.2
 
+/*****************************************************************************
+* Registers
+******************************************************************************/
 #define BH1750_REG_PWR_DOWN     0x00
 #define BH1750_REG_PWR_ON       0x01
 #define BH1750_REG_RESET        0x07
-#define BH1750_REG_CONT_H_RES   0x10
-#define BH1750_REG_CONT_H_RES_2 0x11
-#define BH1750_REG_CONT_L_RES   0x13
+
+#define BH1750_REG_CONT_H_RES   0x10    /* 1 lx, 120 ms */
+#define BH1750_REG_CONT_H_RES_2 0x11    /* 0.5 lx, 120 ms */
+#define BH1750_REG_CONT_L_RES   0x13    /* 4 lx, 16 ms */
+
 #define BH1750_REG_ONE_H_RES    0x20
 #define BH1750_REG_ONE_H_RES_2  0x21
 #define BH1750_REG_ONE_L_RES    0x23
 
+/*****************************************************************************
+* Prototypes
+******************************************************************************/
 result_t bh1750_init (I2C_BUS i2c_bus_id, u8 dev_addr);
 result_t bh1750_get_light (I2C_BUS i2c_bus_id, u8 dev_addr, float *light);
 
