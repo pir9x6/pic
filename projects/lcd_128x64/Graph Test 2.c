@@ -1,18 +1,18 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&					Titre 	: 	Essai d'affichage sur GLCD		&&&
-//&&&					Auteur 	: 	Pierre Blaché					&&&
-//&&&					Date 	: 	Mai 2010						&&&
+//&&&                   Titre   :   Essai d'affichage sur GLCD      &&&
+//&&&                   Auteur  :   Pierre Blaché                   &&&
+//&&&                   Date    :   Mai 2010                        &&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 #include "p18CXXX.h"
 
-#pragma config WDT = OFF		// Watchdog OFF
-#pragma config OSC = XT			// Quartz 20MHz
-#pragma config LVP = OFF		// Low Power Prog OFF
+#pragma config WDT = OFF        // Watchdog OFF
+#pragma config OSC = XT         // Quartz 20MHz
+#pragma config LVP = OFF        // Low Power Prog OFF
 
-#define LCD_E 	PORTCbits.RC7
-#define LCD_RW 	PORTCbits.RC6
-#define LCD_RS 	PORTCbits.RC5
+#define LCD_E   PORTCbits.RC7
+#define LCD_RW  PORTCbits.RC6
+#define LCD_RS  PORTCbits.RC5
 #define LCD_CS1 PORTCbits.RC4
 #define LCD_CS2 PORTCbits.RC3
 #define LCD_RST PORTCbits.RC2
@@ -22,7 +22,7 @@ const char display[1026]={
 
   /* partie gauche du lcd */
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -41,12 +41,12 @@ const char display[1026]={
   1,0,0,0,0,1,0xFE,0,
   0,0,0x1E,0x21,0x40,0x80,0x88,0x88,
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0xFF,0x80,0x80,
   0x80,0x80,0,0,0,0x38,0x44,0x82,
   0x82,0x82,0,0,0,0xFE,0x82,0x82,
@@ -54,24 +54,24 @@ const char display[1026]={
   0x38,0x44,0x82,0x92,0x72,0,0,0,
   0xFE,0x82,0x82,0x44,0x38,0,0,0,
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
   /* partie droite du lcd */
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -82,7 +82,7 @@ const char display[1026]={
   4,0xCE,4,0,0,0x80,0x40,0x40,
   0x40,0x40,0x40,0x40,0x80,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-  0,0,0,0,0,0,0,0,   
+  0,0,0,0,0,0,0,0,
 
   0x48,0x30,0,0,0,0x1E,0x25,0x44,
   0x84,0x84,0x84,0x80,0x40,0,0,0,
@@ -92,7 +92,7 @@ const char display[1026]={
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -106,17 +106,17 @@ const char display[1026]={
   0x12,0xFC,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -130,58 +130,58 @@ void Delay (unsigned int Cnt);
 
 void main (void)
 {
-   	LCD_E=0;              // variable validation octet  
-   	LCD_RW=0;             // variable écriture  
-   
-   	TRISB=0;
-   	TRISC=0;
-   
-   	LCD_RST=0;            // reset
-   	LCD_RST=1;  
-   	ptr=0;                // pointeur diplay
-   	for(cs=0;cs<=1;cs++)
+    LCD_E=0;              // variable validation octet
+    LCD_RW=0;             // variable écriture
+
+    TRISB=0;
+    TRISC=0;
+
+    LCD_RST=0;            // reset
+    LCD_RST=1;
+    ptr=0;                // pointeur diplay
+    for(cs=0;cs<=1;cs++)
     {
-      	LCD_RS=0;          // envoi instruction
-      	if(cs==1)
+        LCD_RS=0;          // envoi instruction
+        if(cs==1)
         {
             LCD_CS1=0;   // selection chip gauche
-            LCD_CS2=1;  
+            LCD_CS2=1;
         }
          else
         {
             LCD_CS1=1;  // selection chip droite
-            LCD_CS2=0; 
+            LCD_CS2=0;
         }
-      	LCD(0x3F);        // lcd allumé
-      	LCD(0xB8);        // page 0
-      	LCD(0xC0);        // pointe vers 1 ligne afficheur
-      
-      	for(x=0;x<=7;x++) 
-        {
-         	LCD_RS=0;      // envoi instruction          
-         	LCD(0x40);     // colonne 0         
-         	LCD(0xB8 + x); // page ++
-         	LCD_RS=1;      // envoi caractère
-         	for(y=0;y<=63;y++)
-            {
-            	LCD(display[ptr]);  
-            	ptr++;            
-            }
-         }     
-     }
-     LCD_CS1=0;  
-     LCD_CS2=0;  
+        LCD(0x3F);        // lcd allumé
+        LCD(0xB8);        // page 0
+        LCD(0xC0);        // pointe vers 1 ligne afficheur
 
-	while (1);     
-} 
+        for(x=0;x<=7;x++)
+        {
+            LCD_RS=0;      // envoi instruction
+            LCD(0x40);     // colonne 0
+            LCD(0xB8 + x); // page ++
+            LCD_RS=1;      // envoi caractère
+            for(y=0;y<=63;y++)
+            {
+                LCD(display[ptr]);
+                ptr++;
+            }
+         }
+     }
+     LCD_CS1=0;
+     LCD_CS2=0;
+
+    while (1);
+}
 
 void LCD(char cVar)  // envoi de l'octet dans le port B
 {
-   	PORTB=cVar;        
-   	LCD_E=1;           // validation de l'octet 
-	Nop(); Nop(); Nop(); Nop(); Nop();
-   	LCD_E=0;
-	Delay (1);
+    PORTB=cVar;
+    LCD_E=1;           // validation de l'octet
+    Nop(); Nop(); Nop(); Nop(); Nop();
+    LCD_E=0;
+    Delay (1);
 }
 
 
@@ -189,10 +189,10 @@ void LCD(char cVar)  // envoi de l'octet dans le port B
 //-------------------------- Delay ----------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 void Delay (unsigned int Cnt)
-	{
-	unsigned int x, y;
-	for (x = Cnt; x != 0; x--)		// Boucle executée Cnt fois
-		{
-		for (y = 332; y != 0; y--);	// Boucle executée Cnt fois
-		}
-	}
+    {
+    unsigned int x, y;
+    for (x = Cnt; x != 0; x--)      // Boucle executée Cnt fois
+        {
+        for (y = 332; y != 0; y--); // Boucle executée Cnt fois
+        }
+    }

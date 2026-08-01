@@ -1,18 +1,18 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&			Titre : Afficheur LCD Graphique 128x64		&&&
-//&&&			Auteur : Pierre Blaché						&&&
-//&&&			Date : 	Decembre 2007 / Janvier 2008		&&&
+//&&&           Titre : Afficheur LCD Graphique 128x64      &&&
+//&&&           Auteur : Pierre Blaché                      &&&
+//&&&           Date :  Decembre 2007 / Janvier 2008        &&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 #include <p18CXXX.h>
-#pragma config WDT = OFF		// Watchdog OFF
-#pragma config OSC = HS			// Quartz 20MHz
-#pragma config LVP = OFF		// Low Power Prog OFF
+#pragma config WDT = OFF        // Watchdog OFF
+#pragma config OSC = HS         // Quartz 20MHz
+#pragma config LVP = OFF        // Low Power Prog OFF
 
-#define LCD_data	PORTD
-#define LCD_E 	PORTCbits.RC7
-#define LCD_RW 	PORTCbits.RC6
-#define LCD_RS 	PORTCbits.RC5
+#define LCD_data    PORTD
+#define LCD_E   PORTCbits.RC7
+#define LCD_RW  PORTCbits.RC6
+#define LCD_RS  PORTCbits.RC5
 #define LCD_CS1 PORTCbits.RC4
 #define LCD_CS2 PORTCbits.RC3
 #define LCD_RST PORTCbits.RC2
@@ -67,85 +67,85 @@ rom char data[]={
 //-------------------------- Delay ----------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 void Delay_ms (unsigned int Cnt)
-	{
-	unsigned int x, y;
-	for (x = Cnt; x != 0; x--)		// Boucle executée Cnt fois
-		{
-		for (y = 332; y != 0; y--);	// Boucle executée 332 fois
-		}
-	}
+    {
+    unsigned int x, y;
+    for (x = Cnt; x != 0; x--)      // Boucle executée Cnt fois
+        {
+        for (y = 332; y != 0; y--); // Boucle executée 332 fois
+        }
+    }
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void ecr_data(char ddata)  			// envoi de l'octet vers lcd
-   	{
-   	LCD_data = ddata;        
-   	LCD_E = 1;           			// validation  
-   	LCD_E = 0;
-	Delay_ms (1);
-   	}
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   
-void chip(unsigned char cs)			// 0 pour gauche,  1 pour droite
-	{
-	LCD_CS1 = !cs; 
-	LCD_CS2 = cs; 
-	} 
+void ecr_data(char ddata)           // envoi de l'octet vers lcd
+    {
+    LCD_data = ddata;
+    LCD_E = 1;                      // validation
+    LCD_E = 0;
+    Delay_ms (1);
+    }
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+void chip(unsigned char cs)         // 0 pour gauche,  1 pour droite
+    {
+    LCD_CS1 = !cs;
+    LCD_CS2 = cs;
+    }
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 void init_lcd(void)
 {
-	TRISB = 0;
-   	TRISC = 0;						//  port CTRL en sortie
-   	TRISD = 0;						//  port data en sortie
-   	LCD_E = 0;             			// init E , RW
-   	LCD_RW = 0;         
-   	LCD_RST = 0;           			// reset LCD
-	Delay_ms (10);
-   	LCD_RST = 1;  
-  
-	LCD_RS = 0;
-   	chip(0);
-   	ecr_data (0xC0);        		// RAM 0 sur haut afficheur coté gauche
-   	ecr_data (0x3F);        		// lcd allumé
-   
-   	chip(1);
-   	ecr_data (0xC0);        		// RAM 0 sur haut afficheur coté droit
-   	ecr_data (0x3F);  	  			// lcd allumé
+    TRISB = 0;
+    TRISC = 0;                      //  port CTRL en sortie
+    TRISD = 0;                      //  port data en sortie
+    LCD_E = 0;                      // init E , RW
+    LCD_RW = 0;
+    LCD_RST = 0;                    // reset LCD
+    Delay_ms (10);
+    LCD_RST = 1;
+
+    LCD_RS = 0;
+    chip(0);
+    ecr_data (0xC0);                // RAM 0 sur haut afficheur coté gauche
+    ecr_data (0x3F);                // lcd allumé
+
+    chip(1);
+    ecr_data (0xC0);                // RAM 0 sur haut afficheur coté droit
+    ecr_data (0x3F);                // lcd allumé
 }
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 void main(void)
 {
 unsigned char ligne, pix;
-unsigned int ptr = 0;				// pointeur table data
-       
-   	init_lcd();
-       
-	for (ligne = 0; ligne < 8; ligne ++)
-		{
-		LCD_RS = 0;
-        chip(0);  					// coté gauche
-        ecr_data (0x40);     		// colonne 0         
-        ecr_data (0xB8 + ligne); 	// page ++ 
-   		for(pix = 0; pix < 64; pix ++)
-			{
-			LCD_RS = 1; 
-			ecr_data(data[ptr++]);	// envoie 64 données
-			}
+unsigned int ptr = 0;               // pointeur table data
 
-		LCD_RS = 0;
- 		chip(1);					// coté droit
-        ecr_data (0x40);     		// colonne 0      
-        ecr_data (0xB8 + ligne); 	// page ++
-	   	for (pix = 0; pix < 64; pix ++)
-			{
-			LCD_RS = 1;
-			ecr_data(data[ptr++]);  // envoie 64 données
-			}
-   		}
-   
-	while (1)
-		{
-		PORTB = 0x01;
-		Delay_ms (200);
-		PORTB = 0x00;
-		Delay_ms (200);
-		} 
+    init_lcd();
+
+    for (ligne = 0; ligne < 8; ligne ++)
+        {
+        LCD_RS = 0;
+        chip(0);                    // coté gauche
+        ecr_data (0x40);            // colonne 0
+        ecr_data (0xB8 + ligne);    // page ++
+        for(pix = 0; pix < 64; pix ++)
+            {
+            LCD_RS = 1;
+            ecr_data(data[ptr++]);  // envoie 64 données
+            }
+
+        LCD_RS = 0;
+        chip(1);                    // coté droit
+        ecr_data (0x40);            // colonne 0
+        ecr_data (0xB8 + ligne);    // page ++
+        for (pix = 0; pix < 64; pix ++)
+            {
+            LCD_RS = 1;
+            ecr_data(data[ptr++]);  // envoie 64 données
+            }
+        }
+
+    while (1)
+        {
+        PORTB = 0x01;
+        Delay_ms (200);
+        PORTB = 0x00;
+        Delay_ms (200);
+        }
 }
 
