@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "lib_comp",
+			"path": "../../../libraries/lib_comp"
+		},
+		{
+			"name": "lib_misc",
+			"path": "../../../libraries/lib_misc"
+		},
+		{
+			"name": "lib_pic",
+			"path": "../../../libraries/lib_pic"
+		}
+	],
+    "settings": {}
+}
