@@ -10,9 +10,11 @@
         <itemPath>../../libraries/lib_comp/ds1307.h</itemPath>
         <itemPath>../../libraries/lib_comp/ds1631.h</itemPath>
         <itemPath>../../libraries/lib_comp/bh1750.h</itemPath>
+        <itemPath>../../libraries/lib_comp/mma7660.h</itemPath>
+        <itemPath>../../libraries/lib_comp/eeprom_i2c.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="lib_lcd" projectFiles="true">
-        <itemPath>../../libraries/lib_lcd/lcd_2x16.h</itemPath>
+        <itemPath>../../libraries/lib_lcd/lcd_hd44780.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="lib_misc" projectFiles="true">
         <itemPath>../../libraries/lib_misc/i2c_tools.h</itemPath>
@@ -39,6 +41,11 @@
       <itemPath>pin_manager.h</itemPath>
       <itemPath>../../libraries/lib_pic/interrupts.h</itemPath>
     </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="true">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
@@ -52,9 +59,11 @@
         <itemPath>../../libraries/lib_comp/ds1631.c</itemPath>
         <itemPath>../../libraries/lib_comp/ds1307.c</itemPath>
         <itemPath>../../libraries/lib_comp/bh1750.c</itemPath>
+        <itemPath>../../libraries/lib_comp/mma7660.c</itemPath>
+        <itemPath>../../libraries/lib_comp/eeprom_i2c.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="lib_lcd" projectFiles="true">
-        <itemPath>../../libraries/lib_lcd/lcd_2x16.c</itemPath>
+        <itemPath>../../libraries/lib_lcd/lcd_hd44780.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="lib_misc" projectFiles="true">
         <itemPath>../../libraries/lib_misc/misc.c</itemPath>
@@ -77,11 +86,6 @@
       <itemPath>pin_manager.c</itemPath>
       <itemPath>../../libraries/lib_pic/interrupts.c</itemPath>
     </logicalFolder>
-    <logicalFolder name="ExternalFiles"
-                   displayName="Important Files"
-                   projectFiles="false">
-      <itemPath>Makefile</itemPath>
-    </logicalFolder>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
@@ -100,7 +104,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.10</languageToolchainVersion>
+        <languageToolchainVersion>3.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
@@ -130,6 +134,26 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../../libraries/lib_misc/console.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
+      </item>
+      <item path="../../libraries/lib_misc/console.h" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
+      </item>
       <HI-TECH-COMP>
         <property key="additional-warnings" value="true"/>
         <property key="asmlist" value="true"/>
@@ -212,46 +236,7 @@
         <property key="remove-unused-sections" value="true"/>
       </HI-TECH-LINK>
       <PICkit3PlatformTool>
-        <property key="AutoSelectMemRanges" value="auto"/>
-        <property key="Freeze Peripherals" value="true"/>
-        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
-        <property key="ToolFirmwareFilePath"
-                  value="Press to browse for a specific firmware version"/>
-        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
-        <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="hwtoolclock.frcindebug" value="false"/>
-        <property key="memories.aux" value="false"/>
-        <property key="memories.bootflash" value="true"/>
-        <property key="memories.configurationmemory" value="true"/>
-        <property key="memories.configurationmemory2" value="true"/>
-        <property key="memories.dataflash" value="true"/>
-        <property key="memories.eeprom" value="true"/>
-        <property key="memories.flashdata" value="true"/>
-        <property key="memories.id" value="true"/>
-        <property key="memories.instruction.ram" value="true"/>
-        <property key="memories.instruction.ram.ranges"
-                  value="${memories.instruction.ram.ranges}"/>
-        <property key="memories.programmemory" value="true"/>
-        <property key="memories.programmemory.ranges" value="0-7fff"/>
-        <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmertogo.imagename" value=""/>
-        <property key="programoptions.donoteraseauxmem" value="false"/>
-        <property key="programoptions.eraseb4program" value="true"/>
-        <property key="programoptions.pgmspeed" value="2"/>
-        <property key="programoptions.preservedataflash" value="false"/>
-        <property key="programoptions.preservedataflash.ranges"
-                  value="${programoptions.preservedataflash.ranges}"/>
-        <property key="programoptions.preserveeeprom" value="false"/>
-        <property key="programoptions.preserveeeprom.ranges" value="0-ff"/>
-        <property key="programoptions.preserveprogram.ranges" value=""/>
-        <property key="programoptions.preserveprogramrange" value="false"/>
-        <property key="programoptions.preserveuserid" value="false"/>
-        <property key="programoptions.programcalmem" value="false"/>
-        <property key="programoptions.programuserotp" value="false"/>
-        <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
-        <property key="programoptions.usehighvoltageonmclr" value="false"/>
-        <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="5.0"/>
+        <property key="firmware.download.all" value="false"/>
       </PICkit3PlatformTool>
       <XC8-CO>
         <property key="coverage-enable" value=""/>

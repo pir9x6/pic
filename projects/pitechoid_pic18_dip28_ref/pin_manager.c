@@ -44,12 +44,12 @@ void pin_manager_init(void)
 
     //-----------------------------------------------------------------------------
     //*I2C specific thresholds */
-    RC3I2Cbits.TH = 1; 
-    RC4I2Cbits.TH = 1; 
+    RC3I2Cbits.TH = 1;
+    RC4I2Cbits.TH = 1;
 
     //-----------------------------------------------------------------------------
     /* No slew rate limiting */
-    SLRCONCbits.SLRC3 = 0; 
+    SLRCONCbits.SLRC3 = 0;
     SLRCONCbits.SLRC4 = 0;
 
     //-----------------------------------------------------------------------------
