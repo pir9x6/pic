@@ -1,20 +1,56 @@
 #include "stdio.h"
+#include "stdarg.h"
 
 #include "log.h"
+#include "uart.h"
 
-//extern UART_ID UART_ID_LOG;
-
-void PRINT_ERROR(char *log)
+static const char *level_color[] =
 {
-    printf(CONS_FG_RED"%s\n"CONS_FG_WHITE, log);
-}
+    LOG_CYAN,       // DEBUG
+    LOG_GREEN,      // INFO
+    LOG_YELLOW,     // WARNING
+    LOG_RED,        // ERROR
+    LOG_MAGENTA     // CRITICAL
+};
 
-void PRINT_DEBUG(char *log)
+static const char *level_string[] =
 {
-    printf("%s\n", log);
-}
+    "DEBUG",
+    "INFO ",
+    "WARN ",
+    "ERROR",
+    "CRIT "
+};
 
-void PRINT_WARN (char *log)
+/* /!\ vprintf costs too much memory, use defines instead */
+void log_printf(LOG_LEVEL_t level, const char *format, ...)
 {
-    printf(CONS_BG_YELLOW"%s\n"CONS_FG_WHITE, log);
+
+    if (level < LOG_LEVEL_THRESHOLD)
+        return;
+
+#ifdef LOG_ENABLE_COLOR
+
+    printf("%s", level_color[level]);
+
+#endif
+
+    printf("[%s] ", level_string[level]);
+
+    va_list args;
+
+    va_start(args, format);
+
+    vprintf(format, args);
+
+    va_end(args);
+
+#ifdef LOG_ENABLE_COLOR
+
+    printf("%s", LOG_COLOR_RESET);
+
+#endif
+
+
+    printf("\r\n");
 }
