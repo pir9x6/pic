@@ -1,9 +1,15 @@
 #ifndef LIB_CHIPS_BMP085_H
 #define LIB_CHIPS_BMP085_H
 
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "types.h"
 #include "i2c.h"
 
+/*****************************************************************************
+* Registers
+******************************************************************************/
 #define BMP085_REG_AC1_MSB      0xAA
 #define BMP085_REG_AC1_LSB      0xAB
 #define BMP085_REG_AC2_MSB      0xAC
@@ -54,6 +60,9 @@ typedef struct
     s32 altitude;
 }bmp085_t;
 
+/*****************************************************************************
+* Prototypes
+******************************************************************************/
 result_t bmp085_init                         (bmp085_t *data);
 result_t bmp085_calculate_temp_pressure      (bmp085_t *data);
 result_t bmp085_get_calibration_coef         (I2C_BUS i2c_bus_id, u8 dev_addr, bmp085_t *data);
