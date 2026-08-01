@@ -15,6 +15,7 @@
 #define MAX6956_REG_PORT_CFG_P23_P22_P21_P20    0X0D
 #define MAX6956_REG_PORT_CFG_P27_P26_P25_P24    0X0E
 #define MAX6956_REG_PORT_CFG_P31_P30_P29_P28    0X0F
+
 #define MAX6956_REG_CURRENT_054                 0X12
 #define MAX6956_REG_CURRENT_076                 0X13
 #define MAX6956_REG_CURRENT_098                 0X14
@@ -29,6 +30,7 @@
 #define MAX6956_REG_CURRENT_1BA                 0X1D
 #define MAX6956_REG_CURRENT_1DC                 0X1E
 #define MAX6956_REG_CURRENT_1FE                 0X1F
+
 #define MAX6956_REG_PORT_0_ONLY                 0X20
 #define MAX6956_REG_PORT_1_ONLY                 0X21
 #define MAX6956_REG_PORT_2_ONLY                 0X22
@@ -61,6 +63,7 @@
 #define MAX6956_REG_PORT_29_ONLY                0X3D
 #define MAX6956_REG_PORT_30_ONLY                0X3E
 #define MAX6956_REG_PORT_31_ONLY                0X3F
+
 #define MAX6956_REG_4_PORTS_4_7                 0X40
 #define MAX6956_REG_5_PORTS_4_8                 0X41
 #define MAX6956_REG_6_PORTS_4_9                 0X42
@@ -94,4 +97,4 @@
 #define MAX6956_REG_2_PORTS_30_31               0X5E
 #define MAX6956_REG_1_PORT_31                   0X5F
 
-result_t max6956_init (I2C_BUS bus_id);
+result_t max6956_init (I2C_BUS i2c_bus_id, u8 dev_addr);
