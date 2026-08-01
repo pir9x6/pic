@@ -407,6 +407,7 @@ result_t i2c_read(I2C_BUS bus_id, u8 ack, u8 *data)
 {
     /* wait for the bus to be free */
     if (_wait_for_idle(bus_id) != SUCCESS){
+        i2c_stop(bus_id);
         return ERROR;
     }
 
@@ -497,6 +498,7 @@ result_t i2c_write(I2C_BUS bus_id, u8 data)
 
     /* wait for the reception of Ack */
     if (i2c_wait_ack(bus_id) != SUCCESS){
+        i2c_stop(bus_id);
         return ERROR;
     }
 
@@ -621,15 +623,12 @@ static result_t _wait_for_idle(I2C_BUS bus_id)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t i2c_read_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 *data)
 {
-    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
-    u8 adr_rd = (u8)((dev_addr << 1) | 0x01);
-
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the chip + W */
-    if (i2c_write(bus_id, adr_wr) != SUCCESS)
+    if (i2c_write(bus_id, I2C_ADDR_WR(dev_addr)) != SUCCESS)
         return ERROR;
 
     /* address of the register */
@@ -641,7 +640,7 @@ result_t i2c_read_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 *data)
         return ERROR;
 
     /* next operation is a reading */
-    if (i2c_write(bus_id, adr_rd) != SUCCESS)
+    if (i2c_write(bus_id, I2C_ADDR_RD(dev_addr)) != SUCCESS)
         return ERROR;
 
     /* get data */
@@ -661,15 +660,13 @@ result_t i2c_read_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 *data)
 result_t i2c_read_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *data)
 {
     u8 i;
-    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
-    u8 adr_rd = (u8)((dev_addr << 1) | 0x01);
 
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the chip + W */
-    if (i2c_write(bus_id, adr_wr) != SUCCESS)
+    if (i2c_write(bus_id, I2C_ADDR_WR(dev_addr)) != SUCCESS)
         return ERROR;
 
     /* address of the register */
@@ -681,7 +678,7 @@ result_t i2c_read_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *d
         return ERROR;
 
     /* next operation is a reading */
-    if (i2c_write(bus_id, adr_rd) != SUCCESS)
+    if (i2c_write(bus_id, I2C_ADDR_RD(dev_addr)) != SUCCESS)
         return ERROR;
 
     /* get data */
@@ -711,14 +708,12 @@ result_t i2c_read_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *d
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t i2c_write_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 data)
 {
-    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
-
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the device + Write */
-    if (i2c_write(bus_id, adr_wr) != SUCCESS)
+    if (i2c_write(bus_id, I2C_ADDR_WR(dev_addr)) != SUCCESS)
         return ERROR;
 
     /* address of the register */
@@ -742,14 +737,13 @@ result_t i2c_write_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 data)
 result_t i2c_write_n_reg(I2C_BUS bus_id, u8 dev_addr, u8 reg_addr, u8 size, u8 *data)
 {
     u8 i;
-    u8 adr_wr = (u8)((dev_addr << 1) & 0xFE);
 
     /* send start condition */
     if (i2c_start(bus_id) != SUCCESS)
         return ERROR;
 
     /* address of the device + Write */
-    if (i2c_write(bus_id, adr_wr) != SUCCESS)
+    if (i2c_write(bus_id, I2C_ADDR_WR(dev_addr)) != SUCCESS)
         return ERROR;
 
     /* address of the register */
