@@ -6,7 +6,7 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //----------------------------- Init of PWM Module ----------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-result_t ccp_init (CCP_ID ccp_id, TIMER_ID timer_id, u16 freq, u16 duty)
+result_t ccp_init (CCP_ID_t ccp_id, TIMER_ID_t timer_id, u16 freq, u16 duty)
 {
     #if defined (_18F252)
 
@@ -23,8 +23,8 @@ result_t ccp_init (CCP_ID ccp_id, TIMER_ID timer_id, u16 freq, u16 duty)
 
     #elif defined (_18F26K42) || defined (_18F57Q43)
 
-        if (timer_id != 2 && 
-            timer_id != 4 && 
+        if (timer_id != 2 &&
+            timer_id != 4 &&
             timer_id != 6){
             return ERROR;
         }
@@ -85,7 +85,7 @@ result_t ccp_init (CCP_ID ccp_id, TIMER_ID timer_id, u16 freq, u16 duty)
         IFS0bits.T2IF = 0;              // Clear Timer 2 Interrupt Flag
         IEC0bits.T2IE = 1;              // Enable Timer 2 interrupt
         T2CONbits.TON = 1;              // Start Timer
-    
+
     #else
         #error -- processor ID not specified in generic header file
     #endif
@@ -96,7 +96,7 @@ result_t ccp_init (CCP_ID ccp_id, TIMER_ID timer_id, u16 freq, u16 duty)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------------- Set Duty Cycle ------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-result_t ccp_set_pwm_duty (CCP_ID ccp_id, u16 duty)
+result_t ccp_set_pwm_duty (CCP_ID_t ccp_id, u16 duty)
 {
     if (duty > 1023){
         duty = 1023;
@@ -133,7 +133,7 @@ result_t ccp_set_pwm_duty (CCP_ID ccp_id, u16 duty)
         }
 
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
-    
+
     OC1RS = duty;                   // Load the Compare Register Value
 
     #else

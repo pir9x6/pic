@@ -13,7 +13,7 @@ typedef enum
     TIMER_ID_4,
     TIMER_ID_5,
     TIMER_ID_6
-}TIMER_ID;
+}TIMER_ID_t;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //-------------------------------- Prescaler ----------------------------------
@@ -60,14 +60,16 @@ typedef enum
     #error "TMR_PRESCALER: Unknown processor."
 
 #endif
-}TMR_PRESCALER;
+}TIMER_PRESCALER_t;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //-------------------------------- Postscaler ---------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 typedef enum
 {
-#if defined (_18F252) || defined (_18F26K42) || defined (_18F57K42)
+#if defined (_18F252) || \
+    defined (_18F26K42) || \
+    defined (_18F57K42)
 
     TMR_POSTSCALER_1 = 0,
     TMR_POSTSCALER_2,
@@ -89,66 +91,72 @@ typedef enum
 #else
 
     #error "TMR_POSTSCALER: Unknown processor."
-    
-#endif
-}TMR_POSTSCALER;
 
+#endif
+}TIMER_POSTSCALER_t;
+
+typedef struct
+{
+    TIMER_ID_t timer_id;
+    TIMER_PRESCALER_t timer_prescaler;
+    TIMER_POSTSCALER_t timer_postscaler;
+    u8 period;
+}TIMER_CFG_t;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //----------------------------------- PIC18 -----------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-result_t timer_init(
-    TIMER_ID id, 
-    TMR_PRESCALER prescaler, 
-    TMR_POSTSCALER postscaler,
-    u8 period
-);
-                    
+result_t timer_init(const TIMER_CFG_t *cfg);
+
+
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//----------------------------------- PIC33 -----------------------------------
+//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 #if defined (TMR0IF_bit)
-    void timer0_init (TMR_PRESCALER prescaler);
+    void timer0_init (const TIMER_CFG_t *cfg);
 #endif
-    
+
 #if defined (TMR1IF_bit)
-    void timer1_init (TMR_PRESCALER prescaler, u16 timer);
+    void timer1_init (const TIMER_CFG_t *cfg);
 #endif
 
 #if defined (TMR2IF_bit)
-    void timer2_init (TMR_PRESCALER prescaler, u16 timer);
+    void timer2_init (const TIMER_CFG_t *cfg);
 #endif
-    
+
 #if defined (TMR3IF_bit)
-    void timer3_init (TMR_PRESCALER prescaler, u16 timer);
+    void timer3_init (const TIMER_CFG_t *cfg);
 #endif
-    
-    
+
+
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //----------------------------------- PIC32 -----------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 #ifdef _T1IF
-    void timer1_init  (PRESCATMR_PRESCALERLER prescaler, u16 timer);
     void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void);
+    void timer1_init  (const TIMER_CFG_t *cfg);
 #endif
 
 #ifdef _T2IF
     void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void);
-    void timer2_init  (TMR_PRESCALER prescaler, u16 timer);
+    void timer2_init  (const TIMER_CFG_t *cfg);
 #endif
 
 #ifdef _T3IF
     void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void);
-    void timer3_init  (TMR_PRESCALER prescaler, u16 timer);
-    void timer23_init (TMR_PRESCALER prescaler, u32 timer);
+    void timer3_init  (const TIMER_CFG_t *cfg);
+    void timer23_init (const TIMER_CFG_t *cfg);
 #endif
 
 #ifdef _T4IF
     void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void);
-    void timer4_init  (TMR_PRESCALER prescaler, u16 timer);
+    void timer4_init  (const TIMER_CFG_t *cfg);
 #endif
 
 #ifdef _T5IF
     void __attribute__((interrupt, no_auto_psv)) _T5Interrupt(void);
-    void timer5_init  (TMR_PRESCALER prescaler, u16 timer);
-    void timer45_init (TMR_PRESCALER prescaler, u32 timer);
+    void timer5_init  (const TIMER_CFG_t *cfg);
+    void timer45_init (const TIMER_CFG_t *cfg);
 #endif
-    
+
 #endif

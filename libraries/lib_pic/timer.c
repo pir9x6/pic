@@ -8,66 +8,61 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //--------------------- Configuration of 16 bits Timers -----------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-result_t timer_init(
-    TIMER_ID id, 
-    TMR_PRESCALER prescaler, 
-    TMR_POSTSCALER postscaler,
-    u8 period
-)
+result_t timer_init(const TIMER_CFG_t *cfg)
 {
-    if (id == TIMER_ID_0){
+    if (cfg->timer_id == TIMER_ID_0){
         return ERROR;
     }
-    else if (id == TIMER_ID_1){
+    else if (cfg->timer_id == TIMER_ID_1){
         return ERROR;
     }
-    else if (id == TIMER_ID_2){
+    else if (cfg->timer_id == TIMER_ID_2){
         #if defined (_18F252)
 
-        /* Enables the TMR2 to PR2 match interrupt */
-        PIE1bits.TMR2IE = 1;
+            /* Enables the TMR2 to PR2 match interrupt */
+            PIE1bits.TMR2IE = 1;
 
-        /* Set Prescaler */
-        T2CONbits.T2CKPS = (u8)prescaler;
+            /* Set Prescaler */
+            T2CONbits.T2CKPS = (u8)cfg->timer_prescaler;
 
-        /* set postscaler */
-        T2CONbits.TOUTPS = (u8)postscaler;  
+            /* set postscaler */
+            T2CONbits.TOUTPS = (u8)cfg->timer_postscaler;
 
-        /* Set timer period */
-        PR2 = period - 1;                    
-        
-        /* enable timer */
-        T2CONbits.TMR2ON = 1;  
+            /* Set timer period */
+            PR2 = cfg->period - 1;
+
+            /* enable timer */
+            T2CONbits.TMR2ON = 1;
 
         #elif defined (_18F26K42) || \
               defined (_18F57K42)
 
-        /* Enables the TMR2 to PR2 match interrupt */
-        TMR2IE = 1;
+            /* Enables the TMR2 to PR2 match interrupt */
+            TMR2IE = 1;
 
-        /* Set Prescaler */
-        T2CONbits.CKPS = prescaler;
+            /* Set Prescaler */
+            T2CONbits.CKPS = (u8)cfg->timer_prescaler;
 
-        /* set postscaler */
-        T2CONbits.OUTPS = postscaler;
+            /* set postscaler */
+            T2CONbits.OUTPS = (u8)cfg->timer_postscaler;
 
-        /* set Fosc/4 as clock source */
-        T2CLKbits.CS = 1;
+            /* set Fosc/4 as clock source */
+            T2CLKbits.CS = 1;
 
-        /* Set timer period */
-        PR2 = period - 1;                    
+            /* Set timer period */
+            PR2 = cfg->period - 1;
 
-        /* enable timer */
-        T2CONbits.TMR2ON = 1;  
+            /* enable timer */
+            T2CONbits.TMR2ON = 1;
 
         #else
             return ERROR;
         #endif
     }
-    else if (id == TIMER_ID_3){
+    else if (cfg->timer_id == TIMER_ID_3){
         return ERROR;
     }
-    else if (id == TIMER_ID_4){
+    else if (cfg->timer_id == TIMER_ID_4){
         #if defined (_18F26K42) || \
             defined (_18F57K42)
 
@@ -75,28 +70,28 @@ result_t timer_init(
         TMR4IE = 1;
 
         /* Set Prescaler */
-        T4CONbits.CKPS = prescaler;
+        T4CONbits.CKPS = (u8)cfg->timer_prescaler;
 
         /* set postscaler */
-        T4CONbits.OUTPS = postscaler;
+        T4CONbits.OUTPS = (u8)cfg->timer_postscaler;
 
         /* set Fosc/4 as clock source */
         T4CLKbits.CS = 1;
 
         /* Set timer period */
-        PR4 = period - 1;                    
+        PR4 = cfg->period - 1;
 
         /* enable timer */
-        T4CONbits.TMR4ON = 1;  
+        T4CONbits.TMR4ON = 1;
 
         #else
             return ERROR;
         #endif
     }
-    else if (id == TIMER_ID_5){
+    else if (cfg->timer_id == TIMER_ID_5){
         return ERROR;
     }
-    else if (id == TIMER_ID_6){
+    else if (cfg->timer_id == TIMER_ID_6){
         #if defined (_18F26K42) || \
             defined (_18F57K42)
 
@@ -104,19 +99,19 @@ result_t timer_init(
         TMR6IE = 1;
 
         /* Set Prescaler */
-        T6CONbits.CKPS = prescaler;
+        T6CONbits.CKPS = (u8)cfg->timer_prescaler;
 
         /* set postscaler */
-        T6CONbits.OUTPS = postscaler;
+        T6CONbits.OUTPS = (u8)cfg->timer_postscaler;
 
         /* set Fosc/4 as clock source */
         T6CLKbits.CS = 1;
 
         /* Set timer period */
-        PR6 = period - 1;                    
+        PR6 = cfg->period - 1;
 
         /* enable timer */
-        T6CONbits.TMR6ON = 1;  
+        T6CONbits.TMR6ON = 1;
 
         #else
             return ERROR;
@@ -130,13 +125,13 @@ result_t timer_init(
 }
 //=============================================================================
 // #if defined (TMR0IF_bit)
-// void timer0_init (TMR_PRESCALER scaler)
+// void timer0_init (const TIMER_CFG_t *cfg)
 // {
 //     // ========  ToDo  ========
 //     PIE1  = 0x02;                   // enable interrupt sur timer 2
 //     INTCON = 0xC0;                  // enable global et periph interrupt
 //     T0CONbits.T08BIT = 0;           // configure as a 16-bits timer
-//     T0CONbits.T0PS = scaler;        // set prescaler
+//     T0CONbits.T0PS = cfg->timer_prescaler;
 //     T0CONbits.TMR0ON = 1;           // Enable Timer
 //     RCONbits.IPEN = 1;              // Interruption prioritaires activ�es
 // }
@@ -146,18 +141,18 @@ result_t timer_init(
 
 //=============================================================================
 #if defined (_T1IF) || defined (TMR1IF_bit)
-void timer1_init (TMR_PRESCALER prescaler, u16 timer)
+void timer1_init (const TIMER_CFG_t *cfg)
 {
     #if defined(__PIC24F__) || \
         defined(__dsPIC33F__)
 
     // Freq Timer = Fosc / Prescaler / TMR
-    T1CONbits.TCKPS = scaler;       // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
+    T1CONbits.TCKPS = cfg->timer_prescaler;    // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
     IFS0bits.T1IF = 0;              // Reset Timer1 interrupt flag
     IPC0bits.T1IP = 6;              // priority level
     IEC0bits.T1IE = 1;              // Enable Timer 1 interrupt
     TMR1 = 0;                       // reset compteur
-    PR1 = timer;                    // Periode du Timer 1 (64ms)
+    PR1 = cfg->period;              // Periode du Timer 1 (64ms)
     T1CONbits.TON = 1;              // Lancer le Timer 1
 
     #endif
@@ -167,7 +162,7 @@ void timer1_init (TMR_PRESCALER prescaler, u16 timer)
 
 //=============================================================================
 #if defined (_T2IF) || defined (TMR2IF_bit)
-void timer2_init (TMR_PRESCALER scaler, u16 timer)
+void timer2_init (const TIMER_CFG_t *cfg)
 {
     #if defined(__PIC24F__) || \
         defined(__dsPIC33F__)
@@ -176,8 +171,8 @@ void timer2_init (TMR_PRESCALER scaler, u16 timer)
 
     T2CONbits.T32 = 0;
     TMR2 = 0;                       // reset compteur
-    PR2 = timer;                    // Periode du Timer 1 (64ms)
-    T2CONbits.TCKPS = scaler;       // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
+    PR2 = cfg->period;              // Periode du Timer 1 (64ms)
+    T2CONbits.TCKPS = cfg->timer_prescaler;    // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
     IFS0bits.T2IF = 0;              // Reset Timer1 interrupt flag
     IPC1bits.T2IP = 6;              // priority level
     IEC0bits.T2IE = 1;              // Enable Timer 1 interrupt
@@ -190,21 +185,21 @@ void timer2_init (TMR_PRESCALER scaler, u16 timer)
 
 //=============================================================================
 #if defined (_T3IF) || defined (TMR3IF_bit)
-void timer3_init (TMR_PRESCALER scaler, u16 timer)
+void timer3_init (const TIMER_CFG_t *cfg)
 {
     #if defined (__18CXX) || \
         defined (__XC8) || \
         defined(_PIC18)
-    
-    
+
+
     #elif defined(__PIC24F__) || \
           defined(__dsPIC33F__)
 
     // Freq Timer = Fosc / Prescaler / TMR
 
     TMR3 = 0;                       // reset compteur
-    PR3 = timer;                    // Periode du Timer 1 (64ms)
-    T3CONbits.TCKPS = scaler;       // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
+    PR3 = cfg->period;              // Periode du Timer 1 (64ms)
+    T3CONbits.TCKPS = cfg->timer_prescaler;    // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
     IFS0bits.T3IF = 0;              // Reset Timer1 interrupt flag
     IPC2bits.T3IP = 6;              // priority level
     IEC0bits.T3IE = 1;              // Enable Timer 1 interrupt
@@ -219,7 +214,7 @@ void timer3_init (TMR_PRESCALER scaler, u16 timer)
 //--------------------- Configuration of 32 bits Timers -----------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 #ifdef _T3IF
-void timer23_init (TMR_PRESCALER scaler, u32 timer)
+void timer23_init (const TIMER_CFG_t *cfg)
 {
     #if defined(__PIC24F__) || \
         defined(__dsPIC33F__)
@@ -233,9 +228,9 @@ void timer23_init (TMR_PRESCALER scaler, u32 timer)
     T2CONbits.TGATE = 0;            // Disable Gated Timer mode
     TMR2 = 0;                       // reset compteur
     TMR3 = 0;                       // reset compteur
-    PR2 = (u16)timer;               // Timer period (lsb)
-    PR3 = timer<<16;                // Timer period (msb)
-    T2CONbits.TCKPS = scaler;       // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
+    PR2 = (u16)cfg->period;               // Timer period (lsb)
+    PR3 = cfg->period<<16;                // Timer period (msb)
+    T2CONbits.TCKPS = cfg->timer_prescaler;    // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
     IPC2bits.T3IP = 0x01;           // Set Timer3 Interrupt Priority Level
     IFS0bits.T3IF = 0;              // Clear Timer3 Interrupt Flag
     IEC0bits.T3IE = 1;              // Enable Timer3 interrupt
@@ -247,7 +242,7 @@ void timer23_init (TMR_PRESCALER scaler, u32 timer)
 
 
 #ifdef _T5IF
-void timer45_init (TMR_PRESCALER scaler, u32 timer)
+void timer45_init (const TIMER_CFG_t *cfg)
 {
     #if defined(__PIC24F__) || \
         defined(__dsPIC33F__)
@@ -261,9 +256,9 @@ void timer45_init (TMR_PRESCALER scaler, u32 timer)
     T4CONbits.TGATE = 0;            // Disable Gated Timer mode
     TMR4 = 0;                       // reset compteur
     TMR5 = 0;                       // reset compteur
-    PR4 = (u16)timer;               // Timer period (lsb)
-    PR5 = timer<<16;                // Timer period (msb)
-    T4CONbits.TCKPS = scaler;       // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
+    PR4 = (u16)cfg->period;               // Timer period (lsb)
+    PR5 = cfg->period<<16;                // Timer period (msb)
+    T4CONbits.TCKPS = cfg->timer_prescaler;    // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
     IPC7bits.T5IP = 0x01;           // Set Timer3 Interrupt Priority Level
     IFS1bits.T5IF = 0;              // Clear Timer3 Interrupt Flag
     IEC1bits.T5IE = 1;              // Enable Timer3 interrupt

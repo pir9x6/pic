@@ -99,6 +99,12 @@ void main (void)
     float ds1631_temp = -12.5;
     u8 eeprom_data = 0x55;
     u32 eeprom_addr = 0x00;
+    TIMER_CFG_t timer_2_cfg = {
+        .timer_id = TIMER_ID_2,
+        .timer_prescaler = TMR_PRESCALER_1,
+        .timer_postscaler = TMR_POSTSCALER_10,
+        .period = 49
+    };
 
 //--------------------------------- GPIO init ---------------------------------
     pin_manager_init();
@@ -126,8 +132,8 @@ void main (void)
 
 //-------------------------- Interruption sur Timer 2 -------------------------
     /* Timer period = Fosc(10M) / 4 /  Prescaler(1) / Postscaler(10) / Timer(250) / Cnt(1000) = 1s */
-    if (timer_init(TIMER_ID_2, TMR_PRESCALER_1, TMR_POSTSCALER_10, 49/*249timer*/) != SUCCESS){
-        LOG_ERROR("Timer initialization failed");
+    if (timer_init(&timer_2_cfg) != SUCCESS){
+        LOG_ERROR("Timer 2 initialization failed");
         PIN_LED_ERROR = 1;
     }
 
