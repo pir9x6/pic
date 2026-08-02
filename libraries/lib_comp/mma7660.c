@@ -8,6 +8,7 @@
 #include "i2c.h"
 #include "mma7660.h"
 #include "types.h"
+#include <stddef.h>     /* NULL */
 
 /*****************************************************************************
 * Docs
