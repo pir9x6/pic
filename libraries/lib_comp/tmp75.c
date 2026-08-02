@@ -8,7 +8,7 @@
 #include "tmp75.h"
 #include "types.h"
 #include "i2c.h"
-
+#include <stddef.h>     /* NULL */
 
 /*****************************************************************************
 * Docs
@@ -43,7 +43,6 @@ result_t tmp75_configure(I2C_BUS bus_id, u8 dev_addr)
 ******************************************************************************/
 result_t tmp75_read_temp(I2C_BUS bus_id, u8 dev_addr, float *temp)
 {
-    u16 tmp = 0;
     s16 raw;
     u8 data[2];
 
