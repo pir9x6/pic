@@ -17,6 +17,9 @@
         },
         {
             "path": "../../../libraries/lib_pic"
+        },
+        {
+            "path": "../../../../VisualStudioCode/pic_xc8"
         }
     ],
     "editor.rulers": [120],
@@ -37,11 +40,13 @@
         },
         "files.exclude": {
             "**/build": true,
+            "**/cmake": true,
             "**/debug": true,
             "**/dist": true,
             "**/disassembly": true,
             "**/nbproject": true,
             "**/.git": true,
+            "**/out": true,
             "**/prog_pickit3.bat": true,
             "**/Makefile": true
         },
@@ -57,6 +62,7 @@
             "__LANGUAGE_C__",
             "_PIC18",
             "_18F252",
+            "_18LF252",
             "__CLANG__",
             "COMPILER_MPLAB_C18"
         ],

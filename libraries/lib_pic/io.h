@@ -7,14 +7,14 @@
 typedef enum{
     GPIO_OUTPUT = 0,
     GPIO_INPUT = 1
-}gpio_direction_t;
+}GPIO_DIRECTION_t;
 
 typedef struct{
     char *name;
     unsigned port;
     u8 num;
-    gpio_direction_t direction;
-}gpio_definition_t;
+    GPIO_DIRECTION_t direction;
+}GPIO_DEFINITION_t;
 
 #define IO_IN       1
 #define IO_OUT      0
@@ -41,36 +41,6 @@ typedef struct{
     #define RPO_OC4             21      // RPn tied to Output Compare 4
     #define RPO_UPDN1           26      // RPn tied to QEI1 direction (UPDN) status
     #define RPO_UPDN2           27      // RPn tied to QEI2 direction (UPDN) status
-#elif defined (__dsPIC33FJ12GP201__)
-    #define RPO_NULL             0      // RPn tied to default port pin
-    #define RPO_U1TX             3      // RPn tied to UART 1 Transmit
-    #define RPO_U1RTS            4      // RPn tied to UART 1 Ready To Send
-    #define RPO_SDO1             7      // RPn tied to SPI 1 Data Output
-    #define RPO_SCK1OUT          8      // RPn tied to SPI 1 Clock Output
-    #define RPO_SS1OUT           9      // RPn tied to SPI 1 Slave Select Output
-    #define RPO_OC1             18      // RPn tied to Output Compare 1
-    #define RPO_OC2             19      // RPn tied to Output Compare 2
-#elif defined (__PIC24FJ64GB002__)
-    #define RPO_NULL             0      // RPn tied to default port pin
-    #define RPO_C1OUT            1      // Comparator 1 Output
-    #define RPO_C2OUT            2      // Comparator 2 Output
-    #define RPO_U1TX             3      // UART1 Transmit
-    #define RPO_U1RTS            4      // UART1 Request To Send
-    #define RPO_U2TX             5      // UART2 Transmit
-    #define RPO_U2RTS            6      // UART2 Request To Send
-    #define RPO_SDO1             7      // SPI1 Data Output
-    #define RPO_SCK1OUT          8      // SPI1 Clock Output
-    #define RPO_SS1OUT           9      // SPI1 Slave Select Output
-    #define RPO_SDO2            10      // SPI2 Data Output
-    #define RPO_SCK2OUT         11      // SPI2 Clock Output
-    #define RPO_SS2OUT          12      // SPI2 Slave Select Output
-    #define RPO_OC1             18      // Output Compare 1
-    #define RPO_OC2             19      // Output Compare 2
-    #define RPO_OC3             20      // Output Compare 3
-    #define RPO_OC4             21      // Output Compare 4
-    #define RPO_OC5             22      // Output Compare 5
-    #define RPO_CTPLS           29      // CTMU Output Pulse
-    #define RPO_C3OUT           30      // Comparator 3 Output
 #elif defined (__PIC24FJ256GB210__)
     #define RPO_NULL             0      // Null
     #define RPO_C1OUT            1      // Comparator 1 Output
