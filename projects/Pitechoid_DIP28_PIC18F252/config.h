@@ -1,7 +1,7 @@
 #ifndef PIC_CONFIG_H
 #define PIC_CONFIG_H
 
-#if defined (_18F252)
+#if defined (_18F252) || defined (_18LF252)
 
     #pragma config WDT = OFF                // Watchdog OFF
     #pragma config OSC = HS                 // Quartz 10MHz

@@ -18,7 +18,7 @@ void pin_manager_init(void)
     set_port_B_input(0);
     set_port_C_input(BIT_7 | BIT_4 | BIT_3);    // uart_rx, i2c_scl, i2c_sda
 
-#if defined (_18F252)
+#if defined (_18F252) || defined (_18LF252)
 
     //-----------------------------------------------------------------------------
     /* select analog / digital GPIO */
