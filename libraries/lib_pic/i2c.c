@@ -2,6 +2,7 @@
 #include "pic_compiler.h"
 #include "hardware_profile.h"
 #include "delays.h"
+#include "log.h"
 #include "types.h"
 
 u8 addr_flag = 0;  // Initlize AddFlag
@@ -13,13 +14,16 @@ static result_t _wait_for_idle(I2C_BUS bus_id);
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------- Configuration du bus I2C --------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
+result_t i2c_init(const I2C_CFG_t *cfg)
 {
     #if defined (_18F252)
 
-        u32 I2C_BRG = (GetSystemClock() / freq) - 1;
+        u32 i2c_brg = (GetSystemClock() / cfg->freq) - 1;
+        if (i2c_brg > 255){
+            return ERROR;
+        }
 
-        if (bus_id == I2C_BUS_1){
+        if (cfg->bus_id == I2C_BUS_1){
             // set module in i2c master mode
             SSPCON1bits.SSPM = 8;
 
@@ -27,7 +31,7 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
             SSPCON1bits.SSPEN = 1;
 
             // set i2c frequency
-            SSPADD = (u8)I2C_BRG;
+            SSPADD = (u8)i2c_brg;
 
             // Standard Speed mode (100 kHz)
             SSPSTATbits.SMP = 1;
@@ -38,7 +42,7 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
 
     #elif defined (_18F26K42) || defined (_18F57Q43)
 
-        if (bus_id == I2C_BUS_1){
+        if (cfg->bus_id == I2C_BUS_1){
 
             /* 7 bits, master mode */
             I2C1CON0 = 0x04;
@@ -68,24 +72,27 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
 
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
 
-        u32 I2C_BRG = (GetSystemClock()/freq - GetSystemClock()/10000000ul)-1;
+        u32 I2C_BRG = (GetSystemClock() / cfg->freq - GetSystemClock() / 10000000ul) - 1;
+        if (I2C_BRG > 65535){
+            return ERROR;
+        }
 
-        if (bus_id == I2C_BUS_1){
+        if (cfg->bus_id == I2C_BUS_1){
             // frequency
-            I2C1BRG = I2C_BRG;
+            I2C1BRG = (u16)I2C_BRG;
 
             // configure bus
             I2C1CON = 0;
-            if ((opt&I2C_SLAVE) == I2C_SLAVE){
+            if (cfg->slave0_master1 == 0){
                 I2C1CONbits.SCLREL = 1;     // release clock when in slave mode
-                I2C1ADD = I2C_SLAVE_ADDR;   // 7 bit slave address
+                I2C1ADD = cfg->slave_addr;   // 7 bit slave address
             }else{
                 I2C1CONbits.SCLREL = 0;
             }
-            I2C1CONbits.I2CEN = 1;          // activer le bus I2C
+            I2C1CONbits.I2CEN = 1;          // enable the I2C bus
 
             // it master
-            if ((opt&I2C_IT_MASTER) == I2C_IT_MASTER){
+            if (cfg->en_master_it){
                 _MI2C1IE = 1;
             }else{
                 _MI2C1IE = 0;
@@ -93,35 +100,33 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
             _MI2C1IF = 0;
 
             // it slave
-            if ((opt&I2C_IT_SLAVE) == I2C_IT_SLAVE){
+            if (cfg->en_slave_it){
                 _SI2C1IE = 1;
             }else{
                 _SI2C1IE = 0;
             }
             _SI2C1IF = 0;
 
-            #if defined UART_VERBOSE
-                printf("i2c bus 1 is initialized \n");
-            #endif
+            LOG_DEBUG("i2c bus 1 is initialized");
         }
 
         #ifdef _MI2C2IF
-        else if (bus_id == I2C_BUS_2){
+        else if (cfg->bus_id == I2C_BUS_2){
             // frequency
             I2C2BRG = I2C_BRG;
 
             // configure bus
             I2C2CON = 0;
-            if ((opt&I2C_SLAVE) == I2C_SLAVE){
-                I2C2CONbits.SCLREL = 1;     // release clock when in slave mode
-                I2C2ADD = I2C_SLAVE_ADDR;   // 7 bit slave address
+            if (cfg->slave0_master1 == 0){
+                I2C2CONbits.SCLREL = 1;         // release clock when in slave mode
+                I2C2ADD = cfg->slave_addr;      // 7 bit slave address
             }else{
                 I2C2CONbits.SCLREL = 0;
             }
-            I2C2CONbits.I2CEN = 1;          // activer le bus I2C
+            I2C2CONbits.I2CEN = 1;              // enable the I2C bus
 
             // it master
-            if ((opt&I2C_IT_MASTER) == I2C_IT_MASTER){
+            if (cfg->en_master_it){
                 _MI2C2IE = 1;
             }else{
                 _MI2C2IE = 0;
@@ -129,24 +134,22 @@ result_t i2c_init(I2C_BUS bus_id, u32 freq, u16 opt)
             _MI2C2IF = 0;
 
             // it slave
-            if ((opt&I2C_IT_SLAVE) == I2C_IT_SLAVE){
+            if (cfg->en_slave_it){
                 _SI2C2IE = 1;
             }else{
                 _SI2C2IE = 0;
             }
             _SI2C2IF = 0;
 
-            #if defined UART_VERBOSE
-                printf("i2c bus 2 is initialized \n");
-            #endif
+            LOG_DEBUG("i2c bus 2 is initialized");
         }
         #endif
 
     #elif defined(__PIC32__)
 
         // Set the I2C baud rate
-        actual_clk = I2CSetFrequency(I2C1, GetPeripheralClock(), freq);
-        if ( abs(actual_clk-freq) > freq/10 )
+        actual_clk = I2CSetFrequency(I2C1, GetPeripheralClock(), cfg->freq);
+        if ( abs(actual_clk-cfg->freq) > cfg->freq/10 )
         {
             return ERROR;
         }

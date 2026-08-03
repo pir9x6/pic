@@ -99,6 +99,18 @@ void main (void)
     float ds1631_temp = -12.5;
     u8 eeprom_data = 0x55;
     u32 eeprom_addr = 0x00;
+    UART_CFG_t uart_1_cfg = {
+        .uart_id = UART_ID_1,
+        .baudrate = UART_FREQ
+    };
+    I2C_CFG_t i2c_1_cfg = {
+        .bus_id = I2C_BUS_1,
+        .freq = I2C_FREQ,
+        .slave0_master1 = 1,
+        .en_master_it = 0,
+        .en_slave_it = 0,
+        .slave_addr = 0x00
+    };
     TIMER_CFG_t timer_2_cfg = {
         .timer_id = TIMER_ID_2,
         .timer_prescaler = TMR_PRESCALER_1,
@@ -116,7 +128,7 @@ void main (void)
 //----------------------------------- UART ------------------------------------
     /* At 10 MHz the actual bitrate is 125k. Putty must be set to 125000
        or a 11.0592 MHz crystal must be used otherwise it won't work */
-    if (uart_init(UART_ID_1, UART_FREQ) != SUCCESS){
+    if (uart_init(uart_1_cfg) != SUCCESS){
         LOG_ERROR("UART initialization failed");
         PIN_LED_ERROR = 1;
     }

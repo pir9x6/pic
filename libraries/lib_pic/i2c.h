@@ -21,14 +21,18 @@ typedef enum{
     I2C_BUS_6
 }I2C_BUS;
 
+typedef struct{
+    I2C_BUS bus_id;
+    u32 freq;
+    u8 slave0_master1;
+    u8 en_master_it;
+    u8 en_slave_it;
+    u8 slave_addr;
+}I2C_CFG_t;
+
 /*****************************************************************************
 * Defines
 ******************************************************************************/
-#define I2C_MASTER              0x0001
-#define I2C_SLAVE               0x0002
-#define I2C_IT_MASTER           0x0004
-#define I2C_IT_SLAVE            0x0008
-
 #define I2C_ACK                 0
 #define I2C_NACK                1
 
@@ -38,7 +42,7 @@ typedef enum{
 /*****************************************************************************
 * Prototypes
 ******************************************************************************/
-result_t i2c_init       (I2C_BUS bus_id, u32 freq, u16 opt);
+result_t i2c_init       (const I2C_CFG_t *cfg);
 result_t i2c_start      (I2C_BUS bus_id);
 result_t i2c_rstart     (I2C_BUS bus_id);
 result_t i2c_stop       (I2C_BUS bus_id);

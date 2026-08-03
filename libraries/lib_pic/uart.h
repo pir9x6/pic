@@ -5,13 +5,10 @@
 * Includes
 ******************************************************************************/
 #include <pic_compiler.h>
-
-#include "date_time.h"
-#include "misc.h"
 #include "types.h"
 
 /*****************************************************************************
-* Enums
+* New types
 ******************************************************************************/
 typedef enum
 {
@@ -23,11 +20,17 @@ typedef enum
     UART_ID_6 = 5
 }UART_ID;
 
+typedef struct
+{
+    UART_ID uart_id;
+    u32 baudrate;
+}UART_CFG_t;
+
 /*****************************************************************************
 * Prototypes
 ******************************************************************************/
 void     putch            (char txData);
-result_t uart_init        (UART_ID uart_id, u32 baudrate);
+result_t uart_init        (UART_CFG_t *cfg);
 result_t uart_write       (UART_ID uart_id, u8 data);
 
 #endif

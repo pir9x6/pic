@@ -13,13 +13,13 @@ extern UART_ID UART_ID_LOG;
 /*******************************************************************************
  * UART Configuration
  * ****************************************************************************/
-result_t uart_init (UART_ID uart_id, u32 baudrate)
+result_t uart_init (UART_CFG_t *cfg)
 {
     #if defined (_18F252)
 
-        SPBRG = (u8)(GetSystemClock() / (16 * baudrate) - 1);
+        SPBRG = (u8)(GetSystemClock() / (16 * cfg->baudrate) - 1);
 
-        if (uart_id == UART_ID_1){
+        if (cfg->uart_id == UART_ID_1){
             // high speed mode
             TXSTAbits.BRGH = 1;
 
@@ -42,10 +42,10 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
 
     #elif defined (_18F26K42) || defined (_18F57K42) || defined (_18F57Q43)
 
-        if (uart_id == UART_ID_1){
+        if (cfg->uart_id == UART_ID_1){
             /* set baudrate */
             U1BRGH = 0;
-            U1BRGL = (u8)(GetSystemClock() / (4.0 * baudrate) - 1);
+            U1BRGL = (u8)(GetSystemClock() / (4.0 * cfg->baudrate) - 1);
 
             /* 8 bits, async mode, high speed mode */
             U1CON0 = 0;
@@ -79,10 +79,10 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
 
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
 
-        u16 UART_BRG = (u16)(GetInstructionClock() / (4 * (baudrate + 1)));
+        u16 UART_BRG = (u16)(GetInstructionClock() / (4 * (cfg->baudrate + 1)));
 
         //===============================================================
-        if (uart_id == UART_ID_1){
+        if (cfg->uart_id == UART_ID_1){
 
             // Enable UART
             U1MODEbits.UARTEN = 1;
@@ -100,80 +100,12 @@ result_t uart_init (UART_ID uart_id, u32 baudrate)
             IFS0bits.U1RXIF = 0;
 
             // Enable Recieve Interrupts
-            if ((opt&UART_EN_IT_RX) == UART_EN_IT_RX){
-                IEC0bits.U1RXIE = 1;
-            }
+            IEC0bits.U1RXIE = 1;
 
             // set it for dma
-            if ((opt&UART_EN_IT_DMA) == UART_EN_IT_DMA){
-                U1STAbits.UTXISEL0 = 0;             // Interrupt after one Tx character is transmitted
-                U1STAbits.UTXISEL1 = 0;
-                U1STAbits.URXISEL  = 0;             // Interrupt after one RX character is received
-            }
-
-        //===============================================================
-        #ifdef _U2TXIF
-        }else if (uart_id == UART_ID_2){
-
-            // Enable UART
-            U2MODEbits.UARTEN = 1;
-
-            // Use high speed mode
-            U2MODEbits.BRGH = 1;
-
-            // Enable Transmission
-            U2STAbits.UTXEN = 1;
-
-            // Fcy/(4*Baud)-1; // 115200 bauds @ 40MIPS (actually = 116 618)
-            U2BRG = UART_BRG;
-
-            // Clear the Receive Interrupt Flag
-            IFS1bits.U2RXIF = 0;
-
-            // Enable Recieve Interrupts
-            if ((opt&UART_EN_IT_RX) == UART_EN_IT_RX){
-                IEC1bits.U2RXIE = 1;
-            }
-
-            // set it for dma
-            if ((opt&UART_EN_IT_DMA) == UART_EN_IT_DMA){
-                U2STAbits.UTXISEL0 = 0;             // Interrupt after one Tx character is transmitted
-                U2STAbits.UTXISEL1 = 0;
-                U2STAbits.URXISEL  = 0;             // Interrupt after one RX character is received
-            }
-        #endif
-
-        //===============================================================
-        #ifdef _U3TXIF
-        }else if (uart_id == UART_ID_3){
-
-            // Enable UART
-            U3MODEbits.UARTEN = 1;
-
-            // Use high speed mode
-            U3MODEbits.BRGH = 1;
-
-            // Enable Transmission
-            U2STAbits.UTXEN = 1;
-
-            // Fcy/(4*Baud)-1; // 115200 bauds @ 40MIPS (actually = 116 618)
-            U2BRG = UART_BRG;
-
-            // Clear the Receive Interrupt Flag
-            IFS1bits.U2RXIF = 0;
-
-            // Enable Recieve Interrupts
-            if ((opt&UART_EN_IT_RX) == UART_EN_IT_RX){
-                IEC1bits.U2RXIE = 1;
-            }
-
-            // set it for dma
-            if ((opt&UART_EN_IT_DMA) == UART_EN_IT_DMA){
-                U2STAbits.UTXISEL0 = 0;             // Interrupt after one Tx character is transmitted
-                U2STAbits.UTXISEL1 = 0;
-                U2STAbits.URXISEL  = 0;             // Interrupt after one RX character is received
-            }
-        #endif
+            U1STAbits.UTXISEL0 = 0;             // Interrupt after one Tx character is transmitted
+            U1STAbits.UTXISEL1 = 0;
+            U1STAbits.URXISEL  = 0;             // Interrupt after one RX character is received
 
         //===============================================================
         }else{

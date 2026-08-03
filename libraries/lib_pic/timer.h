@@ -88,6 +88,11 @@ typedef enum
     TMR_POSTSCALER_15,
     TMR_POSTSCALER_16,
 
+#elif defined(__PIC24F__) || \
+      defined(__dsPIC33F__)
+
+    TMR_POSTSCALER_NONE = 0
+
 #else
 
     #error "TMR_POSTSCALER: Unknown processor."
@@ -100,7 +105,7 @@ typedef struct
     TIMER_ID_t timer_id;
     TIMER_PRESCALER_t timer_prescaler;
     TIMER_POSTSCALER_t timer_postscaler;
-    u8 period;
+    u16 period;
 }TIMER_CFG_t;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
