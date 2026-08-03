@@ -77,7 +77,6 @@ result_t i2c_dump (I2C_BUS i2c_id, u8 dev_addr, u16 start, u16 length)
 {
     u8 i, row, col;
     u8 read_data = 0;
-    u16 addr;
     u16 end = start + length;
 
     printf("\n\n-------------- Dump of I2C Chip --------------\n");
