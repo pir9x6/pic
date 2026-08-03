@@ -3,7 +3,7 @@
 void enable_global_interrupts(void)
 {
     /* enable interrupts (global, peripheral, high priority) */
-#if defined (_18F252)
+#if defined (_18F252) || defined (_18LF252)
 
     INTCONbits.GIE = 1;     /* Enable global interrupts */
     INTCONbits.PEIE = 1;    /* Enable peripheral interrupts */
@@ -26,7 +26,7 @@ void enable_global_interrupts(void)
 void disable_global_interrupts(void)
 {
     /* disnable interrupts (global, peripheral, high priority) */
-#if defined (_18F252)
+#if defined (_18F252) || defined (_18LF252)
 
     INTCONbits.GIE = 0;
     INTCONbits.PEIE = 0;

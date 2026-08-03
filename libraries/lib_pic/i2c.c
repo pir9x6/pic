@@ -16,7 +16,7 @@ static result_t _wait_for_idle(I2C_BUS bus_id);
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t i2c_init(const I2C_CFG_t *cfg)
 {
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         u32 i2c_brg = (GetSystemClock() / cfg->freq) - 1;
         if (i2c_brg > 255){
@@ -177,7 +177,7 @@ result_t i2c_start(I2C_BUS bus_id)
     //     return ERROR;
     // }
 
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         if (bus_id == I2C_BUS_1){
             SSPCON2bits.SEN = 1;
@@ -241,7 +241,7 @@ result_t i2c_rstart(I2C_BUS bus_id)
         return ERROR;
     }
 
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         if (bus_id == I2C_BUS_1){
             SSPCON2bits.RSEN = 1;
@@ -301,7 +301,7 @@ result_t i2c_send_ack(I2C_BUS bus_id, u8 Ack)
         return ERROR;
     }
 
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         SSPCON2bits.ACKDT = Ack;
         SSPCON2bits.ACKEN = 1;
@@ -342,7 +342,7 @@ result_t i2c_send_ack(I2C_BUS bus_id, u8 Ack)
 result_t i2c_wait_ack(I2C_BUS bus_id)
 {
     u8 i;
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         /* wait for end of transaction */
         while (SSPSTATbits.R_W);            /* usefull ? */
@@ -414,7 +414,7 @@ result_t i2c_read(I2C_BUS bus_id, u8 ack, u8 *data)
         return ERROR;
     }
 
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         SSPCON2bits.RCEN = 1;
         while (!PIR1bits.SSPIF);
@@ -463,7 +463,7 @@ result_t i2c_write(I2C_BUS bus_id, u8 data)
     //     return ERROR;
     // }
 
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         /* send data */
         SSPBUF = data;
@@ -513,7 +513,7 @@ result_t i2c_write(I2C_BUS bus_id, u8 data)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t i2c_stop(I2C_BUS bus_id)
 {
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         SSPCON2bits.PEN = 1;
         while(SSPCON2bits.PEN);
@@ -555,7 +555,7 @@ result_t i2c_stop(I2C_BUS bus_id)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 static result_t _wait_for_idle(I2C_BUS bus_id)
 {
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         u16 timeout = 0;
 

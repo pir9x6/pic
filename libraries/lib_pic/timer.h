@@ -20,7 +20,8 @@ typedef enum
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 typedef enum
 {
-#if defined (_18F252)
+#if defined (_18F252) || \
+    defined (_18LF252)
 
     TMR_PRESCALER_1 = 0,
     TMR_PRESCALER_4,
@@ -68,6 +69,7 @@ typedef enum
 typedef enum
 {
 #if defined (_18F252) || \
+    defined (_18LF252) || \
     defined (_18F26K42) || \
     defined (_18F57K42)
 

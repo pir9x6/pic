@@ -15,7 +15,7 @@ extern UART_ID UART_ID_LOG;
  * ****************************************************************************/
 result_t uart_init (UART_CFG_t *cfg)
 {
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         SPBRG = (u8)(GetSystemClock() / (16 * cfg->baudrate) - 1);
 
@@ -132,7 +132,7 @@ void putch(char txData)
  * ****************************************************************************/
 result_t uart_write (UART_ID uart_id, u8 data)
 {
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         if (uart_id == UART_ID_1){
             /* wait for the buffer to be empty */

@@ -17,7 +17,7 @@ result_t timer_init(const TIMER_CFG_t *cfg)
         return ERROR;
     }
     else if (cfg->timer_id == TIMER_ID_2){
-        #if defined (_18F252)
+        #if defined (_18F252) || defined (_18LF252)
 
             /* Enables the TMR2 to PR2 match interrupt */
             PIE1bits.TMR2IE = 1;
@@ -29,7 +29,7 @@ result_t timer_init(const TIMER_CFG_t *cfg)
             T2CONbits.TOUTPS = (u8)cfg->timer_postscaler;
 
             /* Set timer period */
-            PR2 = cfg->period - 1;
+            PR2 = (u8)(cfg->period - 1);
 
             /* enable timer */
             T2CONbits.TMR2ON = 1;

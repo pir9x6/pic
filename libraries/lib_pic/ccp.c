@@ -8,7 +8,7 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t ccp_init (CCP_ID_t ccp_id, TIMER_ID_t timer_id, u16 freq, u16 duty)
 {
-    #if defined (_18F252)
+#if defined (_18F252) || defined (_18LF252)
 
         (void)freq;
         if (ccp_id == CCP_ID_1){
@@ -102,7 +102,7 @@ result_t ccp_set_pwm_duty (CCP_ID_t ccp_id, u16 duty)
         duty = 1023;
     }
 
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         if (ccp_id == CCP_ID_1){
             CCPR1L = (u8)(duty >> 2);                   // bits 9 to 2

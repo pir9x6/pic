@@ -8,7 +8,7 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 result_t pwm_init (PWM_ID pwm_id, u16 freq, u16 duty)
 {
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         (void)freq;
         if (pwm_id == PWM_ID_1){
@@ -59,7 +59,7 @@ result_t pwm_init (PWM_ID pwm_id, u16 freq, u16 duty)
         IFS0bits.T2IF = 0;              // Clear Timer 2 Interrupt Flag
         IEC0bits.T2IE = 1;              // Enable Timer 2 interrupt
         T2CONbits.TON = 1;              // Start Timer
-    
+
     #else
 
         #error -- processor ID not specified in generic header file
@@ -78,7 +78,7 @@ result_t pwm_set_duty (PWM_ID pwm_id, u16 duty)
         duty = 1023;
     }
 
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
 
         if (pwm_id == PWM_ID_1){
             CCPR1L = (u8)(duty >> 2);                       // bits 9 to 2
@@ -99,7 +99,7 @@ result_t pwm_set_duty (PWM_ID pwm_id, u16 duty)
         return ERROR;
 
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
-    
+
     OC1RS = duty;                   // Load the Compare Register Value
 
     #else
