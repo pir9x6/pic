@@ -3,21 +3,17 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>pitechoid_pic18_dip28_ref</name>
-            <creation-uuid>c3e55d25-9e04-4dd7-9ca5-e1e4f35500bd</creation-uuid>
+            <name>Pitechoid_DIP28_PIC18F252</name>
+            <creation-uuid>3ebbeafa-a9f6-45cb-a4a1-2138e8ede3b4</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions>c</c-extensions>
-            <cpp-extensions/>
-            <header-extensions>h</header-extensions>
-            <asminc-extensions/>
-            <sourceEncoding>UTF-8</sourceEncoding>
+            <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
                 <sourceRootElem>../../libraries/lib_comp</sourceRootElem>
+                <sourceRootElem>../../libraries/lib_lcd</sourceRootElem>
                 <sourceRootElem>../../libraries/lib_misc</sourceRootElem>
                 <sourceRootElem>../../libraries/lib_pic</sourceRootElem>
-                <sourceRootElem>../../libraries/lib_lcd</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

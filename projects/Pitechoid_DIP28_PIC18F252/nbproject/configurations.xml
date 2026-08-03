@@ -4,42 +4,30 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="lib_comp" projectFiles="true">
-        <itemPath>../../libraries/lib_comp/pcf8574.h</itemPath>
-        <itemPath>../../libraries/lib_comp/tmp75.h</itemPath>
-        <itemPath>../../libraries/lib_comp/ds1307.h</itemPath>
-        <itemPath>../../libraries/lib_comp/ds1631.h</itemPath>
-        <itemPath>../../libraries/lib_comp/bh1750.h</itemPath>
-        <itemPath>../../libraries/lib_comp/mma7660.h</itemPath>
-        <itemPath>../../libraries/lib_comp/eeprom_i2c.h</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f2" displayName="lib_lcd" projectFiles="true">
-        <itemPath>../../libraries/lib_lcd/lcd_hd44780.h</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f4" displayName="lib_misc" projectFiles="true">
-        <itemPath>../../libraries/lib_misc/i2c_tools.h</itemPath>
+      <logicalFolder name="f1" displayName="lib" projectFiles="true">
         <itemPath>../../libraries/lib_misc/log.h</itemPath>
         <itemPath>../../libraries/lib_misc/misc.h</itemPath>
-        <itemPath>../../libraries/lib_misc/types.h</itemPath>
-        <itemPath>../../libraries/lib_misc/date_time.h</itemPath>
-        <itemPath>../../libraries/lib_misc/console.h</itemPath>
-        <itemPath>../../libraries/lib_misc/bcd.h</itemPath>
-        <itemPath>../../libraries/lib_misc/delays.h</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f3" displayName="lib_pic" projectFiles="true">
-        <itemPath>../../libraries/lib_pic/pic_compiler.h</itemPath>
-        <itemPath>../../libraries/lib_pic/io.h</itemPath>
-        <itemPath>../../libraries/lib_pic/i2c.h</itemPath>
-        <itemPath>../../libraries/lib_pic/ccp.h</itemPath>
+        <itemPath>../../libraries/lib_comp/mma7660.h</itemPath>
+        <itemPath>../../libraries/lib_comp/pcf8574.h</itemPath>
+        <itemPath>pin_manager.h</itemPath>
         <itemPath>../../libraries/lib_pic/timer.h</itemPath>
+        <itemPath>../../libraries/lib_misc/types.h</itemPath>
         <itemPath>../../libraries/lib_pic/uart.h</itemPath>
-        <itemPath>../../libraries/lib_pic/pwm.h</itemPath>
+        <itemPath>../../libraries/lib_pic/io.h</itemPath>
+        <itemPath>../../libraries/lib_lcd/lcd_hd44780.h</itemPath>
+        <itemPath>../../libraries/lib_pic/i2c.h</itemPath>
+        <itemPath>../../libraries/lib_misc/i2c_tools.h</itemPath>
+        <itemPath>../../libraries/lib_pic/interrupts.h</itemPath>
+        <itemPath>../../libraries/lib_misc/bcd.h</itemPath>
+        <itemPath>config.h</itemPath>
+        <itemPath>../../libraries/lib_misc/date_time.h</itemPath>
+        <itemPath>../../libraries/lib_misc/delays.h</itemPath>
+        <itemPath>../../libraries/lib_comp/eeprom_i2c.h</itemPath>
+        <itemPath>../../libraries/lib_comp/ds1337.h</itemPath>
+        <itemPath>../../libraries/lib_comp/ds1631.h</itemPath>
       </logicalFolder>
-      <itemPath>interrupts_management.h</itemPath>
       <itemPath>hardware_profile.h</itemPath>
-      <itemPath>config.h</itemPath>
-      <itemPath>pin_manager.h</itemPath>
-      <itemPath>../../libraries/lib_pic/interrupts.h</itemPath>
+      <itemPath>interrupts_management.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -53,53 +41,48 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="lib_comp" projectFiles="true">
-        <itemPath>../../libraries/lib_comp/pcf8574.c</itemPath>
+      <logicalFolder name="f1" displayName="lib" projectFiles="true">
+        <itemPath>../../libraries/lib_pic/timer.c</itemPath>
         <itemPath>../../libraries/lib_comp/tmp75.c</itemPath>
-        <itemPath>../../libraries/lib_comp/ds1631.c</itemPath>
-        <itemPath>../../libraries/lib_comp/ds1307.c</itemPath>
-        <itemPath>../../libraries/lib_comp/bh1750.c</itemPath>
+        <itemPath>../../libraries/lib_comp/tmp75.h</itemPath>
+        <itemPath>../../libraries/lib_pic/uart.c</itemPath>
+        <itemPath>../../libraries/lib_misc/log.c</itemPath>
+        <itemPath>../../libraries/lib_misc/misc.c</itemPath>
         <itemPath>../../libraries/lib_comp/mma7660.c</itemPath>
+        <itemPath>../../libraries/lib_comp/pcf8574.c</itemPath>
+        <itemPath>../../libraries/lib_pic/i2c.c</itemPath>
+        <itemPath>../../libraries/lib_misc/i2c_tools.c</itemPath>
+        <itemPath>../../libraries/lib_pic/interrupts.c</itemPath>
+        <itemPath>../../libraries/lib_misc/bcd.c</itemPath>
+        <itemPath>../../libraries/lib_misc/date_time.c</itemPath>
+        <itemPath>../../libraries/lib_misc/delays.c</itemPath>
+        <itemPath>../../libraries/lib_comp/ds1337.c</itemPath>
+        <itemPath>../../libraries/lib_comp/ds1631.c</itemPath>
         <itemPath>../../libraries/lib_comp/eeprom_i2c.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f4" displayName="lib_lcd" projectFiles="true">
         <itemPath>../../libraries/lib_lcd/lcd_hd44780.c</itemPath>
       </logicalFolder>
-      <logicalFolder name="f3" displayName="lib_misc" projectFiles="true">
-        <itemPath>../../libraries/lib_misc/misc.c</itemPath>
-        <itemPath>../../libraries/lib_misc/log.c</itemPath>
-        <itemPath>../../libraries/lib_misc/i2c_tools.c</itemPath>
-        <itemPath>../../libraries/lib_misc/date_time.c</itemPath>
-        <itemPath>../../libraries/lib_misc/console.c</itemPath>
-        <itemPath>../../libraries/lib_misc/bcd.c</itemPath>
-        <itemPath>../../libraries/lib_misc/delays.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="f2" displayName="lib_pic" projectFiles="true">
-        <itemPath>../../libraries/lib_pic/uart.c</itemPath>
-        <itemPath>../../libraries/lib_pic/timer.c</itemPath>
-        <itemPath>../../libraries/lib_pic/pwm.c</itemPath>
-        <itemPath>../../libraries/lib_pic/i2c.c</itemPath>
-        <itemPath>../../libraries/lib_pic/ccp.c</itemPath>
-      </logicalFolder>
+      <itemPath>pin_manager.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>interrupts_management.c</itemPath>
-      <itemPath>pin_manager.c</itemPath>
-      <itemPath>../../libraries/lib_pic/interrupts.c</itemPath>
     </logicalFolder>
+    <itemPath>../../libraries/lib_comp/bh1750.c</itemPath>
+    <itemPath>../../libraries/lib_comp/bh1750.h</itemPath>
+    <itemPath>../../libraries/lib_comp/ds1307.c</itemPath>
+    <itemPath>../../libraries/lib_comp/ds1307.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
     <Elem>../../libraries/lib_comp</Elem>
+    <Elem>../../libraries/lib_lcd</Elem>
     <Elem>../../libraries/lib_misc</Elem>
     <Elem>../../libraries/lib_pic</Elem>
-    <Elem>../../libraries/lib_lcd</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC18F252</targetDevice>
+        <targetDevice>PIC18LF252</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
@@ -108,8 +91,10 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18Fxxxx_DFP" vendor="Microchip" version="1.2.26"/>
+        <pack name="PIC18Fxxxx_DFP" vendor="Microchip" version="1.6.159"/>
       </packs>
+      <ScriptingSettings>
+      </ScriptingSettings>
       <compileType>
         <linkerTool>
           <linkerLibItems>
@@ -119,7 +104,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>true</parseOnProdLoad>
+          <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
         <subordinates>
@@ -127,6 +112,7 @@
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
+        <makeUseCleanTarget>false</makeUseCleanTarget>
         <makeCustomizationPreStep></makeCustomizationPreStep>
         <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
         <makeCustomizationPostStep></makeCustomizationPostStep>
@@ -134,26 +120,6 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../../libraries/lib_misc/console.c" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="../../libraries/lib_misc/console.h" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
       <HI-TECH-COMP>
         <property key="additional-warnings" value="true"/>
         <property key="asmlist" value="true"/>
@@ -163,7 +129,7 @@
         <property key="define-macros" value=""/>
         <property key="disable-optimizations" value="true"/>
         <property key="extra-include-directories"
-                  value="..\..\libraries\lib_comp;..\..\libraries\lib_misc;..\..\libraries\lib_lcd;..\..\libraries\lib_pic;."/>
+                  value="..\..\libraries\lib_comp;..\..\libraries\lib_lcd;..\..\libraries\lib_misc;..\..\libraries\lib_pic;."/>
         <property key="favor-optimization-for" value="-speed,+space"/>
         <property key="garbage-collect-data" value="true"/>
         <property key="garbage-collect-functions" value="true"/>
@@ -179,9 +145,9 @@
         <property key="optimization-level" value="-O0"/>
         <property key="optimization-speed" value="false"/>
         <property key="optimization-stable-enable" value="false"/>
-        <property key="pack-struct" value="true"/>
         <property key="preprocess-assembler" value="true"/>
         <property key="short-enums" value="true"/>
+        <property key="tentative-definitions" value="-fno-common"/>
         <property key="undefine-macros" value=""/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
@@ -191,6 +157,7 @@
       </HI-TECH-COMP>
       <HI-TECH-LINK>
         <property key="additional-options-checksum" value=""/>
+        <property key="additional-options-checksumAVR" value=""/>
         <property key="additional-options-code-offset" value=""/>
         <property key="additional-options-command-line" value=""/>
         <property key="additional-options-errata" value=""/>
@@ -232,28 +199,126 @@
         <property key="opt-xc8-linker-file" value="false"/>
         <property key="opt-xc8-linker-link_startup" value="false"/>
         <property key="opt-xc8-linker-serial" value=""/>
-        <property key="program-the-device-with-default-config-words" value="true"/>
+        <property key="program-the-device-with-default-config-words" value="false"/>
         <property key="remove-unused-sections" value="true"/>
       </HI-TECH-LINK>
       <PICkit3PlatformTool>
-        <property key="firmware.download.all" value="false"/>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="Freeze Peripherals" value="true"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="event.recorder.debugger.behavior" value="Running"/>
+        <property key="event.recorder.enabled" value="false"/>
+        <property key="event.recorder.scvd.files" value=""/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="lastid" value=""/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.configurationmemory2" value="true"/>
+        <property key="memories.dataflash" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.instruction.ram" value="true"/>
+        <property key="memories.instruction.ram.ranges"
+                  value="${memories.instruction.ram.ranges}"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.ranges" value="0-7fff"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmertogo.imagename" value=""/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.pgmspeed" value="2"/>
+        <property key="programoptions.preservedataflash" value="false"/>
+        <property key="programoptions.preservedataflash.ranges"
+                  value="${programoptions.preservedataflash.ranges}"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveeeprom.ranges" value="0-ff"/>
+        <property key="programoptions.preserveprogram.ranges" value=""/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.programcalmem" value="false"/>
+        <property key="programoptions.programuserotp" value="false"/>
+        <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="5.0"/>
       </PICkit3PlatformTool>
+      <Tool>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="Freeze Peripherals" value="true"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="event.recorder.debugger.behavior" value="Running"/>
+        <property key="event.recorder.enabled" value="false"/>
+        <property key="event.recorder.scvd.files" value=""/>
+        <property key="hwtoolclock.frcindebug" value="false"/>
+        <property key="lastid" value=""/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.configurationmemory2" value="true"/>
+        <property key="memories.dataflash" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.instruction.ram" value="true"/>
+        <property key="memories.instruction.ram.ranges"
+                  value="${memories.instruction.ram.ranges}"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.ranges" value="0-7fff"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmertogo.imagename" value=""/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.pgmspeed" value="2"/>
+        <property key="programoptions.preservedataflash" value="false"/>
+        <property key="programoptions.preservedataflash.ranges"
+                  value="${programoptions.preservedataflash.ranges}"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveeeprom.ranges" value="0-ff"/>
+        <property key="programoptions.preserveprogram.ranges" value=""/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.programcalmem" value="false"/>
+        <property key="programoptions.programuserotp" value="false"/>
+        <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="5.0"/>
+      </Tool>
       <XC8-CO>
         <property key="coverage-enable" value=""/>
+        <property key="stack-guidance" value="false"/>
       </XC8-CO>
       <XC8-config-global>
         <property key="advanced-elf" value="true"/>
+        <property key="constdata-progmem" value="false"/>
         <property key="gcc-opt-driver-new" value="true"/>
         <property key="gcc-opt-std" value="-std=c99"/>
         <property key="gcc-output-file-format" value="dwarf-3"/>
+        <property key="mapped-progmem" value="false"/>
         <property key="omit-pack-options" value="false"/>
         <property key="omit-pack-options-new" value="1"/>
         <property key="output-file-format" value="-mcof,+elf"/>
+        <property key="smart-io-format" value=""/>
         <property key="stack-size-high" value="auto"/>
         <property key="stack-size-low" value="auto"/>
         <property key="stack-size-main" value="auto"/>
         <property key="stack-type" value="compiled"/>
         <property key="user-pack-device-support" value=""/>
+        <property key="wpo-lto" value="false"/>
       </XC8-config-global>
     </conf>
   </confs>
