@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=pitechoid_pic18_dip28_ref
+PROJECTNAME=Pitechoid_DIP28_PIC18F252
 
 # Active Configuration
 DEFAULTCONF=default
