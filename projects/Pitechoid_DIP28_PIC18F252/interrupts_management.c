@@ -9,7 +9,7 @@ extern bool_t time_has_changed_timer;
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //--------------------------- Interrupts management ---------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-#if defined (_18F252)
+#if defined (_18F252) || defined (_18LF252)
 void __interrupt(high_priority) interrupt()
 {
     /*******************************************************/
@@ -55,7 +55,7 @@ void __interrupt(irq(TMR2),high_priority) timer2_irq(void)
     T2CONbits.TMR2ON = 0;
 
     /* clear timer interrupt */
-    #if defined (_18F252)
+    #if defined (_18F252) || defined (_18LF252)
     PIR1bits.TMR2IF = 0;
     #elif defined (_18F26K42)
     PIR4bits.TMR2IF = 0;
