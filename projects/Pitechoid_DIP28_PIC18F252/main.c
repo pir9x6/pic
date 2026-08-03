@@ -128,14 +128,14 @@ void main (void)
 //----------------------------------- UART ------------------------------------
     /* At 10 MHz the actual bitrate is 125k. Putty must be set to 125000
        or a 11.0592 MHz crystal must be used otherwise it won't work */
-    if (uart_init(uart_1_cfg) != SUCCESS){
+    if (uart_init(&uart_1_cfg) != SUCCESS){
         LOG_ERROR("UART initialization failed");
         PIN_LED_ERROR = 1;
     }
     printf("\nCoucou \n");
 
 //--------------------- i2c, bus & devices initialization ---------------------
-    if (i2c_init(I2C_BUS_1, I2C_FREQ, I2C_MASTER) != SUCCESS){
+    if (i2c_init(&i2c_1_cfg) != SUCCESS){
         LOG_ERROR("I2C initialization failed");
         PIN_LED_ERROR = 1;
     }
