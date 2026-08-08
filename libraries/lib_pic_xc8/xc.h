@@ -20,7 +20,7 @@ extern const char __xc8_OPTIM_SPEED;
 extern double __fpnormalize(double);
 
 #include <language_support.h>
-#include <xc8debug.h>
+// #include <xc8debug.h>
 
 /* HI-TECH PICC / PICC-Lite compiler */
 #if defined(__PICC__) || defined(__PICCLITE__)

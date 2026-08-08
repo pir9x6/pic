@@ -30,15 +30,15 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _PIC18F252_H_
-#define _PIC18F252_H_
+#ifndef _PIC18LF252_H_
+#define _PIC18LF252_H_
 
 /*
  * C Header file for the Microchip PIC Microcontroller
- * PIC18F252
+ * PIC18LF252
  */
 #ifndef _XC_H_
-#warning Header file pic18f252.h included directly. Use #include <xc.h> instead.
+#warning Header file pic18lf252.h included directly. Use #include <xc.h> instead.
 #endif
 
 #include <__at.h>
@@ -5615,51 +5615,6 @@ extern volatile __bit                   POR                 __at(0x7E81);	// @ (
 // T0CON<PSA>
 extern volatile __bit                   PSA                 __at(0x7EAB);	// @ (0xFD5 * 8 + 3)
 #define                                 PSA_bit             _BIT_ACCESS(T0CON,3)
-// PORTA<RA0>
-extern volatile __bit _DEPRECATED       RA0                 __at(0x7C00);	// @ (0xF80 * 8 + 0)
-#define                                 RA0_bit             _BIT_ACCESS(PORTA,0)
-// PORTA<RA1>
-extern volatile __bit _DEPRECATED       RA1                 __at(0x7C01);	// @ (0xF80 * 8 + 1)
-#define                                 RA1_bit             _BIT_ACCESS(PORTA,1)
-// PORTA<RA2>
-extern volatile __bit _DEPRECATED       RA2                 __at(0x7C02);	// @ (0xF80 * 8 + 2)
-#define                                 RA2_bit             _BIT_ACCESS(PORTA,2)
-// PORTA<RA3>
-extern volatile __bit _DEPRECATED       RA3                 __at(0x7C03);	// @ (0xF80 * 8 + 3)
-#define                                 RA3_bit             _BIT_ACCESS(PORTA,3)
-// PORTA<RA4>
-extern volatile __bit _DEPRECATED       RA4                 __at(0x7C04);	// @ (0xF80 * 8 + 4)
-#define                                 RA4_bit             _BIT_ACCESS(PORTA,4)
-// PORTA<RA5>
-extern volatile __bit _DEPRECATED       RA5                 __at(0x7C05);	// @ (0xF80 * 8 + 5)
-#define                                 RA5_bit             _BIT_ACCESS(PORTA,5)
-// PORTA<RA6>
-extern volatile __bit _DEPRECATED       RA6                 __at(0x7C06);	// @ (0xF80 * 8 + 6)
-#define                                 RA6_bit             _BIT_ACCESS(PORTA,6)
-// PORTB<RB0>
-extern volatile __bit _DEPRECATED       RB0                 __at(0x7C08);	// @ (0xF81 * 8 + 0)
-#define                                 RB0_bit             _BIT_ACCESS(PORTB,0)
-// PORTB<RB1>
-extern volatile __bit _DEPRECATED       RB1                 __at(0x7C09);	// @ (0xF81 * 8 + 1)
-#define                                 RB1_bit             _BIT_ACCESS(PORTB,1)
-// PORTB<RB2>
-extern volatile __bit _DEPRECATED       RB2                 __at(0x7C0A);	// @ (0xF81 * 8 + 2)
-#define                                 RB2_bit             _BIT_ACCESS(PORTB,2)
-// PORTB<RB3>
-extern volatile __bit _DEPRECATED       RB3                 __at(0x7C0B);	// @ (0xF81 * 8 + 3)
-#define                                 RB3_bit             _BIT_ACCESS(PORTB,3)
-// PORTB<RB4>
-extern volatile __bit _DEPRECATED       RB4                 __at(0x7C0C);	// @ (0xF81 * 8 + 4)
-#define                                 RB4_bit             _BIT_ACCESS(PORTB,4)
-// PORTB<RB5>
-extern volatile __bit _DEPRECATED       RB5                 __at(0x7C0D);	// @ (0xF81 * 8 + 5)
-#define                                 RB5_bit             _BIT_ACCESS(PORTB,5)
-// PORTB<RB6>
-extern volatile __bit _DEPRECATED       RB6                 __at(0x7C0E);	// @ (0xF81 * 8 + 6)
-#define                                 RB6_bit             _BIT_ACCESS(PORTB,6)
-// PORTB<RB7>
-extern volatile __bit _DEPRECATED       RB7                 __at(0x7C0F);	// @ (0xF81 * 8 + 7)
-#define                                 RB7_bit             _BIT_ACCESS(PORTB,7)
 // INTCON<RBIE>
 extern volatile __bit                   RBIE                __at(0x7F93);	// @ (0xFF2 * 8 + 3)
 #define                                 RBIE_bit            _BIT_ACCESS(INTCON,3)
@@ -5672,12 +5627,6 @@ extern volatile __bit                   RBIP                __at(0x7F88);	// @ (
 // INTCON2<RBPU>
 extern volatile __bit                   RBPU                __at(0x7F8F);	// @ (0xFF1 * 8 + 7)
 #define                                 RBPU_bit            _BIT_ACCESS(INTCON2,7)
-// PORTC<RC0>
-extern volatile __bit _DEPRECATED       RC0                 __at(0x7C10);	// @ (0xF82 * 8 + 0)
-#define                                 RC0_bit             _BIT_ACCESS(PORTC,0)
-// PORTC<RC1>
-extern volatile __bit _DEPRECATED       RC1                 __at(0x7C11);	// @ (0xF82 * 8 + 1)
-#define                                 RC1_bit             _BIT_ACCESS(PORTC,1)
 // PIE1<RC1IE>
 extern volatile __bit                   RC1IE               __at(0x7CED);	// @ (0xF9D * 8 + 5)
 #define                                 RC1IE_bit           _BIT_ACCESS(PIE1,5)
@@ -5687,24 +5636,6 @@ extern volatile __bit                   RC1IF               __at(0x7CF5);	// @ (
 // IPR1<RC1IP>
 extern volatile __bit                   RC1IP               __at(0x7CFD);	// @ (0xF9F * 8 + 5)
 #define                                 RC1IP_bit           _BIT_ACCESS(IPR1,5)
-// PORTC<RC2>
-extern volatile __bit _DEPRECATED       RC2                 __at(0x7C12);	// @ (0xF82 * 8 + 2)
-#define                                 RC2_bit             _BIT_ACCESS(PORTC,2)
-// PORTC<RC3>
-extern volatile __bit _DEPRECATED       RC3                 __at(0x7C13);	// @ (0xF82 * 8 + 3)
-#define                                 RC3_bit             _BIT_ACCESS(PORTC,3)
-// PORTC<RC4>
-extern volatile __bit _DEPRECATED       RC4                 __at(0x7C14);	// @ (0xF82 * 8 + 4)
-#define                                 RC4_bit             _BIT_ACCESS(PORTC,4)
-// PORTC<RC5>
-extern volatile __bit _DEPRECATED       RC5                 __at(0x7C15);	// @ (0xF82 * 8 + 5)
-#define                                 RC5_bit             _BIT_ACCESS(PORTC,5)
-// PORTC<RC6>
-extern volatile __bit _DEPRECATED       RC6                 __at(0x7C16);	// @ (0xF82 * 8 + 6)
-#define                                 RC6_bit             _BIT_ACCESS(PORTC,6)
-// PORTC<RC7>
-extern volatile __bit _DEPRECATED       RC7                 __at(0x7C17);	// @ (0xF82 * 8 + 7)
-#define                                 RC7_bit             _BIT_ACCESS(PORTC,7)
 // RCSTA<RC8_9>
 extern volatile __bit                   RC8_9               __at(0x7D5E);	// @ (0xFAB * 8 + 6)
 #define                                 RC8_9_bit           _BIT_ACCESS(RCSTA,6)
@@ -5729,9 +5660,6 @@ extern volatile __bit                   RCIP                __at(0x7CFD);	// @ (
 // EECON1<RD>
 extern volatile __bit                   RD                  __at(0x7D30);	// @ (0xFA6 * 8 + 0)
 #define                                 RD_bit              _BIT_ACCESS(EECON1,0)
-// T1CON<RD16>
-extern volatile __bit _DEPRECATED       RD16                __at(0x7E6F);	// @ (0xFCD * 8 + 7)
-#define                                 RD16_bit            _BIT_ACCESS(T1CON,7)
 // T3CON<RD163>
 extern volatile __bit                   RD163               __at(0x7D8F);	// @ (0xFB1 * 8 + 7)
 #define                                 RD163_bit           _BIT_ACCESS(T3CON,7)
@@ -6252,4 +6180,4 @@ extern volatile __bit                   nW                  __at(0x7E3A);	// @ (
 extern volatile __bit                   nWRITE              __at(0x7E3A);	// @ (0xFC7 * 8 + 2)
 #define                                 nWRITE_bit          _BIT_ACCESS(SSPSTAT,2)
 
-#endif // _PIC18F252_H_
+#endif // _PIC18LF252_H_
