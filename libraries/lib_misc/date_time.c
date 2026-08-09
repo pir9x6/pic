@@ -115,21 +115,19 @@ void datetime_increase_hours(date_time_t *t)
 
 void datetime_decrease_days(date_time_t *t)
 {
+    if (t->dow == 1)
+        t->dow = 7;
+    else
+        t->dow--;
+
     if (t->day == 1)
     {
-        t->day = 31;
         datetime_decrease_months(t);
+        t->day = _days_in_month(t->mth, t->yrs);
     }
     else
     {
         t->day--;
-    }
-
-    if (t->dow == 1){
-        t->dow = 7;
-    }
-    else{
-        t->dow--;
     }
 }
 
