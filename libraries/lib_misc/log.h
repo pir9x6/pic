@@ -3,6 +3,8 @@
 
 #include "uart.h"
 
+#include "stdio.h"  /* printf */
+
 typedef enum
 {
     LOG_LEVEL_TRACE,
