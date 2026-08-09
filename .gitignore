@@ -264,3 +264,14 @@ projects/Pitechoid_QFP100_dsPIC33FJ256MC710/dist/default/production/pitechoid_re
 /projects/Pitechoid_QFP100_dsPIC33FJ256MC710/build
 /projects/Pitechoid_QFP100_dsPIC33FJ256MC710/.generated_files
 /projects/EVB_QFP100_dsPIC33FJ256MC710/build
+projects/clock_big_7seg_red_v2/nbproject/Makefile-genesis.properties
+projects/EVB_QFP100_dsPIC33FJ256MC710/dist/default/production/EVB_QFP100_dsPIC33FJ256MC710.production.elf
+projects/EVB_QFP100_dsPIC33FJ256MC710/dist/default/production/EVB_QFP100_dsPIC33FJ256MC710.production.map
+projects/clock_big_7seg_red_v2/nbproject/Makefile-genesis.properties
+projects/Pitechoid_DIP28_PIC18F252/nbproject/Makefile-genesis.properties
+projects/Pitechoid_DIP28_PIC18F252/nbproject/Makefile-default.mk
+projects/Pitechoid_QFP100_dsPIC33FJ256MC710/nbproject/Makefile-default.mk
+projects/Pitechoid_QFP100_dsPIC33FJ256MC710/nbproject/Makefile-genesis.properties
+projects/Pitechoid_QFP100_dsPIC33FJ256MC710/nbproject/Makefile-impl.mk
+projects/Pitechoid_QFP100_dsPIC33FJ256MC710/nbproject/Makefile-local-default.mk
+*.mk
