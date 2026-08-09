@@ -6,6 +6,7 @@
 * Includes
 ******************************************************************************/
 #include "bmp085.h"
+#include "delays.h"
 #include "i2c.h"
 #include "types.h"
 
