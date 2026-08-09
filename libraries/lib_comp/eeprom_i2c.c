@@ -10,9 +10,10 @@
 #include "delays.h"
 #include "eeprom_i2c.h"
 #include "i2c.h"
+#include "log.h"
 #include "types.h"
 
-#include "log.h"
+#include <stddef.h>     /* NULL */
 
 
 /*****************************************************************************
@@ -143,6 +144,8 @@ result_t eeprom_i2c_read_buffer(
     u16 length
 )
 {
+    u16 i;
+
     if (cfg->addr_bytes > 2)
         return ERROR;
 
@@ -193,7 +196,7 @@ result_t eeprom_i2c_read_buffer(
     }
 
     /* get data */
-    for (u16 i = 0; i < length; i++){
+    for (i = 0; i < length; i++){
         u8 ack = (i == (length-1)) ? I2C_NACK : I2C_ACK;
         if (i2c_read(i2c_bus_id, ack, &data[i]) != SUCCESS){
             return ERROR;
