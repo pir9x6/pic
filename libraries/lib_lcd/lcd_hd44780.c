@@ -10,7 +10,7 @@
 #include "lcd_hd44780.h"
 #include "hardware_profile.h"
 #include "delays.h"
-#include "math.h"
+// #include "math.h"
 
 static void _write(u8 data, u8 rs);
 static void _write_4b(u8 data, u8 rs);
@@ -18,9 +18,8 @@ static void _write_4b(u8 data, u8 rs);
 /*****************************************************************************
 * Initialization of LCD
 ******************************************************************************/
-void lcd_hd44780_init(LCD_HD44780_CONFIG_t config)
+void lcd_hd44780_init(LCD_HD44780_CONFIG_t *config)
 {
-
     /* wait > 15 ms @ 5V, > 40 ms @ 3.3V */
     delay_ms(60);
 
@@ -68,10 +67,10 @@ void lcd_hd44780_init(LCD_HD44780_CONFIG_t config)
 #endif
 
     /* nb bits data, nb lines */
-    _write(LCD_HD44780_SET_FUNCTION | config.nb_lines | config.nb_bits, LCD_HD44780_CMD);
+    _write(LCD_HD44780_SET_FUNCTION | config->nb_lines | config->nb_bits, LCD_HD44780_CMD);
 
     /* right shift */
-    _write(LCD_HD44780_CURSOR_SHIFT | config.shift, LCD_HD44780_CMD);
+    _write(LCD_HD44780_CURSOR_SHIFT | config->shift, LCD_HD44780_CMD);
 
     /* Display ON, Cursor OFF, Blink OFF */
     _write (0x0C, LCD_HD44780_CMD);

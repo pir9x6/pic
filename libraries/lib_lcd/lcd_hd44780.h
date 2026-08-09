@@ -1,10 +1,15 @@
 #ifndef _LCD_hd44780_H_
 #define _LCD_hd44780_H_
 
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "date_time.h"
 #include "types.h"
 
-/* Settings */
+/*****************************************************************************
+* Settings
+******************************************************************************/
 #define LCD_HD44780_NB_BITS     4        // number of bits of data bus (4 or 8)
 #define LCD_HD44780_BLINKING    0        // blinking cursor (0 or 1)
 #define LCD_HD44780_CURSOR      0        // display cursor (0 or 1)
@@ -13,11 +18,15 @@
 #define LCD_HD44780_SHIFT_RIGHT (1 << 2) // display from left to right
 #define LCD_HD44780_SHIFT_LEFT  0        // display from right to left
 
-/* Commands / Data*/
+/*****************************************************************************
+* Commands / Data
+******************************************************************************/
 #define LCD_HD44780_DATA        1
 #define LCD_HD44780_CMD         0
 
-/* set function */
+/*****************************************************************************
+* set function
+******************************************************************************/
 #define LCD_HD44780_CURSOR_SHIFT    0x10
 #define LCD_HD44780_SET_FUNCTION    0x20
 #define LCD_HD44780_NB_LINES_1      0x00
@@ -25,12 +34,17 @@
 #define LCD_HD44780_NB_BITS_4       0x00
 #define LCD_HD44780_NB_BITS_8       0x10
 
-/* Line */
+/*****************************************************************************
+* Lines
+******************************************************************************/
 #define LCD_HD44780_LINE_1          0
 #define LCD_HD44780_LINE_2          1
 #define LCD_HD44780_LINE_3          2
 #define LCD_HD44780_LINE_4          3
 
+/*****************************************************************************
+* Types
+******************************************************************************/
 typedef struct{
     u8 nb_lines;
     u8 nb_bits;
@@ -43,7 +57,10 @@ typedef enum
     LCD_HD44780_DATE_NUMBERS
 }LCD_HD44780_DATE_FORMAT_t;
 
-void lcd_hd44780_init(LCD_HD44780_CONFIG_t config);
+/*****************************************************************************
+* Prototypes
+******************************************************************************/
+void lcd_hd44780_init(LCD_HD44780_CONFIG_t *config);
 void lcd_hd44780_set_position(u8 line, u8 pos);
 void lcd_hd44780_clear(void);
 void lcd_hd44780_write_hex8(u8 data);
