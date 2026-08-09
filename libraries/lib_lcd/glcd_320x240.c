@@ -1,9 +1,14 @@
+/*****************************************************************************
+* includes
+******************************************************************************/
 #include "glcd_320x240.h"
 
 #include "font_12x06.h"
 #include "font_16x08.h"
 #include "font_16x24.h"
 #include "uart.h"
+#include "math.h"
+#include "delays.h"
 
 #define GLCD_WIDTH       (u16) 320                 // Screen Width (in pixels)
 #define GLCD_HEIGHT      (u16) 240                 // Screen Hight (in pixels)
@@ -163,7 +168,7 @@ void glcd_init (u16 *device_id)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------- Draw Point (Text Color) ---------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_point(u16 x, u16 y, COLOR color)
+void glcd_draw_point(u16 x, u16 y, GLCD_COLOR_t color)
 {
     // set cursor
     glcd_set_cursor(x, y);
@@ -218,7 +223,7 @@ void glcd_window_max (u32 x, u32 y, u32 x_end, u32 y_end)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------- Clear the LCD with a certain color ----------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_clear (COLOR color)
+void glcd_clear (GLCD_COLOR_t color)
 {
     u32   i;
     glcd_set_cursor(0, 0);
@@ -236,7 +241,7 @@ void glcd_clear (COLOR color)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------ Display Char Horizontaly ---------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_display_char(u32 ln, u32 col, u8 c, COLOR font_color, COLOR back_color)
+void glcd_display_char(u32 ln, u32 col, u8 c, GLCD_COLOR_t font_color, GLCD_COLOR_t back_color)
 {
     c -= 32;
     glcd_draw_char(ln, col, &ascii_16x24[c * 24], font_color, back_color);
@@ -246,7 +251,7 @@ void glcd_display_char(u32 ln, u32 col, u8 c, COLOR font_color, COLOR back_color
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------ Display Char Horizontaly ---------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_char(u32 x, u32 y, u16 *c, COLOR font_color, COLOR back_color)
+void glcd_draw_char(u32 x, u32 y, u16 *c, GLCD_COLOR_t font_color, GLCD_COLOR_t back_color)
 {
     u32 index = 0;
     int  i = 0;
@@ -276,7 +281,7 @@ void glcd_draw_char(u32 x, u32 y, u16 *c, COLOR font_color, COLOR back_color)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------ Display String Vertically --------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_display_string(u32 ln, u8 *s, COLOR font_color, COLOR back_color)
+void glcd_display_string(u32 ln, u8 *s, GLCD_COLOR_t font_color, GLCD_COLOR_t back_color)
 {
     u32 i = 0;
     u32 refcolumn = (GLCD_WIDTH/*-1*/)-16;
@@ -298,7 +303,7 @@ void glcd_display_string(u32 ln, u8 *s, COLOR font_color, COLOR back_color)
 #define MAX_CHAR_POSX 232
 #define MAX_CHAR_POSY 304
 
-void glcd_string(u8 x, u16 y, const char *p, u8 size, COLOR font_color, COLOR back_color)
+void glcd_string(u8 x, u16 y, const char *p, u8 size, GLCD_COLOR_t font_color, GLCD_COLOR_t back_color)
 {
     u8 temp;
     u8 pos,t;
@@ -341,7 +346,7 @@ void glcd_string(u8 x, u16 y, const char *p, u8 size, COLOR font_color, COLOR ba
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //---------------------------- Display Register -------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_register(u8 x, u8 y, u32 reg, u8 len, u8 size, COLOR font_color, COLOR back_color)
+void glcd_register(u8 x, u8 y, u32 reg, u8 len, u8 size, GLCD_COLOR_t font_color, GLCD_COLOR_t back_color)
 {
     u8 i;
     u8 t;
@@ -391,7 +396,7 @@ void glcd_bitmap (u32 x, u32 y, u32 w, u32 h, u16 bitmap[])
 
     for (j = 0; j < h; j++){
         for (i = 0; i < w; i++){
-            glcd_draw_point(x+i, y+j, (COLOR)bitmap[i+(j*w)]);
+            glcd_draw_point(x+i, y+j, (GLCD_COLOR_t)bitmap[i+(j*w)]);
         }
     }
 }
@@ -426,7 +431,7 @@ void glcd_colorbar(void)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------------- Draw a Line ---------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_line(u32 x1, u32 y1, u32 x2, u32 y2, COLOR color)
+void glcd_draw_line(u32 x1, u32 y1, u32 x2, u32 y2, GLCD_COLOR_t color)
 {
     u32 t;
     s16 xerr=0, yerr=0, delta_x, delta_y, distance;
@@ -488,7 +493,7 @@ void glcd_draw_line(u32 x1, u32 y1, u32 x2, u32 y2, COLOR color)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //-------------- Draw a Line (less better than previous one) ------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_line2(u32 x1, u32 y1, u32 x2, u32 y2, COLOR color)
+void glcd_draw_line2(u32 x1, u32 y1, u32 x2, u32 y2, GLCD_COLOR_t color)
 {
     u16 x, y, t;
 
@@ -534,7 +539,7 @@ void glcd_draw_line2(u32 x1, u32 y1, u32 x2, u32 y2, COLOR color)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------------ Draw a Circle --------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_circle(u32 x0, u32 y0, u32 r, COLOR color)
+void glcd_draw_circle(u32 x0, u32 y0, u32 r, GLCD_COLOR_t color)
 {
     s32 a,b;
     s32 di;
@@ -569,7 +574,7 @@ void glcd_draw_circle(u32 x0, u32 y0, u32 r, COLOR color)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------ Draw an Empty Rectangle ----------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_rectangle(u32 x, u32 y, u32 w, u32 h, COLOR color)
+void glcd_draw_rectangle(u32 x, u32 y, u32 w, u32 h, GLCD_COLOR_t color)
 {
     glcd_draw_line(  x,   y, x+w,   y, color);
     glcd_draw_line(  x,   y,   x, y+h, color);
@@ -582,7 +587,7 @@ void glcd_draw_rectangle(u32 x, u32 y, u32 w, u32 h, COLOR color)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //------------------------- Draw a Full Rectangle -----------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_full_rectangle(u32 x, u32 y, u32 w, u32 h, COLOR color)
+void glcd_draw_full_rectangle(u32 x, u32 y, u32 w, u32 h, GLCD_COLOR_t color)
 {
     u32 i;
     for (i = 0; i < h; i++){
@@ -608,7 +613,7 @@ void glcd_rgb24_to_rgb16 (u8 r, u8 g, u8 b, u16 *rgb16)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //-----------------------------------------------------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_touch_point(u8 x, u16 y, COLOR color)
+void glcd_draw_touch_point(u8 x, u16 y, GLCD_COLOR_t color)
 {
     glcd_draw_line(x-12, y, x+13, y, color);
     glcd_draw_line(x, y-12, x, y+13, color);
@@ -625,7 +630,7 @@ void glcd_draw_touch_point(u8 x, u16 y, COLOR color)
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //-----------------------------------------------------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-void glcd_draw_big_point(u8 x, u16 y, COLOR color)
+void glcd_draw_big_point(u8 x, u16 y, GLCD_COLOR_t color)
 {
     glcd_draw_point(x,   y,   color);
     glcd_draw_point(x+1, y,   color);

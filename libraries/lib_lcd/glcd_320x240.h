@@ -1,6 +1,9 @@
 #ifndef _GLCD_320X240_H
 #define _GLCD_320X240_H
 
+/*****************************************************************************
+* includes
+******************************************************************************/
 #if defined (__18CXX)
     #include "p18cxxx.h"
 #elif defined(__PIC24F__)
@@ -10,7 +13,7 @@
 #elif defined(__PIC24E__)
     #include "p24Exxxx.h"
 #elif defined(__dsPIC33F__)
-    #include "p33Fxxxx.h"
+    #include "xc.h"
 #elif defined(__dsPIC33E__)
     #include "p33Exxxx.h"
 #elif defined(__dsPIC30F__)
@@ -24,11 +27,11 @@
 
 // global headers
 #include "types.h"
-#include "delays.h"
 
-// C headers
-#include "math.h"
 
+/*****************************************************************************
+* Pin assignments
+******************************************************************************/
 #if defined (__STM32F10x__)
 
     #define Set_Cs          GPIOD->BSRR = 0x00001000;
@@ -83,6 +86,9 @@
     #error -- No Processor ID has been defined
 #endif
 
+/*****************************************************************************
+* Register definitions
+******************************************************************************/
 #define GLCD_SSD1298_REG_OSCILLATOR     0x00
 #define GLCD_SSD1298_REG_DRIVER_OUT     0x01
 #define GLCD_SSD1298_REG_LCD_DRIVE_AC   0x02
@@ -126,9 +132,9 @@
 #define GLCD_SSD1298_REG_GDDRAM_Y_ADR   0x4F
 
 
-
-
-// GLCD RGB color definitions (R=5b, G=6b, B=5b)
+/*****************************************************************************
+* GLCD RGB color definitions (R=5b, G=6b, B=5b)
+******************************************************************************/
 typedef enum eCOLOR
 {
     BLACK     = 0x0000,      /*   0,   0,   0 */
@@ -153,9 +159,12 @@ typedef enum eCOLOR
     GOLD      = 0xFEA0,
     YELLOW    = 0xFFE0,      /* 255, 255, 0   */
     WHITE     = 0xFFFF       /* 255, 255, 255 */
-}COLOR;
+}GLCD_COLOR_t;
 
 
+/*****************************************************************************
+* Defines
+******************************************************************************/
 #define GLCD_LINE_0       0
 #define GLCD_LINE_1      24
 #define GLCD_LINE_2      48
@@ -167,30 +176,35 @@ typedef enum eCOLOR
 #define GLCD_LINE_8     192
 #define GLCD_LINE_9     216
 
+
+/*****************************************************************************
+* Prototypes
+******************************************************************************/
 void glcd_wr_data            (u16 data);
 void glcd_wr_cmd             (u16 data);
 void glcd_rd_data            (u16 *data);
 void glcd_wr_reg             (u16 addr, u16 data);
 void glcd_rd_reg             (u16 addr, u16 *data);
 void glcd_init               (u16 *device_id);
-void glcd_draw_point         (u16 x,  u16 y,   COLOR color);
+void glcd_draw_point         (u16 x,  u16 y,   GLCD_COLOR_t color);
 void glcd_set_cursor         (u16 x,  u16 y);
 void glcd_window_max         (u32 x,  u32 y,   u32 x_end, u32 y_end) ;
-void glcd_clear              (COLOR color);
-void glcd_display_string     (u32 ln, u8 *s,   COLOR font_color, COLOR back_color);
-void glcd_register           (u8 x,   u8 y,    u32 reg, u8 len, u8 size, COLOR font_color, COLOR back_color);
-void glcd_string             (u8 x,   u16 y,   const char *p,  u8 size, COLOR font_color, COLOR back_color);
+void glcd_clear              (GLCD_COLOR_t color);
+void glcd_display_string     (u32 ln, u8 *s,   GLCD_COLOR_t font_color, GLCD_COLOR_t back_color);
+void glcd_register           (u8 x,   u8 y,    u32 reg, u8 len, u8 size, GLCD_COLOR_t font_color, GLCD_COLOR_t back_color);
+void glcd_string             (u8 x,   u16 y,   const char *p,  u8 size, GLCD_COLOR_t font_color, GLCD_COLOR_t back_color);
 void glcd_clearLn            (u32 ln);
-void glcd_draw_char          (u32 x,  u32 y,   u16 *c,  COLOR font_color, COLOR back_color);
-void glcd_display_char       (u32 ln, u32 col, u8 c,    COLOR font_color, COLOR back_color);
+void glcd_draw_char          (u32 x,  u32 y,   u16 *c,  GLCD_COLOR_t font_color, GLCD_COLOR_t back_color);
+void glcd_display_char       (u32 ln, u32 col, u8 c,    GLCD_COLOR_t font_color, GLCD_COLOR_t back_color);
 void glcd_bitmap             (u32 x,  u32 y,   u32 w,   u32 h, u16 bitmap[]);
 void glcd_colorbar           (void);
-void glcd_draw_circle        (u32 x0, u32 y0,  u32 r,   COLOR color);
-void glcd_draw_line          (u32 x1, u32 y1,  u32 x2,  u32 y2, COLOR color);
-void glcd_draw_line2         (u32 x1, u32 y1,  u32 x2,  u32 y2, COLOR color);
-void glcd_draw_rectangle     (u32 x,  u32 y,   u32 w,   u32 h,  COLOR color);
-void glcd_draw_full_rectangle(u32 x,  u32 y,   u32 w,   u32 h,  COLOR color);
+void glcd_draw_circle        (u32 x0, u32 y0,  u32 r,   GLCD_COLOR_t color);
+void glcd_draw_line          (u32 x1, u32 y1,  u32 x2,  u32 y2, GLCD_COLOR_t color);
+void glcd_draw_line2         (u32 x1, u32 y1,  u32 x2,  u32 y2, GLCD_COLOR_t color);
+void glcd_draw_rectangle     (u32 x,  u32 y,   u32 w,   u32 h,  GLCD_COLOR_t color);
+void glcd_draw_full_rectangle(u32 x,  u32 y,   u32 w,   u32 h,  GLCD_COLOR_t color);
 void glcd_rgb24_to_rgb16     (u8 r,   u8 g,    u8 b,    u16 *rgb16);
-void glcd_draw_touch_point   (u8 x,  u16 y,    COLOR color);
-void glcd_draw_big_point     (u8 x,  u16 y,    COLOR color);
-#endif 
+void glcd_draw_touch_point   (u8 x,  u16 y,    GLCD_COLOR_t color);
+void glcd_draw_big_point     (u8 x,  u16 y,    GLCD_COLOR_t color);
+
+#endif
