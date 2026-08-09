@@ -1,6 +1,6 @@
 /*
  * Copyright 2007-2021 Microchip Technology, all rights reserved
- * 
+ *
  * This file defines useful exports from libpic30.a
  * Not all functions defined in libpic30.a can be usefully called by
  * the user, most are helper functions for the standard C library, libc.a
@@ -30,9 +30,9 @@ extern int __attach_input_file(const char *f);
 void __close_input_file(void);
 
 /*
- * __C30_UART selects the default UART port that read() and write() will use.  
- * read() is called by fscanf and family, while write() is called by printf 
- * and family.  The default setting (as shipped) is 1, which is suitable for 
+ * __C30_UART selects the default UART port that read() and write() will use.
+ * read() is called by fscanf and family, while write() is called by printf
+ * and family.  The default setting (as shipped) is 1, which is suitable for
  * the dsPICdem 1.1(tm) board.   Modifying this to another value will select
  * UART 2, suitable for the explorer 16(tm) board.
  */
@@ -152,7 +152,7 @@ extern void *_memcpy_df(__pack_upper_byte void *src,void *dst,unsigned int len);
 _prog_addressT _memcpy_p2d16(void *dest, _prog_addressT src,
                              unsigned int len);
 
-#define _memcpy_p2d16(dest, src, len)  _memcpy_helper(src, dest, len, 0) 
+#define _memcpy_p2d16(dest, src, len)  _memcpy_helper(src, dest, len, 0)
 
 /*
  * _memcpy_p2d24() copies 24 bits of data from each address
@@ -164,7 +164,7 @@ _prog_addressT _memcpy_p2d16(void *dest, _prog_addressT src,
 _prog_addressT _memcpy_p2d24(void *dest, _prog_addressT src,
                              unsigned int len);
 
-#define _memcpy_p2d24(dest, src, len)  _memcpy_helper(src, dest, len, 1) 
+#define _memcpy_p2d24(dest, src, len)  _memcpy_helper(src, dest, len, 1)
 
 /*
  * _strncpy_p2d16() copies 16 bits of data from each address
@@ -177,7 +177,7 @@ _prog_addressT _memcpy_p2d24(void *dest, _prog_addressT src,
 _prog_addressT _strncpy_p2d16(char *dest, _prog_addressT src,
                               unsigned int len);
 
-#define _strncpy_p2d16(dest, src, len)  _memcpy_helper(src, dest, len, 2) 
+#define _strncpy_p2d16(dest, src, len)  _memcpy_helper(src, dest, len, 2)
 
 /*
  * _strncpy_p2d24() copies 24 bits of data from each address
@@ -190,19 +190,19 @@ _prog_addressT _strncpy_p2d16(char *dest, _prog_addressT src,
 _prog_addressT _strncpy_p2d24(char *dest, _prog_addressT src,
                               unsigned int len);
 
-#define _strncpy_p2d24(dest, src, len)  _memcpy_helper(src, dest, len, 3) 
+#define _strncpy_p2d24(dest, src, len)  _memcpy_helper(src, dest, len, 3)
 
 /*
  * _memcpy_packed copies from a __pack_upper_byte data space to RAM,
  */
 
-void *_memcpy_packed(char *dest, const __pack_upper_byte void *src, 
+void *_memcpy_packed(char *dest, const __pack_upper_byte void *src,
                      unsigned int len);
 
 #define _memcpy_packed(dest, src, len) _memcpy_df(src, dest, len)
 
 extern char *_strcpy_packed(char *dest, const __pack_upper_byte void *src);
-extern char *_strncpy_packed(char *dest, const __pack_upper_byte void *src, 
+extern char *_strncpy_packed(char *dest, const __pack_upper_byte void *src,
                              unsigned int len);
 
 /*
@@ -210,7 +210,7 @@ extern char *_strncpy_packed(char *dest, const __pack_upper_byte void *src,
  *   this routine can safely be passed non-qualified (RAM) pointers too
  */
 
-extern __eds__ void *_memcpy_eds_3(const __eds__ void *src, __eds__ void *dst, 
+extern __eds__ void *_memcpy_eds_3(const __eds__ void *src, __eds__ void *dst,
                                    unsigned int len);
 
 /*
@@ -222,8 +222,8 @@ extern __eds__ void *_memcpy_eds_3(const __eds__ void *src, __eds__ void *dst,
 
 /*
  * _strcpy_eds and _strncpy_eds
- *   _strncpy_eds does not zero fill up to n bytes if the copied string is 
- *    short  
+ *   _strncpy_eds does not zero fill up to n bytes if the copied string is
+ *    short
  */
 extern __eds__ char *_strcpy_eds(const __eds__ void *src, __eds__ void *dst);
 extern __eds__ char *_strncpy_eds(const __eds__ void *src, __eds__ void *dst,
@@ -275,7 +275,7 @@ extern __eds__ void *_memchr_eds(__eds__ void *s, int c, size_t n);
 #define _EE_ROW         32
 
 /* constants for 33F devices */
-#elif defined(__dsPIC33F__) 
+#elif defined(__dsPIC33F__)
 #define _FLASH_ERASE_CODE                 0x4042
 #define _FLASH_ERASE_GENERAL_SEGMENT_CODE 0x404D
 #define _FLASH_ERASE_SECURE_SEGMENT_CODE  0x404C
@@ -486,8 +486,8 @@ void _write_eedata_row(_prog_addressT dst, int *src);
 #ifdef __PIC24FK__
 
 /*
- * _erase_eedata() erases eedata memory on 24FK devices. 
- * The address is specified with type _prog_addressT. 
+ * _erase_eedata() erases eedata memory on 24FK devices.
+ * The address is specified with type _prog_addressT.
  * The length may be _EE_WORD, _EE_4WORDS, or _EE_8WORDS.
  */
 
@@ -551,7 +551,7 @@ void _erase_flash(_prog_addressT dst);
  * Note that the row must be erased before
  * any write can be successful.
  *
- * This function includes a workaround for the Device ID errata as 
+ * This function includes a workaround for the Device ID errata as
  * described in DS-80444, DS-80446, or DS-80447 (#32).
  */
 
@@ -567,7 +567,7 @@ void _write_flash16(_prog_addressT dst, int *src);
  * Note that the row must be erased before
  * any write can be successful.
  *
- * This function includes a workaround for the Device ID errata as 
+ * This function includes a workaround for the Device ID errata as
  * described in DS-80444, DS-80446, or DS-80447 (#32).
  */
 
@@ -585,7 +585,7 @@ void _write_flash24(_prog_addressT dst, long *src);
  * with type _prog_addressT. Note that the location must
  * be erased before any write can be successful.
  *
- * This function is currently disable for devices subject to the 
+ * This function is currently disable for devices subject to the
  * Device ID errata as described in DS-80444, DS-80446, or DS-80447 (#32).
  */
 #if defined(__PIC24F__)
@@ -603,7 +603,7 @@ void _write_flash_word16(_prog_addressT dst, int dat);
  * with type _prog_addressT. Note that the location must
  * be erased before any write can be successful.
  *
- * This function is currently disable for devices subject to the 
+ * This function is currently disable for devices subject to the
  * Device ID errata as described in DS-80444, DS-80446, or DS-80447 (#32).
  */
 #if defined(__PIC24F__)
@@ -667,7 +667,7 @@ void _write_flash24(_prog_addressT dst, long *src);
  *    (May be expanded for all devices)                   *
  *                                                        *
  *********************************************************/
- 
+
 #if defined(__dsPIC33E__) || defined(__PIC24E__)
 
 /*
@@ -678,7 +678,7 @@ void _write_flash24(_prog_addressT dst, long *src);
  * with type _prog_addressT. Note that the location must
  * be erased before any write can be successful.
  *
- * This function is currently disable for devices subject to the 
+ * This function is currently disable for devices subject to the
  * Device ID errata as described in DS-80444, DS-80446, or DS-80447 (#32).
  */
 
@@ -693,7 +693,7 @@ void _write_flash_word32(_prog_addressT dst, int dat1, int dat2);
  * with type _prog_addressT. Note that the location must
  * be erased before any write can be successful.
  *
- * This function is currently disable for devices subject to the 
+ * This function is currently disable for devices subject to the
  * Device ID errata as described in DS-80444, DS-80446, or DS-80447 (#32).
  */
 
@@ -701,7 +701,7 @@ void _write_flash_word48(_prog_addressT dst, long dat1, long dat2);
 
 #define _write_flash_word48 _flash_helper11
 
-#endif 
+#endif
 
 #if defined(__dsPIC33C__)
 
@@ -716,20 +716,20 @@ extern int _wipe_secondary(int core_number);
 extern void _start_secondary(void);
 extern void _stop_secondary(void);
 
-extern int  
+extern int
   __attribute__((__deprecated__("Please migrate to '_program_secondary'")))
   _program_slave(int slave_number, int verify, __eds__ unsigned char *image);
 
-extern int  
+extern int
   __attribute__((__deprecated__("Please migrate to '_program_inactive_secondary'")))
-  _program_inactive_slave(int slave_number, int verify, 
+  _program_inactive_slave(int slave_number, int verify,
                           __eds__ unsigned char *image);
 
-extern void 
+extern void
   __attribute__((__deprecated__("Please migrate to '_start_secondary'")))
   _start_slave(void);
 
-extern void 
+extern void
   __attribute__((__deprecated__("Please migrate to '_stop_secondary'")))
   _stop_slave(void);
 #endif
