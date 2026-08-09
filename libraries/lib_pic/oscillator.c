@@ -1,6 +1,6 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&   Project     :   Global                                              &&&
-//&&&   Author      :   Pierre BLACHÉ                                       &&&
+//&&&   Author      :   Pierre BLACHï¿½                                       &&&
 //&&&   Date        :   15/12/2014                                          &&&
 //&&&   Version     :   v1.0                                                &&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -34,7 +34,6 @@ static OSCILLATOR_PROFILE *oscillator_profile[] = {
 void oscillator_init (OSC_FREQ mode)
 {
     // Fosc = Crystal(MHz) * pll / (post*pre)
-#if defined(__dsPIC33F__)
     OSCILLATOR_PROFILE *profile;
     profile = oscillator_profile[mode];
 
@@ -47,6 +46,5 @@ void oscillator_init (OSC_FREQ mode)
     __builtin_write_OSCCONL(1);         // Start clock switching
     while (OSCCONbits.COSC!=3);         // Oscillateur externe + PLL
     while (OSCCONbits.LOCK!=1);         // Wait for PLL to lock
-#endif
 }
 
