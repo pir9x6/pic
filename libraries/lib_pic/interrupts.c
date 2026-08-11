@@ -1,4 +1,4 @@
-#include "pic_compiler.h"
+#include "xc.h"
 
 void enable_global_interrupts(void)
 {
