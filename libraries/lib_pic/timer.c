@@ -228,8 +228,8 @@ void timer23_init (const TIMER_CFG_t *cfg)
     T2CONbits.TGATE = 0;            // Disable Gated Timer mode
     TMR2 = 0;                       // reset compteur
     TMR3 = 0;                       // reset compteur
-    PR2 = (u16)cfg->period;               // Timer period (lsb)
-    PR3 = (u16)(cfg->period >> 16);                // Timer period (msb)
+    PR2 = (u16)cfg->period;         // Timer period (lsb)
+    PR3 = (u16)(cfg->period >> 16); // Timer period (msb)
     T2CONbits.TCKPS = cfg->timer_prescaler;    // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
     IPC2bits.T3IP = 0x01;           // Set Timer3 Interrupt Priority Level
     IFS0bits.T3IF = 0;              // Clear Timer3 Interrupt Flag
@@ -256,8 +256,8 @@ void timer45_init (const TIMER_CFG_t *cfg)
     T4CONbits.TGATE = 0;            // Disable Gated Timer mode
     TMR4 = 0;                       // reset compteur
     TMR5 = 0;                       // reset compteur
-    PR4 = (u16)cfg->period;               // Timer period (lsb)
-    PR5 = (u16)(cfg->period >> 16);                // Timer period (msb)
+    PR4 = (u16)cfg->period;         // Timer period (lsb)
+    PR5 = (u16)(cfg->period >> 16); // Timer period (msb)
     T4CONbits.TCKPS = cfg->timer_prescaler;    // Prescaler (0=1 - 1=8 - 2=64 - 3=256)
     IPC7bits.T5IP = 0x01;           // Set Timer3 Interrupt Priority Level
     IFS1bits.T5IF = 0;              // Clear Timer3 Interrupt Flag

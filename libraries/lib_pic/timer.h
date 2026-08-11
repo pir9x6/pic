@@ -2,7 +2,7 @@
 #define LIB_PIC_TIMER_H
 
 #include "types.h"
-#include "pic_compiler.h"
+#include "xc.h"
 
 typedef enum
 {
@@ -107,7 +107,11 @@ typedef struct
     TIMER_ID_t timer_id;
     TIMER_PRESCALER_t timer_prescaler;
     TIMER_POSTSCALER_t timer_postscaler;
+#if defined (__18CXX) || defined (_PIC18)
     u16 period;
+#elif(__PIC24F__) || defined(__dsPIC33F__)
+    u32 period;
+#endif
 }TIMER_CFG_t;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
