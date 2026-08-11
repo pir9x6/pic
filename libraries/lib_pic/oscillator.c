@@ -1,6 +1,4 @@
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Project     :   Global                                              &&&
-//&&&   Author      :   Pierre BLACH�                                       &&&
 //&&&   Date        :   15/12/2014                                          &&&
 //&&&   Version     :   v1.0                                                &&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -11,9 +9,16 @@
 //&&&   Version     :   1.0  15/12/2014  First release                      &&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "types.h"
 #include "oscillator.h"
 
+
+/*****************************************************************************
+* Constants
+******************************************************************************/
 static OSCILLATOR_PROFILE PROFILE_OSC_120MHz = {48-2, 0, 0};
 static OSCILLATOR_PROFILE PROFILE_OSC_100MHz = {40-2, 0, 0};
 static OSCILLATOR_PROFILE PROFILE_OSC_80MHz  = {32-2, 0, 0};    // 32 / (2 * 2)
@@ -28,9 +33,16 @@ static OSCILLATOR_PROFILE *oscillator_profile[] = {
     &PROFILE_OSC_32MHz
 };
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//--------------------- Configuration of 16 bits Timers -----------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+/*****************************************************************************
+* Initialization of the internal PLL
+* If the PLL of the target device is enabled and configured for the device
+* start-up oscillator, the maximum oscillator source frequency must be limited to
+* 4 MHz < FIN < 8 MHz to comply with device PLL start-up conditions.
+* This means that if the external oscillator frequency is outside this range,
+* the application must start-up in the FRC mode first. The default PLL settings
+* after a POR with an oscillator frequency outside this range will violate the device
+* operating speed.
+******************************************************************************/
 void oscillator_init (OSC_FREQ mode)
 {
     // Fosc = Crystal(MHz) * pll / (post*pre)
