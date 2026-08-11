@@ -1,23 +1,24 @@
-/*****************************************************************************
+/******************************************************************************
 * Includes
 ******************************************************************************/
-#include "bcd.h"
-#include "date_time.h"
-#include "delays.h"
-#include "hardware_profile.h"
-#include "math.h"
 #include "uart.h"
+#include "types.h"
 
+#include <xc.h>
+
+/******************************************************************************
+* Global variables
+******************************************************************************/
 extern UART_ID UART_ID_LOG;
 
-/*******************************************************************************
+/******************************************************************************
  * UART Configuration
- * ****************************************************************************/
+ * ***************************************************************************/
 result_t uart_init (UART_CFG_t *cfg)
 {
     #if defined (_18F252) || defined (_18LF252)
 
-        SPBRG = (u8)(GetSystemClock() / (16 * cfg->baudrate) - 1);
+        SPBRG = (u8)(cfg->system_clock / (16 * cfg->baudrate) - 1);
 
         if (cfg->uart_id == UART_ID_1){
             // high speed mode
@@ -45,7 +46,7 @@ result_t uart_init (UART_CFG_t *cfg)
         if (cfg->uart_id == UART_ID_1){
             /* set baudrate */
             U1BRGH = 0;
-            U1BRGL = (u8)(GetSystemClock() / (4.0 * cfg->baudrate) - 1);
+            U1BRGL = (u8)(cfg->system_clock / (4.0 * cfg->baudrate) - 1);
 
             /* 8 bits, async mode, high speed mode */
             U1CON0 = 0;
@@ -79,7 +80,7 @@ result_t uart_init (UART_CFG_t *cfg)
 
     #elif defined(__PIC24F__) || defined(__dsPIC33F__)
 
-        u16 UART_BRG = (u16)(GetInstructionClock() / (4 * (cfg->baudrate + 1)));
+        u16 UART_BRG = (u16)((cfg->system_clock / 2) / (4 * (cfg->baudrate + 1)));
 
         //===============================================================
         if (cfg->uart_id == UART_ID_1){
