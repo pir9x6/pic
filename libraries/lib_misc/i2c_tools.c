@@ -17,7 +17,7 @@ result_t i2c_detect (I2C_BUS i2c_id)
     u8 i, row, col;
     u8 nb_devices = 0;
 
-    printf("\n\r--------- Detected I2C Devices (bus #%u) ----------\n   ", i2c_id);
+    printf("\r\n--------- Detected I2C Devices (bus #%u) ----------\r\n   ", i2c_id);
 
     /* print '0' to 'F' */
     for (i = 0; i < 16; i++)
@@ -26,7 +26,7 @@ result_t i2c_detect (I2C_BUS i2c_id)
         printf(" ");
     }
 
-    printf("\n");
+    printf("\r\n");
     for (row = 0; row < 8; row++)
     {
         printf("%02X:", row << 4);
@@ -61,10 +61,10 @@ result_t i2c_detect (I2C_BUS i2c_id)
                 i2c_stop(i2c_id);
             }
         }
-        printf("\n");
+        printf("\r\n");
     }
 
-    printf("\nFound %u device(s)\n\n", nb_devices);
+    printf("\r\nFound %u device(s)\r\n\r\n", nb_devices);
 
     return SUCCESS;
 }
@@ -79,12 +79,12 @@ result_t i2c_dump (I2C_BUS i2c_id, u8 dev_addr, u16 start, u16 length)
     u8 read_data = 0;
     u16 end = start + length;
 
-    printf("\n\n-------------- Dump of I2C Chip --------------\n");
-    printf("Bus    : %u\n", i2c_id);
-    printf("Address: 0x%02X\n", dev_addr);
-    printf("Range  : 0x%04X - 0x%04X\n\n", start, end - 1);
+    printf("\r\n-------------- Dump of I2C Chip --------------\r\n");
+    printf("Bus    : %u\r\n", i2c_id);
+    printf("Address: 0x%02X\r\n", dev_addr);
+    printf("Range  : 0x%04X - 0x%04X\r\n\r\n", start, end - 1);
 
-    printf("\n    ");
+    printf("\r\n    ");
 
     /* print '0' to 'F' */
     for (i = 0; i < 16; i++)
@@ -101,7 +101,7 @@ result_t i2c_dump (I2C_BUS i2c_id, u8 dev_addr, u16 start, u16 length)
             i2c_read_reg(i2c_id, dev_addr, (u8)((row << 4) | col), &read_data);
             printf("%02X ", read_data);
         }
-        printf("\n");
+        printf("\r\n");
     }
 
     return SUCCESS;
