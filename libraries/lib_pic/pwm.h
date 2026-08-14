@@ -1,12 +1,17 @@
 #ifndef LIB_PIC_PWM_H
 #define LIB_PIC_PWM_H
 
-#include "pic_compiler.h"
-
+/*****************************************************************************
+* includes
+******************************************************************************/
+#include "xc.h"
 #include "types.h"
-#include "io.h"
 
-typedef enum ePWM_ID
+
+/*****************************************************************************
+* New types
+******************************************************************************/
+typedef enum
 {
     PWM_ID_1 = 0,
     PWM_ID_2 = 1,
@@ -14,13 +19,27 @@ typedef enum ePWM_ID
     PWM_ID_4 = 3,
     PWM_ID_5 = 4,
     PWM_ID_6 = 5
-}PWM_ID;
+}PWM_ID_t;
 
-result_t pwm_init (PWM_ID pwm_id, u16 freq, u16 duty);
-result_t pwm_set_duty (PWM_ID pwm_id, u16 duty);
+typedef enum
+{
+    PWM_FROM_TMR2 = 0,
+    PWM_FROM_TMR3 = 1
+}PWM_SOURCE_t;
 
-#if defined(__PIC24F__) || defined(__dsPIC33F__)
-void __attribute__((interrupt, no_auto_psv)) _OC1Interrupt(void);
-#endif
+typedef struct
+{
+    PWM_ID_t pwm_id;
+    u16 freq;
+    u8 duty;    /* 0 to 100 */
+    PWM_SOURCE_t timer_source;
+}PWM_CFG_t;
+
+
+/*****************************************************************************
+* Prototypes
+******************************************************************************/
+result_t pwm_init (const PWM_CFG_t *cfg);
+result_t pwm_set_duty (const PWM_CFG_t *cfg);
 
 #endif

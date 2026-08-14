@@ -74,6 +74,7 @@
         <itemPath>../../libraries//lib_pic/oscillator.c</itemPath>
         <itemPath>../../libraries//lib_pic/i2c.c</itemPath>
         <itemPath>../../libraries/lib_pic/uart.c</itemPath>
+        <itemPath>../../libraries/lib_pic/pwm.c</itemPath>
       </logicalFolder>
       <itemPath>../../libraries//lib_pic/pic_config.c</itemPath>
       <itemPath>../../libraries//lib_misc/misc.c</itemPath>
