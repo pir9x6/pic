@@ -4,16 +4,29 @@
 //  v1.2    2026-07-26  Renaming
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+/*****************************************************************************
+* Includes
+******************************************************************************/
 #include "bcd.h"
 #include "misc.h"
 #include "date_time.h"
 #include "lcd_hd44780.h"
 #include "hardware_profile.h"
 #include "delays.h"
-// #include "math.h"
 
+
+/*****************************************************************************
+* Prototypes
+******************************************************************************/
 static void _write(u8 data, u8 rs);
 static void _write_4b(u8 data, u8 rs);
+
+
+/*****************************************************************************
+* Doc
+******************************************************************************/
+// https://cdn.sparkfun.com/assets/9/5/f/7/b/HD44780.pdfq
+
 
 /*****************************************************************************
 * Initialization of LCD
@@ -100,7 +113,7 @@ static void _write_4b(u8 data, u8 rs)
     PIN_LCD_HD44780_D4 = (data >> 0) & 0x01;
 
     PIN_LCD_HD44780_E = 1;
-    delay_us (1);
+    delay_us (1);       /* at least 450 ns (PWeh) */
     PIN_LCD_HD44780_E = 0;
 }
 
@@ -121,7 +134,7 @@ static void _write (u8 data, u8 rs)
     PIN_LCD_HD44780_D4 = (data >> 4) & 0x01;
 
     PIN_LCD_HD44780_E = 1;
-    delay_us (1);
+    delay_us (1);       /* at least 450 ns (PWeh) */
     PIN_LCD_HD44780_E = 0;
 
     // Send LSB Last
@@ -131,7 +144,7 @@ static void _write (u8 data, u8 rs)
     PIN_LCD_HD44780_D4 = (data >> 0) & 0x01;
 
     PIN_LCD_HD44780_E = 1;
-    delay_us (1);
+    delay_us (1);       /* at least 450 ns (PWeh) */
     PIN_LCD_HD44780_E = 0;
     delay_us (50);
 
