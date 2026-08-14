@@ -19,14 +19,18 @@
             "path": "../../../libraries/lib_pic"
         },
         {
-            "path": "../../../libraries/lib_pic_xc8"
+            "path": "../../../libraries/lib_pic_xc16"
         }
     ],
     "editor.rulers": [120],
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 120,
     "settings": {
-        "mplab.clangd.compileCommandsDir": "${workspaceFolder}\\_build\\Pitechoid_DIP28_PIC18F252\\default",
+        "C_Cpp.default.compilerPath": "C:/Programs/Microchip/xc-dsc/v4.00/bin/xc16-gcc.exe",
+        "C_Cpp.default.includePath": [
+            "${workspaceFolder}/**",
+            "../../../libraries/lib_pic_xc16"
+        ],
         "files.associations": {
             "*.h": "c",
             "system_error": "c",
@@ -36,7 +40,9 @@
             "type_traits": "c",
             "utility": "c",
             "limits": "c",
-            "memory": "c"
+            "memory": "c",
+            "chrono": "c",
+            "vector": "c"
         },
         "files.exclude": {
             "**/build": true,
@@ -58,13 +64,13 @@
             "UNICODE",
             "_UNICODE",
             "__PICC__",
-            "__XC8",
+            "__C30__",
             "__LANGUAGE_C__",
-            "_PIC18",
-            "_18F252",
-            "_18LF252",
+            "__dsPIC33F__",
+            "__dsPIC33FJ256MC710__",
             "__CLANG__",
-            "COMPILER_MPLAB_C18"
+            "COMPILER_MPLAB_C18",
+            "__XC16_VERSION__=2010"
         ],
         "mplab.clangd.arguments": [
             "--header-insertion=never"

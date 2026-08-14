@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>pitechoid_ref</name>
+            <name>Pitechoid_QFP100_dsPIC33FJ256MC710</name>
             <creation-uuid>1f2b19c4-2d89-4046-b9a1-14a7a97958b0</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
@@ -12,6 +12,23 @@
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>..</sourceRootElem>
+                <sourceRootElem>../../libraries//lib_pic</sourceRootElem>
+                <sourceRootElem>../../libraries//lib_misc</sourceRootElem>
+                <sourceRootElem>../../libraries//lib_chips</sourceRootElem>
+                <sourceRootElem>../../libraries//lib_lcd</sourceRootElem>
+                <sourceRootElem>../../libraries/lib_comp</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>default</name>
+                    <type>2</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
         </data>
     </configuration>
 </project>
