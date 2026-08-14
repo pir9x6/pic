@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MPLAB Build Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #111827;
+            color: #e5e7eb
+        }
+
+        header {
+            background: #0b1120;
+            color: white;
+            padding: 20px 30px
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 13px;
+            margin-top: 4px
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 25px auto;
+            padding: 0 20px
+        }
+
+        .toolbar,
+        .card {
+            background: #1f2937;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #00000055
+        }
+
+        .toolbar {
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px
+        }
+
+        button {
+            border: 0;
+            border-radius: 6px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600
+        }
+
+        button:disabled {
+            opacity: .45;
+            cursor: not-allowed
+        }
+
+        .build-failed {
+            background: #d97706;
+            color: white;
+            font-size: 15px;
+            padding: 12px 22px
+        }
+
+        .build-all {
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            padding: 12px 22px
+        }
+
+        .build-one {
+            background: #374151;
+            color: #e5e7eb
+        }
+
+        .log-button,
+        .folder-button {
+            background: #374151;
+            color: #e5e7eb;
+            margin-left: 5px
+        }
+
+        .summary {
+            margin-left: auto;
+            color: #9ca3af;
+            font-size: 14px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        th {
+            background: #111827;
+            text-align: left;
+            padding: 13px 16px;
+            font-size: 13px;
+            color: #9ca3af;
+            border-bottom: 1px solid #374151
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #374151;
+            vertical-align: top
+        }
+
+        .project-name {
+            font-weight: 600
+        }
+
+        .status {
+            display: inline-block;
+            min-width: 95px;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700
+        }
+
+        .passed {
+            background: #dcfce7;
+            color: #166534
+        }
+
+        .failed {
+            background: #fee2e2;
+            color: #991b1b
+        }
+
+        .building {
+            background: #fef3c7;
+            color: #92400e
+        }
+
+        .not-built {
+            background: #374151;
+            color: #d1d5db
+        }
+
+        .actions {
+            white-space: nowrap
+        }
+
+        .last-build {
+            font-size: 12px;
+            color: #9ca3af;
+            white-space: nowrap
+        }
+
+        .enabled-cell {
+            white-space: nowrap
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px
+        }
+
+        .switch input {
+            display: none
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #4b5563;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: .2s
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 2px;
+            top: 2px;
+            background: #e5e7eb;
+            border-radius: 50%;
+            transition: .2s
+        }
+
+        .switch input:checked+.slider {
+            background: #2563eb
+        }
+
+        .switch input:checked+.slider:before {
+            transform: translateX(18px)
+        }
+
+        .disabled-row {
+            opacity: .5
+        }
+
+        .error-line {
+            font-family: Consolas, "Courier New", monospace;
+            background: #3f1d1d;
+            color: #fca5a5;
+            border-left: 3px solid #ef4444;
+            padding: 4px 7px;
+            margin-top: 4px;
+            overflow-wrap: anywhere;
+            font-size: 12px
+        }
+
+        .error {
+            color: #fca5a5;
+            font-size: 12px;
+            margin-top: 6px
+        }
+
+        #logPanel {
+            display: none;
+            margin-top: 20px;
+            background: #111827;
+            color: #d1d5db;
+            border-radius: 10px;
+            overflow: hidden
+        }
+
+        #logTitle {
+            background: #1f2937;
+            padding: 12px 16px;
+            color: white;
+            font-weight: 600
+        }
+
+        #logContent {
+            padding: 15px;
+            height: 450px;
+            overflow: auto;
+            white-space: pre-wrap;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.4
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #d1d5db;
+            border-top-color: #92400e;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+            margin-right: 5px
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @media (max-width:900px) {
+            .summary {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>MPLAB Build Dashboard</h1>
+        <div class="subtitle">PIC / dsPIC project compilation</div>
+    </header>
+
+    <div class="container">
+
+        <div class="toolbar">
+            <button class="build-all" id="buildAllButton" onclick="buildAll()">
+                ▶ Build All
+            </button>
+
+            <button class="build-failed" id="buildFailedButton" onclick="buildFailed()">
+                ↻ Rebuild Failed
+            </button>
+
+            <div class="summary" id="summary">
+                Loading...
+            </div>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Enabled</th>
+                        <th>Project</th>
+                        <th>Status</th>
+                        <th>Last Build</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="projects"></tbody>
+            </table>
+        </div>
+
+        <div id="logPanel">
+            <div id="logTitle">Build Log</div>
+            <div id="logContent"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+        let currentLogProject = null;
+
+        async function api(u, o = {}) {
+            let r = await fetch(u, o),
+                d = await r.json();
+
+            if (!r.ok)
+                throw Error(d.error || "Server error");
+
+            return d;
+        }
+
+        function esc(v) {
+            return String(v)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "'");
+        }
+
+        function status(p) {
+            if (p.status == "PASSED")
+                return '<span class="status passed">PASSED</span>';
+
+            if (p.status == "FAILED")
+                return '<span class="status failed">FAILED</span>';
+
+            if (p.status == "BUILDING")
+                return '<span class="status building"><span class="spinner"></span>BUILDING</span>';
+
+            return '<span class="status not-built">NOT BUILT</span>';
+        }
+
+        function render(d) {
+            let t = document.getElementById("projects"),
+                pass = 0,
+                fail = 0,
+                build = 0;
+
+            t.innerHTML = "";
+
+            for (let p of d.projects) {
+
+                if (p.status == "PASSED") pass++;
+                if (p.status == "FAILED") fail++;
+                if (p.running) build++;
+
+                let disabled = p.enabled === false;
+
+                let errs = p.status == "FAILED"
+                    ? (p.error_lines || [])
+                        .map(x => `<div class="error-line">${esc(x)}</div>`)
+                        .join("")
+                    : (p.error
+                        ? `<div class="error">${esc(p.error)}</div>`
+                        : "");
+
+                let tr = document.createElement("tr");
+
+                if (disabled)
+                    tr.className = "disabled-row";
+
+                tr.innerHTML = `
+                    <td class="enabled-cell">
+                        <label class="switch" title="${disabled ? "Enable build" : "Disable build"}">
+                            <input type="checkbox"
+                                   ${disabled ? "" : "checked"}
+                                   onchange="toggleProject('${p.id}',this.checked)"
+                                   ${p.running ? "disabled" : ""}>
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+
+                    <td>
+                        <div class="project-name">${esc(p.name)}</div>
+                        ${errs}
+                    </td>
+
+                    <td>${status(p)}</td>
+
+                    <td class="last-build">
+                        ${esc(p.last_build || "-")}
+                    </td>
+
+                    <td>
+                        ${p.duration === null ? "-" : p.duration + " s"}
+                    </td>
+
+                    <td class="actions">
+                        <button class="build-one"
+                                onclick="buildProject('${p.id}')"
+                                ${d.running_all || p.running || disabled ? "disabled" : ""}>
+                            ▶ Build
+                        </button>
+
+                        <button class="log-button"
+                                onclick="showLog('${p.id}','${esc(p.name)}')"
+                                ${!p.log_file ? "disabled" : ""}>
+                            Log
+                        </button>
+
+                        <button class="folder-button"
+                                onclick="openFolder('${p.id}')">
+                            📁 Open Folder
+                        </button>
+                    </td>
+                `;
+
+                t.appendChild(tr);
+            }
+
+            document.getElementById("buildAllButton").disabled =
+                d.running_all || build > 0;
+
+            document.getElementById("buildFailedButton").disabled =
+                d.running_all ||
+                build > 0 ||
+                !d.projects.some(
+                    p => p.status == "FAILED" && p.enabled !== false
+                );
+
+            document.getElementById("summary").textContent =
+                `${pass} PASSED · ${fail} FAILED · ${build} BUILDING`;
+        }
+
+        async function refresh() {
+            try {
+                let d = await api("/api/status");
+                render(d);
+
+                if (currentLogProject)
+                    loadLog(currentLogProject);
+            }
+            catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function toggleProject(id, enabled) {
+            try {
+                await api(
+                    "/api/toggle/" + encodeURIComponent(id),
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ enabled })
+                    }
+                );
+
+                refresh();
+            }
+            catch (e) {
+                alert(e.message);
+                refresh();
+            }
+        }
+
+        async function buildProject(id) {
+            try {
+                await api(
+                    "/api/build/" + encodeURIComponent(id),
+                    { method: "POST" }
+                );
+
+                refresh();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        async function buildFailed() {
+            try {
+                await api(
+                    "/api/build-failed",
+                    { method: "POST" }
+                );
+
+                refresh();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        async function buildAll() {
+
+            <!-- if (!confirm("Build all enabled projects?")) -->
+                <!-- return; -->
+
+            try {
+                await api(
+                    "/api/build-all",
+                    { method: "POST" }
+                );
+
+                refresh();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        async function openFolder(id) {
+            try {
+                await api(
+                    "/api/open-folder/" + encodeURIComponent(id),
+                    { method: "POST" }
+                );
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        async function showLog(id, name) {
+
+            currentLogProject = id;
+
+            document.getElementById("logPanel").style.display = "block";
+            document.getElementById("logTitle").textContent =
+                "Build Log — " + name;
+
+            await loadLog(id);
+
+            document.getElementById("logPanel")
+                .scrollIntoView({ behavior: "smooth" });
+        }
+
+        async function loadLog(id) {
+
+            try {
+
+                let d = await api("/api/log/" + encodeURIComponent(id)),
+                    c = document.getElementById("logContent");
+
+                let bottom =
+                    c.scrollTop + c.clientHeight >=
+                    c.scrollHeight - 30;
+
+                c.textContent = d.log;
+
+                if (bottom)
+                    c.scrollTop = c.scrollHeight;
+            }
+            catch (e) {
+            }
+        }
+
+        refresh();
+        setInterval(refresh, 1000);
+
+    </script>
+
+</body>
+
+</html>
