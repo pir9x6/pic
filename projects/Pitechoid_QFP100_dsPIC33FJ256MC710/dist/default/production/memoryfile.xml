@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/default/production/pitechoid_ref.X.production.elf">
+  <executable name="dist/default/production/Pitechoid_QFP100_dsPIC33FJ256MC710.production.elf">
     <memory name="data">
       <units>bytes</units>
       <length>30720</length>
-      <used>5414</used>
-      <free>25306</free>
+      <used>5758</used>
+      <free>24962</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
       <length>261888</length>
-      <used>30441</used>
-      <free>231447</free>
+      <used>49596</used>
+      <free>212292</free>
     </memory>
   </executable>
 </project>
