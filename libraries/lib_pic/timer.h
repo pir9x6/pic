@@ -1,9 +1,16 @@
 #ifndef LIB_PIC_TIMER_H
 #define LIB_PIC_TIMER_H
 
+/*****************************************************************************
+* includes
+******************************************************************************/
 #include "types.h"
 #include "xc.h"
 
+
+/*****************************************************************************
+* New types
+******************************************************************************/
 typedef enum
 {
     TIMER_ID_0 = 0,
@@ -12,12 +19,16 @@ typedef enum
     TIMER_ID_3,
     TIMER_ID_4,
     TIMER_ID_5,
-    TIMER_ID_6
+    TIMER_ID_6,
+    TIMER_ID_7,
+    TIMER_ID_8,
+    TIMER_ID_9,
+    TIMER_ID_2_3,
+    TIMER_ID_4_5,
+    TIMER_ID_6_7,
+    TIMER_ID_8_9
 }TIMER_ID_t;
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//-------------------------------- Prescaler ----------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 typedef enum
 {
 #if defined (_18F252) || \
@@ -63,9 +74,6 @@ typedef enum
 #endif
 }TIMER_PRESCALER_t;
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//-------------------------------- Postscaler ---------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 typedef enum
 {
 #if defined (_18F252) || \
@@ -114,60 +122,10 @@ typedef struct
 #endif
 }TIMER_CFG_t;
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//----------------------------------- PIC18 -----------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+/*****************************************************************************
+* Prototype
+******************************************************************************/
 result_t timer_init(const TIMER_CFG_t *cfg);
-
-
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//----------------------------------- PIC33 -----------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-#if defined (TMR0IF_bit)
-    void timer0_init (const TIMER_CFG_t *cfg);
-#endif
-
-#if defined (TMR1IF_bit)
-    void timer1_init (const TIMER_CFG_t *cfg);
-#endif
-
-#if defined (TMR2IF_bit)
-    void timer2_init (const TIMER_CFG_t *cfg);
-#endif
-
-#if defined (TMR3IF_bit)
-    void timer3_init (const TIMER_CFG_t *cfg);
-#endif
-
-
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//----------------------------------- PIC32 -----------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-#ifdef _T1IF
-    void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void);
-    void timer1_init  (const TIMER_CFG_t *cfg);
-#endif
-
-#ifdef _T2IF
-    void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void);
-    void timer2_init  (const TIMER_CFG_t *cfg);
-#endif
-
-#ifdef _T3IF
-    void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void);
-    void timer3_init  (const TIMER_CFG_t *cfg);
-    void timer23_init (const TIMER_CFG_t *cfg);
-#endif
-
-#ifdef _T4IF
-    void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void);
-    void timer4_init  (const TIMER_CFG_t *cfg);
-#endif
-
-#ifdef _T5IF
-    void __attribute__((interrupt, no_auto_psv)) _T5Interrupt(void);
-    void timer5_init  (const TIMER_CFG_t *cfg);
-    void timer45_init (const TIMER_CFG_t *cfg);
-#endif
 
 #endif
