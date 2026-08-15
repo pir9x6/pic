@@ -15,10 +15,10 @@ result_t pwm_init (const PWM_CFG_t *cfg)
 
     #if defined (_18F252) || defined (_18LF252)
 
-        if (pwm_id == PWM_ID_1){
+        if (cfg->pwm_id == PWM_ID_1){
             CCP1CONbits.CCP1M = 15;             // PWM mode
         }
-        else if (pwm_id == PWM_ID_2){
+        else if (cfg->pwm_id == PWM_ID_2){
             CCP2CONbits.CCP2M = 15;             // PWM mode
         }
         else{
@@ -27,11 +27,11 @@ result_t pwm_init (const PWM_CFG_t *cfg)
 
     #elif defined (_18F26K42) || defined (_18F57K42) || defined (_18F57Q43)
 
-        if (pwm_id == PWM_ID_1){
+        if (cfg->pwm_id == PWM_ID_1){
             CCP1CONbits.MODE = 15;             // PWM mode
             return ERROR;
         }
-        else if (pwm_id == PWM_ID_2){
+        else if (cfg->pwm_id == PWM_ID_2){
             CCP2CONbits.MODE = 15;             // PWM mode
             return ERROR;
         }
@@ -56,6 +56,8 @@ result_t pwm_init (const PWM_CFG_t *cfg)
             OC2RS = comp_reg;                       // Load the Compare Register Value
             OC2CONbits.OCTSEL = cfg->timer_source;  // Select Timer 2 or 3 as output compare time base
             OC2CONbits.OCM = 0b110;                 // output compare module is configure for PWM mode
+
+        #if defined (__dsPIC33FJ128MC802__) || (__dsPIC33FJ256MC710__)
         }else if (cfg->pwm_id == PWM_ID_3){
             OC3CONbits.OCM = 0b000;                 // Disable Output Compare Module
             OC3R = 0;                               // Read-only reg in PWM mode
@@ -68,6 +70,9 @@ result_t pwm_init (const PWM_CFG_t *cfg)
             OC4RS = comp_reg;                       // Load the Compare Register Value
             OC4CONbits.OCTSEL = cfg->timer_source;  // Select Timer 2 or 3 as output compare time base
             OC4CONbits.OCM = 0b110;                 // output compare module is configure for PWM mode
+
+        #endif
+
         }else{
             return ERROR;
         }
@@ -145,10 +150,16 @@ result_t pwm_set_duty (const PWM_CFG_t *cfg)
             OC1RS = comp_reg;                      // Load the Compare Register Value
         }else if (cfg->pwm_id == PWM_ID_2){
             OC2RS = comp_reg;                      // Load the Compare Register Value
+
+        #if defined (__dsPIC33FJ128MC802__) || (__dsPIC33FJ256MC710__)
+
         }else if (cfg->pwm_id == PWM_ID_3){
             OC3RS = comp_reg;                      // Load the Compare Register Value
         }else if (cfg->pwm_id == PWM_ID_4){
             OC4RS = comp_reg;                      // Load the Compare Register Value
+
+        #endif
+
         }else{
             return ERROR;
         }
