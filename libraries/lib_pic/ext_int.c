@@ -1,103 +1,61 @@
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Project     :   Global                                              &&&
-//&&&   Author      :   Pierre BLACHÉ                                       &&&
-//&&&   Company     :   PiTech                                              &&&
-//&&&   Date        :   23/11/2014                                          &&&
-//&&&   Version     :   v1.0                                                &&&
-//&&&   File        :   ext_int.c                                           &&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Description :   - Init External Interrupts                          &&&
-//&&&                   - Handles Interrupts                                &&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Infos       :   - Tested with ds33FJ256GP506A                       &&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Version     :   1.0  23/11/2014  First release                      &&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+/*****************************************************************************
+* Title:    external interrupt
+******************************************************************************
+* Versions: v1.0    23/11/2014  MPLAB: vx.x   XC16: vx.x
+*                   Initial version
+*           v1.1    08/08/2026  MPLAB: 6.05   XC-DSC: 4.00
+*                   Added support for all channels
+******************************************************************************/
 
+
+/******************************************************************************
+* Includes
+******************************************************************************/
 #include "ext_int.h"
+#include "types.h"
+#include <xc.h>
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//--------------------- Configuration of 16 bits Timers -----------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-#ifdef _INT0IF
-void ext_int0_init  (u8 edge)
-{
-    INTCON2bits.INT0EP = edge;         // negative edge
-    IFS0bits.INT0IF = 0;
-    IEC0bits.INT0IE = 1;
-}
-#endif
 
-#ifdef _INT1IF
-void ext_int1_init  (u8 edge)
+/******************************************************************************
+* Initialisation
+******************************************************************************/
+result_t ext_int_init(const EXT_INT_CFG_t *cfg)
 {
-    INTCON2bits.INT0EP = edge;         // negative edge
-    IFS1bits.INT1IF = 0;
-    IEC1bits.INT1IE = 1;
-}
-#endif
+    if (cfg->ext_int_id == EXT_INT_ID_0)
+    {
+        _INT0EP = cfg->edge;    /* edge */
+        _INT0IF = 0;            /* clear IT flag */
+        _INT0IE = 1;            /* Enable IT */
+    }
+    else if (cfg->ext_int_id == EXT_INT_ID_1)
+    {
+        _INT1EP = cfg->edge;    /* edge */
+        _INT1IF = 0;            /* clear IT flag */
+        _INT1IE = 1;            /* Enable IT */
+    }
+    else if (cfg->ext_int_id == EXT_INT_ID_2)
+    {
+        _INT2EP = cfg->edge;    /* edge */
+        _INT2IF = 0;            /* clear IT flag */
+        _INT2IE = 1;            /* Enable IT */
+    }
+    else if (cfg->ext_int_id == EXT_INT_ID_3)
+    {
+        _INT3EP = cfg->edge;    /* edge */
+        _INT3IF = 0;            /* clear IT flag */
+        _INT3IE = 1;            /* Enable IT */
+    }
+    else if (cfg->ext_int_id == EXT_INT_ID_4)
+    {
+        _INT4EP = cfg->edge;    /* edge */
+        _INT4IF = 0;            /* clear IT flag */
+        _INT4IE = 1;            /* Enable IT */
+    }
+    else
+    {
+        return ERROR;
+    }
 
-#ifdef _INT2IF
-void ext_int2_init  (u8 edge)
-{
-    INTCON2bits.INT0EP = edge;         // negative edge
-    IFS1bits.INT2IF = 0;
-    IEC1bits.INT2IE = 1;
+    return SUCCESS;
 }
-#endif
 
-#ifdef _INT3IF
-void ext_int3_init  (u8 edge)
-{
-    INTCON2bits.INT0EP = edge;         // negative edge
-    IFS3bits.INT3IF = 0;
-    IEC3bits.INT3IE = 1;
-}
-#endif
-
-#ifdef _INT4IF
-void ext_int4_init  (u8 edge)
-{
-    INTCON2bits.INT0EP = edge;         // negative edge
-    IFS3bits.INT4IF = 0;
-    IEC3bits.INT4IE = 1;
-}
-#endif
-
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//------------------------------ Timers ISR -----------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-#ifdef _INT0IF
-void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
-{
-    ext_int0_isr();
-}
-#endif
-
-#ifdef _INT1IF
-void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)
-{
-    ext_int1_isr();
-}
-#endif
-
-#ifdef _INT2IF
-void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt(void)
-{
-    ext_int2_isr();
-}
-#endif
-
-#ifdef _INT3IF
-void __attribute__((interrupt, no_auto_psv)) _INT3Interrupt(void)
-{
-    ext_int3_isr();
-}
-#endif
-
-#ifdef _INT4IF
-void __attribute__((interrupt, no_auto_psv)) _INT4Interrupt(void)
-{
-    ext_int4_isr();
-}
-#endif
