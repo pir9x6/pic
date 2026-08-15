@@ -24,9 +24,7 @@ void pin_manager_init(void)
     /* select analog / digital GPIO */
     ADCON1 = 0x07;
 
-#endif
-
-#if defined (_18F26K42)
+#elif defined (_18F26K42)
 
     //-----------------------------------------------------------------------------
     /* select analog / digital GPIO */

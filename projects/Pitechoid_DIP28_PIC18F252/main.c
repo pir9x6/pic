@@ -51,7 +51,10 @@
 //-------------------------------- Defines ------------------------------------
 #define DEBOUNCE_DELAY  100
 
-//---------------------------- Global variables -------------------------------
+
+/*****************************************************************************
+* Global variables
+******************************************************************************/
 bool_t time_has_changed_timer = FALSE;
 bool_t time_has_changed_user = FALSE;
 UART_ID UART_ID_LOG = UART_ID_1;
@@ -72,6 +75,7 @@ const u8 pcf8574_values[14] = {
     0b10111111,
 };
 
+
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //-------------------------------- Main Program -------------------------------
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -82,13 +86,13 @@ void main (void)
     float light;
     s8 x = 0; s8 y = 0; s8 z = 0;
     date_time_t t = {
-            t.hrs = 18,
-            t.min = 16,
-            t.sec =  0,
-            t.dow =  6,
-            t.day = 26,
-            t.mth = 07,
-            t.yrs = 26
+        .hrs = 18,
+        .min = 16,
+        .sec =  0,
+        .dow =  6,
+        .day = 26,
+        .mth = 07,
+        .yrs = 26
     };
     LCD_HD44780_CONFIG_t lcd_hd44780_config = {
         .nb_lines = LCD_HD44780_NB_LINES_2,
@@ -106,16 +110,31 @@ void main (void)
     I2C_CFG_t i2c_1_cfg = {
         .bus_id = I2C_BUS_1,
         .freq = I2C_FREQ,
-        .slave0_master1 = 1,
+        .slave_or_master = I2C_MASTER,
         .en_master_it = 0,
         .en_slave_it = 0,
         .slave_addr = 0x00
     };
+    TIMER_CFG_t timer_0_cfg = {
+        .timer_id = TIMER_ID_0, /* max period = 6.7 sec */
+        .timer_prescaler = 7,
+        .period = 65535         /* max = 65535 */
+    };
+    TIMER_CFG_t timer_1_cfg = { /* max period = 209 ms */
+        .timer_id = TIMER_ID_1,
+        .timer_prescaler = 3,
+        .period = 65535         /* max = 65535 */
+    };
     TIMER_CFG_t timer_2_cfg = {
-        .timer_id = TIMER_ID_2,
-        .timer_prescaler = TMR_PRESCALER_1,
-        .timer_postscaler = TMR_POSTSCALER_10,
-        .period = 49
+        .timer_id = TIMER_ID_2, /* max period 26 ms */
+        .timer_prescaler = 0,
+        .timer_postscaler = 9,
+        .period = 250           /* max = 255 */
+    };
+    TIMER_CFG_t timer_3_cfg = { /* max period = 209 ms */
+        .timer_id = TIMER_ID_3,
+        .timer_prescaler = 3,
+        .period = 65535         /* max = 65535 */
     };
 
 //--------------------------------- GPIO init ---------------------------------
@@ -143,11 +162,10 @@ void main (void)
     i2c_detect(I2C_BUS_1);
 
 //-------------------------- Interruption sur Timer 2 -------------------------
-    /* Timer period = Fosc(10M) / 4 /  Prescaler(1) / Postscaler(10) / Timer(250) / Cnt(1000) = 1s */
-    if (timer_init(&timer_2_cfg) != SUCCESS){
-        LOG_ERROR("Timer 2 initialization failed");
-        PIN_LED_ERROR = 1;
-    }
+    timer_init(&timer_0_cfg);
+    timer_init(&timer_1_cfg);
+    timer_init(&timer_2_cfg);   /* period = 400 ns * Presc(1) * Post(10) * Timer(250) * Cnt(1000) = 1s */
+    timer_init(&timer_3_cfg);
 
 //---------------- 3-Axis Orientation/Motion/Detection Sensor -----------------
     mma7660_init(I2C_BUS_1, I2C_ADR_MMA7660);
@@ -178,7 +196,7 @@ void main (void)
     // ccp_set_pwm_duty(CCP_ID_4, 512);
 
 //--------------------------------- LCD Init ----------------------------------
-    lcd_hd44780_init(lcd_hd44780_config);
+    lcd_hd44780_init(&lcd_hd44780_config);
 
 //------------------------------------ RTC ------------------------------------
     if (ds1307_init(I2C_BUS_1, I2C_ADR_DS1307) != SUCCESS){
@@ -240,16 +258,16 @@ void main (void)
             cnt = 0;
         }
 
-        // lcd_hd44780_write_time(t, LCD_HD44780_LINE_1, 1/*position*/);
-        // lcd_hd44780_write_date(t, LCD_HD44780_LINE_2, 1/*position*/, LCD_HD44780_DATE_LETTERS);
+        lcd_hd44780_write_time(t, LCD_HD44780_LINE_1, 1/*position*/);
+        lcd_hd44780_write_date(t, LCD_HD44780_LINE_2, 1/*position*/, LCD_HD44780_DATE_LETTERS);
         printf("Time: %02d:%02d:%02d   ", t.hrs, t.min, t.sec);
 
         ds1631_read_temp(I2C_BUS_1, I2C_ADR_DS1631, &ds1631_temp);
-        lcd_hd44780_write_temperature(ds1631_temp, LCD_HD44780_LINE_1, 10/*position*/);
+        lcd_hd44780_write_temperature(ds1631_temp, LCD_HD44780_LINE_1, 11/*position*/);
         printf("Temp(DS1631): %2.1fC   ", ds1631_temp);
 
         tmp75_read_temp(I2C_BUS_1, I2C_ADR_TMP75, &tmp75_temp);
-        lcd_hd44780_write_temperature(tmp75_temp, LCD_HD44780_LINE_2, 10/*position*/);
+        lcd_hd44780_write_temperature(tmp75_temp, LCD_HD44780_LINE_2, 11/*position*/);
         printf("Temp(TMP75): %2.1fC   ", tmp75_temp);
 
         bh1750_get_light(I2C_BUS_1, I2C_ADR_BH1750, &light);
@@ -258,13 +276,13 @@ void main (void)
         // mma7660_read_angles(I2C_BUS_1, I2C_ADR_MMA7660, &x, &y, &z);
         // printf("MMA7660: X=%d, Y=%d, Z=%d", x, y, z);
 
-        if(eeprom_i2c_read_byte(I2C_BUS_1, &EEPROM_24LC1025, I2C_ADR_EEPROM, eeprom_addr, &eeprom_data) != SUCCESS){
-            LOG_ERROR("Unable to read from EEPROM");
-            PIN_LED_ERROR = 1;
-        }else{
-            LOG_INFO("EEPROM: Addr=0x%08lX Data=0x%02X    ", eeprom_addr, eeprom_data);
-        }
-        eeprom_addr++;
+        // if(eeprom_i2c_read_byte(I2C_BUS_1, &EEPROM_24LC1025, I2C_ADR_EEPROM, eeprom_addr, &eeprom_data) != SUCCESS){
+        //     LOG_ERROR("Unable to read from EEPROM");
+        //     PIN_LED_ERROR = 1;
+        // }else{
+        //     LOG_INFO("EEPROM: Addr=0x%08lX Data=0x%02X    ", eeprom_addr, eeprom_data);
+        // }
+        // eeprom_addr++;
 
         // printf("\r\n");
 

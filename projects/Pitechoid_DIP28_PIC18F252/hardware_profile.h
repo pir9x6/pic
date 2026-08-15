@@ -1,15 +1,22 @@
 #ifndef _HARDWARE_PROFILE_H_
 #define _HARDWARE_PROFILE_H_
 
-//-------------------------------- Revision -----------------------------------
+/*****************************************************************************
+* includes
+******************************************************************************/
+#include <xc.h>
+
+
+/*****************************************************************************
+* Version
+******************************************************************************/
 #define VERSION_MAJ             0x01
 #define VERSION_MIN             0x01
 
-//-----------------------------------------------------------------------------
-// #define DS1307_IS_PRESENT
-// #define DS1631_IS_PRESENT
 
-//-------------------------- I2C device addresses -----------------------------
+/*****************************************************************************
+* I2C device addresses
+******************************************************************************/
 #define I2C_ADR_BH1750          0x23
 #define I2C_ADR_PCF8574A        0x38
 #define I2C_ADR_TMP75           0x48
@@ -17,9 +24,13 @@
 #define I2C_ADR_MMA7660         0x4C
 #define I2C_ADR_EEPROM          0x50
 #define I2C_ADR_DS1307          0x68
+#define I2C_ADR_DS1337          0x68
 #define I2C_ADR_BMP180          0x77
 
-//--------------------------------- GPIOs -------------------------------------
+
+/*****************************************************************************
+* Pin Assignments
+******************************************************************************/
 #define LCD_RS_DIR              TRISBbits.TRISB5
 #define LCD_E_DIR               TRISBbits.TRISB4
 #define LCD_D4_DIR              TRISBbits.TRISB0
@@ -49,7 +60,9 @@
 //--------------------------- Peripherals speed -------------------------------
 #define UART_FREQ               125000  /* cannot have 115200 at 10 MHz. PuttY should be set to 125000 !!*/
 #define I2C_FREQ                100000
+
 #define GetSystemClock()        10000000L
+#define GetInstructionClock()   (GetSystemClock() / 4)  /* one instruction takes 400 ns */
 #define GetPeripheralClock()    GetSystemClock()
 
 //--------------------------------- Misc --------------------------------------
