@@ -41,7 +41,7 @@ void __interrupt(high_priority) HighISR()
         if (CntTmrIncSec == 499){
             PIN_LED_SEC = 1;
         }
-        else if (CntTmrIncSec == 499)
+        else if (CntTmrIncSec == 999)
         {
             time_has_changed_timer = TRUE;
             PIN_LED_SEC = 0;

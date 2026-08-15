@@ -1,16 +1,16 @@
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Project     :   Reference project for:                              &&&
-//&&&                   Pitechoid Dev Board PIC18 DIP28                     &&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   IDE         :   MPLABX v6.20                                        &&&
-//&&&   Compiler    :   XC8 v3.10                                           &&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&   Version     :                                                       &&&
-//&&&   - 1.0    30 Apr 2020    Creation                                    &&&
-//&&&   - 1.1    22 Jul 2026    Renamed lcd_2x16 to lcd_hd44780             &&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+/******************************************************************************
+* Title:    Evaluation board for 18F252
+* MCU:      18F252
+*******************************************************************************
+* Versions: v1.0    01/08/2014  MPLAB: vx.x   XC8: vx.x
+*                   Initial version
+*           v1.1    08/08/2026  MPLAB: v6.20  XC8: v3.10
+*                   Reworked most drivers
+******************************************************************************/
 
-//------------------------- Remove useless warnings ---------------------------
+/******************************************************************************
+* Remove useless warnings
+******************************************************************************/
 #pragma warning disable 520     // function is never called
 #pragma warning disable 759     // expression generates no code
 #pragma warning disable 1311    // missing configuration setting
@@ -18,7 +18,9 @@
 #pragma warning disable 1510    // non-reentrant function
 #pragma warning disable 2020
 
-//-------------------------------- includes -----------------------------------
+/******************************************************************************
+* Includes
+******************************************************************************/
 #include "config.h"
 #include "xc.h"
 #include "stdio.h"
@@ -48,7 +50,10 @@
 #include "types.h"
 #include "uart.h"
 
-//-------------------------------- Defines ------------------------------------
+
+/******************************************************************************
+* Defines
+******************************************************************************/
 #define DEBOUNCE_DELAY  100
 
 
@@ -56,7 +61,6 @@
 * Global variables
 ******************************************************************************/
 bool_t time_has_changed_timer = FALSE;
-bool_t time_has_changed_user = FALSE;
 UART_ID UART_ID_LOG = UART_ID_1;
 const u8 pcf8574_values[14] = {
     0b01111111,
@@ -76,9 +80,9 @@ const u8 pcf8574_values[14] = {
 };
 
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//-------------------------------- Main Program -------------------------------
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+/******************************************************************************
+* Main program
+******************************************************************************/
 void main (void)
 {
     u8 i, j;
@@ -105,7 +109,8 @@ void main (void)
     u32 eeprom_addr = 0x00;
     UART_CFG_t uart_1_cfg = {
         .uart_id = UART_ID_1,
-        .baudrate = UART_FREQ
+        .baudrate = UART_FREQ,
+        .system_clock = GetSystemClock()
     };
     I2C_CFG_t i2c_1_cfg = {
         .bus_id = I2C_BUS_1,
@@ -251,30 +256,20 @@ void main (void)
 
 //-----------------------------------------------------------------------------
     while (1){
-        delay_ms(400);
-
-        pcf8574_write_port(I2C_BUS_1, I2C_ADR_PCF8574A, pcf8574_values[cnt]);
-        if (++cnt > 13){
-            cnt = 0;
-        }
+        delay_ms(100);
 
         lcd_hd44780_write_time(t, LCD_HD44780_LINE_1, 1/*position*/);
         lcd_hd44780_write_date(t, LCD_HD44780_LINE_2, 1/*position*/, LCD_HD44780_DATE_LETTERS);
-        printf("Time: %02d:%02d:%02d   ", t.hrs, t.min, t.sec);
 
         ds1631_read_temp(I2C_BUS_1, I2C_ADR_DS1631, &ds1631_temp);
         lcd_hd44780_write_temperature(ds1631_temp, LCD_HD44780_LINE_1, 11/*position*/);
-        printf("Temp(DS1631): %2.1fC   ", ds1631_temp);
 
         tmp75_read_temp(I2C_BUS_1, I2C_ADR_TMP75, &tmp75_temp);
         lcd_hd44780_write_temperature(tmp75_temp, LCD_HD44780_LINE_2, 11/*position*/);
-        printf("Temp(TMP75): %2.1fC   ", tmp75_temp);
 
         bh1750_get_light(I2C_BUS_1, I2C_ADR_BH1750, &light);
-        printf("Light: %2.1f lx    ",  light);
 
-        // mma7660_read_angles(I2C_BUS_1, I2C_ADR_MMA7660, &x, &y, &z);
-        // printf("MMA7660: X=%d, Y=%d, Z=%d", x, y, z);
+        mma7660_read_angles(I2C_BUS_1, I2C_ADR_MMA7660, &x, &y, &z);
 
         // if(eeprom_i2c_read_byte(I2C_BUS_1, &EEPROM_24LC1025, I2C_ADR_EEPROM, eeprom_addr, &eeprom_data) != SUCCESS){
         //     LOG_ERROR("Unable to read from EEPROM");
@@ -284,25 +279,23 @@ void main (void)
         // }
         // eeprom_addr++;
 
-        // printf("\r\n");
-
-        if (time_has_changed_user || time_has_changed_timer){
-            if (time_has_changed_user){
-                time_has_changed_user = FALSE;
-            }
-
-            if (time_has_changed_timer){
-                time_has_changed_timer = FALSE;
-                datetime_increase_seconds(&t);
-            }
+        if (time_has_changed_timer){
+            time_has_changed_timer = FALSE;
+            datetime_increase_seconds(&t);
+            printf("Time: %02d:%02d:%02d   ", t.hrs, t.min, t.sec);
+            printf("Temp(DS1631): %2.1fC   ", ds1631_temp);
+            printf("Temp(TMP75): %2.1fC   ", tmp75_temp);
+            printf("Light: %2.1f lx    ",  light);
+            printf("MMA7660: X=%d, Y=%d, Z=%d", x, y, z);
+            printf("\r\n");
+            pcf8574_write_port(I2C_BUS_1, I2C_ADR_PCF8574A, pcf8574_values[cnt]);
+            if (++cnt > 13) cnt = 0;
         }
 
         if (!PIN_SWITCH_1){
             delay_ms(25);
             if (!PIN_SWITCH_1){
                 datetime_increase_minutes(&t);
-                time_has_changed_user = TRUE;
-                i2c_dump(I2C_BUS_1, I2C_ADR_DS1631, 0x00/*start*/, 256/*length*/);
             }
         }
 
@@ -310,8 +303,6 @@ void main (void)
             delay_ms(25);
             if (!PIN_SWITCH_2){
                 datetime_decrease_minutes(&t);
-                time_has_changed_user = TRUE;
-                i2c_dump(I2C_BUS_1, I2C_ADR_TMP75, 0x00/*start*/, 256/*length*/);
             }
         }
     }
