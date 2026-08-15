@@ -10,7 +10,7 @@
 #include "hardware_profile.h"
 #include "delays.h"
 
-#if defined(__PIC24F__) || defined(__PIC24H__) || defined(__PIC24E__) || defined(__dsPIC33F__) || defined(__dsPIC33E__)
+#if defined(__dsPIC33F__)
     #include <libpic30.h>
 #endif
 
@@ -23,9 +23,9 @@ void delay_us (u16 loop)
     unsigned int i;
     for (i=(usec*13); i!=0; i--);        // @ 80 MHz
 
-#elif defined(__PIC24F__) || defined(__PIC24H__) || defined(__PIC24E__) || defined(__dsPIC33F__) || defined(__dsPIC33E__)
+ #elif defined(__dsPIC33F__)
 
-    __delay_us(loop);
+     __delay_us(loop);
 
 #else
 
@@ -48,9 +48,9 @@ void delay_ms (u16 loop)
     tStart=ReadCoreTimer();
     while((ReadCoreTimer()-tStart)<tWait);  // wait for the time to pass
 
-#elif defined(__PIC24F__) || defined(__PIC24H__) || defined(__PIC24E__) || defined(__dsPIC33F__) || defined(__dsPIC33E__)
+#elif defined(__dsPIC33F__)
 
-    __delay_ms(loop);
+    __delay_ms(loop);   /* very accurate*/
 
 #else
     u16 i, k;

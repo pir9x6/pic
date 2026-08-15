@@ -16,7 +16,7 @@
     #define US_LOOP GetSystemClock()/40000000ul
 
 #elif defined(__PIC24F__) || defined(__PIC24H__) || defined(__PIC24E__) || defined(__dsPIC33F__) || defined(__dsPIC33E__)
-    /* deprecated */
+
     #define MS_LOOP         GetSystemClock()/8000
     #define US_LOOP         GetSystemClock()/10000000ul
 
